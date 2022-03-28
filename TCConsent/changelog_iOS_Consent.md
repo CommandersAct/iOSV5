@@ -1,7 +1,7 @@
 Changelog iOS
 =============
 
-*5.0.0 : 02/15 2022*
+*5.0.0 : 03/28 2022*
 
 	~ Renaming Module to Consent and TCMobilePrivacy to TCMobileConsent.
 	~ Renaming of many other classes and some methods (see documentation for an easy migration)

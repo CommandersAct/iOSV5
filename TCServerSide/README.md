@@ -4,7 +4,7 @@
 <p><img alt="alt tag" src="../res/ca_logo.png" /></p>
 <h1 id="serversides-implementation-guide">ServerSide's Implementation Guide</h1>
 <p><strong>iOS</strong></p>
-<p>Last update : <em>16/03/2022</em><br />
+<p>Last update : <em>28/03/2022</em><br />
 Release version : <em>5.0.0</em></p>
 <p><div id="end_first_page" /></p>
 
@@ -30,6 +30,7 @@ Release version : <em>5.0.0</em></p>
 <li><a href="#initialisation">Initialisation</a></li>
 <li><a href="#executing-events">Executing events</a></li>
 <li><a href="#additional-parameters">Additional parameters</a></li>
+<li><a href="#custom-events">Custom events</a></li>
 <li><a href="#consent">Consent</a></li>
 <li><a href="#background-mode">Background Mode</a></li>
 <li><a href="#deactivating-the-serversides-module">Deactivating the ServerSide's module</a></li>
@@ -117,20 +118,16 @@ Be aware that some of the data inside TCUser require consent from the user te be
 </ul>
 <h1 id="using-the-serversides-module">Using the ServerSide's module</h1>
 <h2 id="initialisation">Initialisation</h2>
-<p>It is recommended to initialise ServerSider in your <code>AppDelegate's applicationdidFinishLaunchingWithOptions</code> so it will be operational as soon as possible.</p>
+<p>It is recommended to initialise TCServerSide in your <code>AppDelegate's applicationdidFinishLaunchingWithOptions</code> so it will be operational as soon as possible.</p>
 <p>You will need 2 things provided by our consulting team. A siteID which is representing the web platform in which you setup your destinations.
 And a sourceKeyID which will represent the Android source inside your setup.</p>
 <p>If you are using our Consent module, you can also change during this initialisation the default ServerSide behaviour while waiting for the user consent.
 More information a bit later in this document.</p>
-<p>A single line of code is required to properly initialize an instance of ServerSide:</p>
-<p>ServerSide *TCS = [[ServerSide alloc] initWithSiteID: siteID andSourceKey: sourceKey];</p>
-<div class="warning"></div>
-
-<blockquote>
-<p>This class is not a Singleton. If you have the need for only one pair
-of siteID's and containerID's, you might want to use it as a Singleton
-anyway for reasons of simplification.</p>
-</blockquote>
+<p>A single line of code is required to properly initialize an instance of ServerSide, and you can add one more for better logging:</p>
+<pre><code>//!\\ Important while integrating TCServerSide
+[TCDebug setDebugLevel: TCLogLevel_Verbose];
+ServerSide *TCS = [[ServerSide alloc] initWithSiteID: siteID andSourceKey: sourceKey];
+</code></pre>
 <h2 id="executing-events">Executing events</h2>
 <p>Each time you are required to launch an event, simply instantiate the corresponding event, fill it with what your tagging plan suggest and execute it.</p>
 <pre><code>NSMutableArray *items = [[NSMutableArray alloc] init];
@@ -161,6 +158,13 @@ pageViewEvent.pageName = @"Configuration";
 </code></pre>
 <p>Here for example this could be tracking some user going back to your configuration to open the consent interface. And you would want to know what was the consent before re-opening.
 Of course this is a simple example only here to show the addAdditionalParameter method.</p>
+<h2 id="custom-events">Custom events</h2>
+<p>In some case, the classic events might not suit your needs, in this case you can build complete custom events.
+It is important to name them properly as this will be the base of forwarding them to your destinations.</p>
+<pre><code>TCCustomEvent *event = [[TCCustomEvent alloc] initWithName: @"eventName"];
+[event addAdditionalParameter: @"myParam" withValue: @"myValue"];
+[TCS execute: event];
+</code></pre>
 <h2 id="consent">Consent</h2>
 <p>To manage the privacy of the user's data you can use our Consent product, another product or nothing at all.</p>
 <p>By default, the ServerSide module will try to see if you have added our Privacy module. If so, it will put itself into a waiting for consent mode.
@@ -360,6 +364,6 @@ TCPurchaseEvent *event = [[TCPurchaseEvent alloc] initWithId: @"ID" withRevenue:
 <em>support@commandersact.com</em></p>
 <p>http://www.commandersact.com</p>
 <hr />
-<p>This documentation was generated on 16/03/2022 17:17:42</p>
+<p>This documentation was generated on 28/03/2022 15:49:23</p>
 </body>
 </html>

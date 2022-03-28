@@ -1,7 +1,7 @@
 Changelog iOS
 =============
 
-*5.0.0 : 02/15 2022*
+*5.0.0 : 03/28 2022*
 
 	~ Small refactorings to be up to date with the other changes from ServerSide, Core and Consent.
 
