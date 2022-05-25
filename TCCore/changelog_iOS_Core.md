@@ -6,6 +6,10 @@ Changelog iOS
 
 [Previous changelist](../res/changelog_iOS_3.md)
 
+*5.1.0 : 05/24/2022*
+
+	- Removing unused NormalizedID and simplified collecting idfa/idfv/ad_tracking_enabled
+
 *5.0.0 : 03/28 2022*
 
     ~ Only internal renamings to go with all other 5.0.0 modules.

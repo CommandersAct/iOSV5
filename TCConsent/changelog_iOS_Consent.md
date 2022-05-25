@@ -1,6 +1,15 @@
 Changelog iOS
 =============
 
+*5.1.0 : 05/24 2022*
+
+    ~ Changed the payload of the consent statistics sent to our servers for better statistics.
+    ~ fixed memory leak on TCPrivacyCenterViewController.
+    ~ [IAB] Modified consent string timestamp to comply with new TCF standards of reducing precision.
+    ~ [IAB] fixing cmpVersion bug in generated TCF consent string.
+    ~ fixed default switch states not working anymore.
+    + added TCUser.consentID on the purposes screen.
+
 *5.0.0 : 03/28 2022*
 
 	~ Renaming Module to Consent and TCMobilePrivacy to TCMobileConsent.

@@ -4,8 +4,8 @@
 <p><img alt="alt tag" src="../res/ca_logo.png" /></p>
 <h1 id="serversides-implementation-guide">ServerSide's Implementation Guide</h1>
 <p><strong>iOS</strong></p>
-<p>Last update : <em>28/03/2022</em><br />
-Release version : <em>5.0.0</em></p>
+<p>Last update : <em>25/05/2022</em><br />
+Release version : <em>5.1.0</em></p>
 <p><div id="end_first_page" /></p>
 
 <div class="toc">
@@ -201,11 +201,13 @@ We have 3 behaviours:</p>
 </code></pre>
 <p>When the user-agent is ready, it will be added to all the hit waiting to be sent.</p>
 <h2 id="getting-idfa">Getting IDFA</h2>
-<p>If you are using iOS 14 or later, the SDK can't get the IDFA automatically. This would force the popup asking for the user permission at any moment which is not the wanted behavior.</p>
-<p>Instead, you'll have to control when you want this popup to be displayed with the code here: https://medium.com/@nish.bhasin/how-to-get-idfa-in-ios14-54f7ea02aa42</p>
-<p>and in the "case .authorized:", call:</p>
-<pre><code>[[TCCoreVariables sharedInstance] setIDFA];
+<p>For privacy reason, the server-side module can't read and use the IDFA automatically. We need to first be sure that your user have accepted the corresponding category inside the privacy.</p>
+<p>Also, if you are using iOS 14 or later, you have to display the system pop-up firs.</p>
+<p>Since we don't know the flow of your application, you'll have to call the popup when you are ready to. You can check some code example here: https://medium.com/@nish.bhasin/how-to-get-idfa-in-ios14-54f7ea02aa42</p>
+<p>and in the "case .authorized:", and the user accepted the related privacy category you can call:</p>
+<pre><code>[ServerSideInstance addAdvertisingIDs];
 </code></pre>
+<p>This method will check and add if possible the IDFA, the IDFV and the boolean "is ad tracking enabled".</p>
 <h1 id="troubleshooting">Troubleshooting</h1>
 <p>The ServerSide also offers methods to help you with the Quality Assessment of the implementation.</p>
 <h2 id="debugging">Debugging</h2>
@@ -306,7 +308,7 @@ If you encounter this issue, you need to pass your custom process pool like to T
 <p>If you want to use Swift as your main language, please check the demo <a href="https://github.com/TagCommander/TagCommander-In-Swift">TagCommander-In-Swift</a>.</p>
 <h1 id="example-tcdemo">Example: TCDemo</h1>
 <p>To check an example of how to use this module, please check: </p>
-<p><a href="https://github.com/TagCommander/Tag-Demo/tree/master/iOS">Tag Demo</a></p>
+<p><a href="https://github.com/TagCommander/Privacy-Demo/tree/master/V5/iOS/TCDemo_PrivacyCenter_And_ServerSide">Tag Demo</a></p>
 <h1 id="migration-v4-to-v5">Migration v4 to v5</h1>
 <h2 id="why-a-new-version-of-the-sdk">Why a new version of the SDK</h2>
 <p>CommandersAct made a big move forward to bring all his products together in a whole new platform.</p>
@@ -364,6 +366,6 @@ TCPurchaseEvent *event = [[TCPurchaseEvent alloc] initWithId: @"ID" withRevenue:
 <em>support@commandersact.com</em></p>
 <p>http://www.commandersact.com</p>
 <hr />
-<p>This documentation was generated on 28/03/2022 15:49:23</p>
+<p>This documentation was generated on 25/05/2022 09:28:51</p>
 </body>
 </html>

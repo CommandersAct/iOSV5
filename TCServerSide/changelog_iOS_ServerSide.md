@@ -6,6 +6,12 @@ Changelog iOS
 
 [Previous changelist](../res/changelog_iOS_3.md)
 
+*5.1.0 : 05/24/2022*
+
+    + Added enums of classic values for payment methods and purchase status.
+    + Added a function to help adding idfa/idfv/ad_tracking_enabled to the payload.
+    ~ Modified the event payload to add refused vendors instead of accepted.
+
 *5.0.0 : 03/28 2022*
 
 	~ Renaming TCSDK to TCServerSide since it's now its exact purpose.

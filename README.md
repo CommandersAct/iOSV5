@@ -4,7 +4,7 @@
 <p><img alt="alt tag" src="res/ca_logo.png" /></p>
 <h1 id="developers-implementation-guide">Developers' Implementation Guide</h1>
 <p><strong>iOS</strong></p>
-<p>Last update : <em>28/03/2022</em><br />
+<p>Last update : <em>25/05/2022</em><br />
 Release version : <em>5</em></p>
 <p><div id="end_first_page" /></p>
 
@@ -31,9 +31,9 @@ The modules are the following :</p>
 <p><a href="TCConsent/README.md">Consent : Pass the Consent settings to our tag system</a></p>
 <p>For each of those modules, please check their respective documentation for more information.</p>
 <h1 id="latest-available-versions">Latest available versions</h1>
-<p>Core : <em>5.0.0</em></p>
-<p>ServerSide : <em>5.0.0</em></p>
-<p>Consent : <em>5.0.0</em></p>
+<p>Core : <em>5.1.0</em></p>
+<p>ServerSide : <em>5.1.0</em></p>
+<p>Consent : <em>5.1.0</em></p>
 <p>IAB : <em>5.0.0</em></p>
 <p>Partners : <em>5.0.0</em></p>
 <p>Segment : <em>5.0.0</em></p>
@@ -85,6 +85,6 @@ e
 <p>http://www.commandersact.com</p>
 <p>Commanders Act | 3/5 rue Saint Georges - 75009 PARIS - France</p>
 <hr />
-<p>This documentation was generated on 28/03/2022 15:49:23</p>
+<p>This documentation was generated on 25/05/2022 09:28:51</p>
 </body>
 </html>
