@@ -6,6 +6,10 @@ Changelog iOS
 
 [Previous changelist](../res/changelog_iOS_3.md)
 
+*5.1.1 : 08/04/2022*
+
+	~ Added back user_agent as a variable inside the device payload.
+
 *5.1.0 : 05/24/2022*
 
     + Added enums of classic values for payment methods and purchase status.

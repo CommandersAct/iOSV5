@@ -1,6 +1,11 @@
 Changelog iOS
 =============
 
+*5.1.1 : xx/xx 2022*
+
+    ~ Fixing some stats where we would loose the click information for a consent status.
+
+
 *5.1.0 : 05/24 2022*
 
     ~ Changed the payload of the consent statistics sent to our servers for better statistics.
