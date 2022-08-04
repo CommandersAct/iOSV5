@@ -33,7 +33,7 @@ The modules are the following :</p>
 <h1 id="latest-available-versions">Latest available versions</h1>
 <p>Core : <em>5.1.0</em></p>
 <p>ServerSide : <em>5.1.1</em></p>
-<p>Consent : <em>5.1.0</em></p>
+<p>Consent : <em>5.1.1</em></p>
 <p>IAB : <em>5.0.0</em></p>
 <p>Partners : <em>5.0.0</em></p>
 <p>Segment : <em>5.0.0</em></p>
@@ -85,6 +85,6 @@ e
 <p>http://www.commandersact.com</p>
 <p>Commanders Act | 3/5 rue Saint Georges - 75009 PARIS - France</p>
 <hr />
-<p>This documentation was generated on 04/08/2022 15:27:08</p>
+<p>This documentation was generated on 04/08/2022 16:50:30</p>
 </body>
 </html>

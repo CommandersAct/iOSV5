@@ -9,6 +9,7 @@ Changelog iOS
 *5.1.1 : 08/04/2022*
 
 	~ Added back user_agent as a variable inside the device payload.
+	~ Added _Nonnull annotations on some parameters in events.
 
 *5.1.0 : 05/24/2022*
 
