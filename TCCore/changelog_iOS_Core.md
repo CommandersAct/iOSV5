@@ -6,6 +6,10 @@ Changelog iOS
 
 [Previous changelist](../res/changelog_iOS_3.md)
 
+*5.1.1 : 09/28/2022*
+
+  + Added support for TVOS inside the XCFramework (only for Core/ServerSide for now)
+
 *5.1.0 : 05/24/2022*
 
 	- Removing unused NormalizedID and simplified collecting idfa/idfv/ad_tracking_enabled

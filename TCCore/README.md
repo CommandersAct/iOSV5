@@ -4,8 +4,8 @@
 <p><img alt="alt tag" src="../res/ca_logo.png" /></p>
 <h1 id="core-guide">Core Guide</h1>
 <p><strong>iOS</strong></p>
-<p>Last update : <em>04/08/2022</em><br />
-Release version : <em>5.1.0</em></p>
+<p>Last update : <em>28/09/2022</em><br />
+Release version : <em>5.1.1</em></p>
 <p><div id="end_first_page" /></p>
 
 <div class="toc">
@@ -29,6 +29,6 @@ Release version : <em>5.1.0</em></p>
 <em>support@commandersact.com</em></p>
 <p>http://www.commandersact.com</p>
 <hr />
-<p>This documentation was generated on 04/08/2022 16:50:30</p>
+<p>This documentation was generated on 28/09/2022 09:30:23</p>
 </body>
 </html>

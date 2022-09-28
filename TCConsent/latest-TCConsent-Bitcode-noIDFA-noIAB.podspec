@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "latest-TCConsent-Bitcode-noIDFA-noIAB"
-  s.version      = "5.1.1"
+  s.version      = "5.1.2"
   s.homepage     = "https://github.com/TagCommander/iOSV5/tree/master/TCConsent"
   s.license      = { :type => 'proprietary', :text => <<-LICENSE
                         Copyright 2013 - present Commanders Act. All rights reserved.
@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
            Go to https://github.com/TagCommander/iOSV5/tree/master/TCConsent for more details
                    DESC
   s.platform     = :ios, '8.0'
-  s.source   = { :http => "https://github.com/TagCommander/iOSV5/raw/master/TCConsent/5/1/1/TCConsent-Bitcode-noIDFA-noIAB.zip" }
+  s.source   = { :http => "https://github.com/TagCommander/iOSV5/raw/master/TCConsent/5/1/2/TCConsent-Bitcode-noIDFA-noIAB.zip" }
   s.preserve_paths      = 'TCConsent.xcframework'
   #s.public_header_files = 'TCConsent.framework/Headers/*.h'
   s.vendored_frameworks = 'TCConsent.xcframework'

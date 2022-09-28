@@ -6,6 +6,11 @@ Changelog iOS
 
 [Previous changelist](../res/changelog_iOS_3.md)
 
+*5.1.2 : 09/28/2022*
+
+  + Added support for TVOS inside the XCFramework (only for Core/ServerSide for now)
+
+
 *5.1.1 : 08/04/2022*
 
 	~ Added back user_agent as a variable inside the device payload.
