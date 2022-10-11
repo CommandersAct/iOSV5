@@ -4,8 +4,8 @@
 <p><img alt="alt tag" src="../res/ca_logo.png" /></p>
 <h1 id="serversides-implementation-guide">ServerSide's Implementation Guide</h1>
 <p><strong>iOS</strong></p>
-<p>Last update : <em>28/09/2022</em><br />
-Release version : <em>5.1.2</em></p>
+<p>Last update : <em>11/10/2022</em><br />
+Release version : <em>5.1.3</em></p>
 <p><div id="end_first_page" /></p>
 
 <div class="toc">
@@ -86,7 +86,9 @@ We also add "value" and "currency" that are generally used by solutions for this
 <h2 id="event-details">Event details</h2>
 <p>All events and their payloads are detailed here: <a href="https://community.commandersact.com/platform-x/developers/tracking/events-reference">events-reference</a></p>
 <p>You will also find information about what you can add inside the TCUser which is sent with every hit.
-Be aware that some of the data inside TCUser require consent from the user te be read and used.</p>
+Be aware that some data inside TCUser require consent from the user te be read and used.</p>
+<p>You can also check this page to see the link between the event names and the SDK's Class names and all information inside the payload here:
+<a href="https://community.commandersact.com/platform-x/developers/tracking/about-events/mobile-sdk-event-specificity">mobile-sdk-event-specificity</a></p>
 <h2 id="executing-an-event">Executing an event</h2>
 <p>When you call the sendData method, a hit will be packaged and sent to Commanders Act's server.</p>
 <p><img alt="alt tag" src="../res/server_side_module_scheme.png" /></p>
@@ -366,6 +368,6 @@ TCPurchaseEvent *event = [[TCPurchaseEvent alloc] initWithId: @"ID" withRevenue:
 <em>support@commandersact.com</em></p>
 <p>http://www.commandersact.com</p>
 <hr />
-<p>This documentation was generated on 28/09/2022 09:30:23</p>
+<p>This documentation was generated on 11/10/2022 16:15:56</p>
 </body>
 </html>

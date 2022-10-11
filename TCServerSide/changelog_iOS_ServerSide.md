@@ -6,9 +6,13 @@ Changelog iOS
 
 [Previous changelist](../res/changelog_iOS_3.md)
 
+*5.1.3 : 10/06/2022*
+
+	~ fixing user information in the payload.
+
 *5.1.2 : 09/28/2022*
 
-  + Added support for TVOS inside the XCFramework (only for Core/ServerSide for now)
+  	+ Added support for TVOS inside the XCFramework (only for Core/ServerSide for now)
 
 
 *5.1.1 : 08/04/2022*
@@ -18,9 +22,9 @@ Changelog iOS
 
 *5.1.0 : 05/24/2022*
 
-    + Added enums of classic values for payment methods and purchase status.
-    + Added a function to help adding idfa/idfv/ad_tracking_enabled to the payload.
-    ~ Modified the event payload to add refused vendors instead of accepted.
+	+ Added enums of classic values for payment methods and purchase status.
+	+ Added a function to help adding idfa/idfv/ad_tracking_enabled to the payload.
+	~ Modified the event payload to add refused vendors instead of accepted.
 
 *5.0.0 : 03/28 2022*
 
