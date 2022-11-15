@@ -4,7 +4,7 @@
 <p><img alt="alt tag" src="res/ca_logo.png" /></p>
 <h1 id="developers-implementation-guide">Developers' Implementation Guide</h1>
 <p><strong>iOS</strong></p>
-<p>Last update : <em>11/10/2022</em><br />
+<p>Last update : <em>15/11/2022</em><br />
 Release version : <em>5</em></p>
 <p><div id="end_first_page" /></p>
 
@@ -17,6 +17,7 @@ Release version : <em>5</em></p>
 <li><a href="#cocoapods">Cocoapods</a><ul>
 <li><a href="#build-variants">Build Variants</a></li>
 <li><a href="#xcframework">XCFramework</a></li>
+<li><a href="#spm-support">SPM support</a></li>
 </ul>
 </li>
 <li><a href="#support-and-contacts">Support and contacts</a></li>
@@ -60,15 +61,15 @@ pod 'TCServerSide', :podspec =&gt; 'https://raw.githubusercontent.com/TagCommand
 <p>We have several variants depending on your needs.</p>
 <pre><code>- 1 full vanilla version
 - 1 vanilla version with Bitcode enabled
-- 1 version without the code to get the IDFA
-- 1 version without the code to get the IDFA with Bitcode enabled
+- [for TCCore] : 1 version without the code to get the IDFA
+- [for TCCore] : 1 version without the code to get the IDFA with Bitcode enabled
 </code></pre>
 <p>The 2 latests variants will not compile anything linked with ASIdentifierManager.</p>
 <p>If you're using Consent (Privacy) there is a bit more variants depending on wether you're using IAB or not for your privacy.</p>
 <h2 id="xcframework">XCFramework</h2>
-<p>The latest version of our modules are always available on our github account: https://github.com/TagCommander/iosv5
-e
-<div class="warning"></div></p>
+<p>The latest version of our modules are always available on our github account: https://github.com/TagCommander/iosv5</p>
+<div class="warning"></div>
+
 <blockquote>
 <p>You will always need to at least add the Core module to your project.</p>
 </blockquote>
@@ -77,6 +78,11 @@ e
 - In the "Build Phases" tab under "Link Binary With Libraries"
 - That the FRAMEWORK_SEARCH_PATHS do include the places where the frameworks are.
 </code></pre>
+<h2 id="spm-support">SPM support</h2>
+<p>Swift Package Manager is an easy and a simple way to install Commanders Act's iOS libraries:</p>
+<p>&nbsp;&nbsp;1.In Xcode, select “File” → “Swift Packages” → “Add Package Dependency”</p>
+<p>&nbsp;&nbsp;2.Enter https://github.com/CommandersAct/iOSV5/</p>
+<p>&nbsp;&nbsp;3.Choose the right libs for your project</p>
 <h1 id="support-and-contacts">Support and contacts</h1>
 <p><img alt="alt tag" src="../res/ca_logo.png" /></p>
 <hr />
@@ -85,6 +91,6 @@ e
 <p>http://www.commandersact.com</p>
 <p>Commanders Act | 3/5 rue Saint Georges - 75009 PARIS - France</p>
 <hr />
-<p>This documentation was generated on 11/10/2022 16:15:56</p>
+<p>This documentation was generated on 15/11/2022 15:59:36</p>
 </body>
 </html>

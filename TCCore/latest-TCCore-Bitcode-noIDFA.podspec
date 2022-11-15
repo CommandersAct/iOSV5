@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
                    DESC
   s.platform     = :ios, '8.0'
   s.source   = { :http => "https://github.com/TagCommander/iOSV5/raw/master/TCCore/5/1/1/TCCore-Bitcode-noIDFA.zip" }
-  s.preserve_paths      = 'TCCore.xcframework'
-  #s.public_header_files = 'TCCore.framework/Headers/*.h'
-  s.vendored_frameworks = 'TCCore.xcframework'
+  s.preserve_paths      = 'TCCore-noIDFA.xcframework'
+  #s.public_header_files = 'TCCore-noIDFA.framework/Headers/*.h'
+  s.vendored_frameworks = 'TCCore-noIDFA.xcframework'
 end

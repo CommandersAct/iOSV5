@@ -6,6 +6,11 @@ Changelog iOS
 
 [Previous changelist](../res/changelog_iOS_3.md)
 
+*5.1.4 : 11/07/2022*
+
+	+ Added additionalProperties methodes for customising TCApp, TCDevice, TCLifecycle, TCProduct, TCItem & Events
+	- TCEvent addAdditionalParameter: methodes are now deprecated, please use addAdditionalProperty:
+
 *5.1.3 : 10/06/2022*
 
 	~ fixing user information in the payload.
