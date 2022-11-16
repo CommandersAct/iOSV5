@@ -5,7 +5,7 @@
 <h1 id="core-guide">Core Guide</h1>
 <p><strong>iOS</strong></p>
 <p>Last update : <em>16/11/2022</em><br />
-Release version : <em>5.1.1</em></p>
+Release version : <em>5.2.0</em></p>
 <p><div id="end_first_page" /></p>
 
 <div class="toc">
@@ -29,6 +29,6 @@ Release version : <em>5.1.1</em></p>
 <em>support@commandersact.com</em></p>
 <p>http://www.commandersact.com</p>
 <hr />
-<p>This documentation was generated on 16/11/2022 16:24:33</p>
+<p>This documentation was generated on 16/11/2022 16:40:02</p>
 </body>
 </html>
