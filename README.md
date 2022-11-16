@@ -91,6 +91,6 @@ pod 'TCServerSide', :podspec =&gt; 'https://raw.githubusercontent.com/TagCommand
 <p>http://www.commandersact.com</p>
 <p>Commanders Act | 3/5 rue Saint Georges - 75009 PARIS - France</p>
 <hr />
-<p>This documentation was generated on 16/11/2022 16:40:02</p>
+<p>This documentation was generated on 16/11/2022 16:47:29</p>
 </body>
 </html>

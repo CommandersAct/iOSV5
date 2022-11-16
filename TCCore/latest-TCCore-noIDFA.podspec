@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "latest-TCCore-noIDFA"
-  s.version      = "5.1.1"
+  s.version      = "5.2.0"
   s.homepage     = "https://github.com/TagCommander/iOSV5/tree/master/TCCore"
   s.license      = { :type => 'proprietary', :text => <<-LICENSE
                         Copyright 2013 - present Commanders Act. All rights reserved.
@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
            Go to https://github.com/TagCommander/iOSV5/tree/master/TCCore for more details
                    DESC
   s.platform     = :ios, '8.0'
-  s.source   = { :http => "https://github.com/TagCommander/iOSV5/raw/master/TCCore/5/1/1/TCCore-noIDFA.zip" }
+  s.source   = { :http => "https://github.com/TagCommander/iOSV5/raw/master/TCCore/5/2/0/TCCore-noIDFA.zip" }
   s.preserve_paths      = 'TCCore-noIDFA.xcframework'
   #s.public_header_files = 'TCCore-noIDFA.framework/Headers/*.h'
   s.vendored_frameworks = 'TCCore-noIDFA.xcframework'
