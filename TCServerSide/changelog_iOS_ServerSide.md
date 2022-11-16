@@ -6,10 +6,13 @@ Changelog iOS
 
 [Previous changelist](../res/changelog_iOS_3.md)
 
-*5.1.4 : 11/07/2022*
+*5.2.0 : 11/16/2022*
 
+	/!\ Requires TCCore 5.2.0
 	+ Added additionalProperties methodes for customising TCApp, TCDevice, TCLifecycle, TCProduct, TCItem & Events
 	- TCEvent addAdditionalParameter: methodes are now deprecated, please use addAdditionalProperty:
+	+ Added "affiliation" as a payload information inside TCItem
+	- Remove the dependency on IDFA
 
 *5.1.3 : 10/06/2022*
 

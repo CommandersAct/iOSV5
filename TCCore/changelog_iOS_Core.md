@@ -6,7 +6,7 @@ Changelog iOS
 
 [Previous changelist](../res/changelog_iOS_3.md)
 
-*5.1.2 : 11/07/2022*
+*5.2.0 : 11/16/2022*
 
   + Added additionalProperties methodes for customizing TCNetwork & TCUser
 
