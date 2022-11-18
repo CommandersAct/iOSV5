@@ -45,7 +45,7 @@ let package = Package(
         .binaryTarget(
             name: "TCPartners",
             url: "https://github.com/CommandersAct/iOSV5/raw/master/TCPartners/5/0/0/TCPartners.zip",
-            checksum: "d481a29eb2b23ec124fdbc46cc5a281272eaed83c4762b91177bf3e78d322178"
+            checksum: "fbb4aadbada6ce58871cef4fd7a4f3030ac6be6de30cf0904632ce20fdc3bcf0"
         ),
         .binaryTarget(
             name: "TCCore",
