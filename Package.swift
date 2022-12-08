@@ -8,14 +8,11 @@ let package = Package(
       // Products define the executables and libraries a package produces, and make them visible to other packages.
 
         .library(
-            name: "TCCore-noIDFA",
-            targets: ["TCCore-noIDFA"]),
+            name: "TCServerSide_noIDFA",
+            targets: ["TCServerSide_noIDFA"]),
         .library(
-            name: "TCConsent-IAB",
-            targets: ["TCConsent-IAB"]),
-        .library(
-            name: "TCPartners",
-            targets: ["TCPartners"]),
+            name: "TCConsent_IAB",
+            targets: ["TCConsent_IAB"]),
         .library(
             name: "TCCore",
             targets: ["TCCore"]),
@@ -27,44 +24,47 @@ let package = Package(
             targets: ["TCIAB"]),
         .library(
             name: "TCConsent",
-            targets: ["TCConsent"]),  ],
+            targets: ["TCConsent"]),
+        .library(
+            name: "TCPartners",
+            targets: ["TCPartners"]),  ],
   dependencies: [
   ],
   targets: [
 
         .binaryTarget(
-            name: "TCCore-noIDFA",
-            url: "https://github.com/CommandersAct/iOSV5/raw/master/TCCore/5/2/0/TCCore-noIDFA.zip",
-            checksum: "ef3b47d42adc42373a6dfe36db49ff23dc43a949b0dcbf5f3439e75a48ddd7ec"
+            name: "TCServerSide_noIDFA",
+            url: "https://github.com/CommandersAct/iOSV5/raw/master/TCServerSide/5/2/1/TCServerSide_noIDFA.zip",
+            checksum: "6ad48190f3c556979a0e1e423c9428c41fb48f44aa02080cf4233dc8b5ae98f7"
         ),
         .binaryTarget(
-            name: "TCConsent-IAB",
-            url: "https://github.com/CommandersAct/iOSV5/raw/master/TCConsent/5/1/2/TCConsent-IAB.zip",
-            checksum: "28101020cd19be58de491c24745433d18da14318d48b7f88b24a8df588070989"
-        ),
-        .binaryTarget(
-            name: "TCPartners",
-            url: "https://github.com/CommandersAct/iOSV5/raw/master/TCPartners/5/0/0/TCPartners.zip",
-            checksum: "fbb4aadbada6ce58871cef4fd7a4f3030ac6be6de30cf0904632ce20fdc3bcf0"
+            name: "TCConsent_IAB",
+            url: "https://github.com/CommandersAct/iOSV5/raw/master/TCConsent/5/1/3/TCConsent_IAB.zip",
+            checksum: "ed026f7fbf2f299ef35ce3d1b80df04e576e41bd8c0eed0283fce8609fc99259"
         ),
         .binaryTarget(
             name: "TCCore",
-            url: "https://github.com/CommandersAct/iOSV5/raw/master/TCCore/5/2/0/TCCore.zip",
-            checksum: "451606a6b0cdaa089bcc4bc57076dfa11a95c31ca9817aae3bc53e5a957b8470"
+            url: "https://github.com/CommandersAct/iOSV5/raw/master/TCCore/5/2/1/TCCore.zip",
+            checksum: "3e4dbf578aec0fd955d7a17f7adf2d168ff227ade67ca4ffe84464d8ffe0dc31"
         ),
         .binaryTarget(
             name: "TCServerSide",
-            url: "https://github.com/CommandersAct/iOSV5/raw/master/TCServerSide/5/2/0/TCServerSide.zip",
-            checksum: "a8dbb6ccd5f48b0fee154f4c3a3a41b6a11a66a8c6879711b98b3ab11249d17e"
+            url: "https://github.com/CommandersAct/iOSV5/raw/master/TCServerSide/5/2/1/TCServerSide.zip",
+            checksum: "d5839f4a943ff80c5198d9ffdd155a2fc0e52859a22a4faf72dd34f10a754f58"
         ),
         .binaryTarget(
             name: "TCIAB",
-            url: "https://github.com/CommandersAct/iOSV5/raw/master/TCIAB/5/0/0/TCIAB.zip",
-            checksum: "60fc5a2b83d4cd448fc40106e18435454cb2ea3d9d1d48fc0ebd57ad398b9222"
+            url: "https://github.com/CommandersAct/iOSV5/raw/master/TCIAB/5/0/1/TCIAB.zip",
+            checksum: "fab7b1b6d4fcc87457763c172fa28c4d5f26f1e6fed3248ee73729b280cb969d"
         ),
         .binaryTarget(
             name: "TCConsent",
-            url: "https://github.com/CommandersAct/iOSV5/raw/master/TCConsent/5/1/2/TCConsent.zip",
-            checksum: "ae6fde0131622ba2b4ebccff7cd14a9c323cc5a78b4f1b2048ee0f3b01c7e445"
+            url: "https://github.com/CommandersAct/iOSV5/raw/master/TCConsent/5/1/3/TCConsent.zip",
+            checksum: "92ce20781769cfb523ad8e06a107d7e7bd739412598ae099ffe1a50905b52c7f"
+        ),
+        .binaryTarget(
+            name: "TCPartners",
+            url: "https://github.com/CommandersAct/iOSV5/raw/master/TCPartners/5/0/1/TCPartners.zip",
+            checksum: "b8bb9adb15aaf44a5f1406584c05396f2bad7bc481941d38b9f0a583efd58b08"
         ),  ]
 )
