@@ -6,6 +6,11 @@ Changelog iOS
 
 [Previous changelist](../res/changelog_iOS_3.md)
 
+*5.2.1 : 12/08/2022*
+
+	- Removed bitcode variants
+
+
 *5.2.0 : 11/16/2022*
 
   + Added additionalProperties methodes for customizing TCNetwork & TCUser

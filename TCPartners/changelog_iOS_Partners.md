@@ -1,6 +1,11 @@
 Changelog iOS
 =================
 
+*5.0.1 : 12/08/2022*
+
+	- Removed bitcode variants
+
+
 *5.0.0 : 03/28 2022*
 
     ~ new version up to date with other the changes

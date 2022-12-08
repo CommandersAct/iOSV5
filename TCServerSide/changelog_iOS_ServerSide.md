@@ -6,6 +6,12 @@ Changelog iOS
 
 [Previous changelist](../res/changelog_iOS_3.md)
 
+*5.2.1 : 12/08/2022*
+
+	- Removed bitcode variants
+	+ Added a way to add a simple json list with addAdditionalParameter
+
+
 *5.2.0 : 11/16/2022*
 
 	/!\ Requires TCCore 5.2.0

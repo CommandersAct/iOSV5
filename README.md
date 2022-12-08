@@ -4,7 +4,7 @@
 <p><img alt="alt tag" src="res/ca_logo.png" /></p>
 <h1 id="developers-implementation-guide">Developers' Implementation Guide</h1>
 <p><strong>iOS</strong></p>
-<p>Last update : <em>16/11/2022</em><br />
+<p>Last update : <em>08/12/2022</em><br />
 Release version : <em>5</em></p>
 <p><div id="end_first_page" /></p>
 
@@ -32,16 +32,17 @@ The modules are the following :</p>
 <p><a href="TCConsent/README.md">Consent : Pass the Consent settings to our tag system</a></p>
 <p>For each of those modules, please check their respective documentation for more information.</p>
 <h1 id="latest-available-versions">Latest available versions</h1>
-<p>Core : <em>5.2.0</em></p>
-<p>ServerSide : <em>5.2.0</em></p>
-<p>Consent : <em>5.1.2</em></p>
-<p>IAB : <em>5.0.0</em></p>
-<p>Partners : <em>5.0.0</em></p>
+<p>Core : <em>5.2.1</em></p>
+<p>ServerSide : <em>5.2.1</em></p>
+<p>Consent : <em>5.1.3</em></p>
+<p>IAB : <em>5.0.1</em></p>
+<p>Partners : <em>5.0.1</em></p>
 <p>Segment : <em>5.0.0</em></p>
 <h1 id="adding-a-module-to-your-project">Adding a module to your project</h1>
 <p>If you want to add a module to your iOS project, you have several possibilities.</p>
 <pre><code>- Using cocoapods to manage the dependency.
 - Using directly the framework files in your project.
+- Using SPM
 </code></pre>
 <h1 id="cocoapods">Cocoapods</h1>
 <div class="warning"></div>
@@ -58,14 +59,19 @@ pod 'latest-TCServerSide', :podspec =&gt; 'https://raw.githubusercontent.com/Tag
 pod 'TCServerSide', :podspec =&gt; 'https://raw.githubusercontent.com/TagCommander/iOSV5/master/TCServerSide/5/0/0/TCServerSide.podspec'
 </code></pre>
 <h2 id="build-variants">Build Variants</h2>
-<p>We have several variants depending on your needs.</p>
-<pre><code>- 1 full vanilla version
-- 1 vanilla version with Bitcode enabled
-- [for TCCore] : 1 version without the code to get the IDFA
-- [for TCCore] : 1 version without the code to get the IDFA with Bitcode enabled
+<div class="warning"></div>
+
+<blockquote>
+<p>Starting with XCode 14, Apple will no longer accept releases with Bitcode, so we removed the corresponding variants.</p>
+</blockquote>
+<p>We had several variants depending on your needs, but when Bitcode was removed, we tried our best to limit as much as possible.</p>
+<p>Right now all modules only have one version beside:</p>
+<pre><code>- [for TCServerSide] : one regular version
+- [for TCServerSide] : one version without the code to get the IDFA
+- [for TCConsent] : one regular version
+- [for TCConsent] : one version made to work with IAB
 </code></pre>
-<p>The 2 latests variants will not compile anything linked with ASIdentifierManager.</p>
-<p>If you're using Consent (Privacy) there is a bit more variants depending on wether you're using IAB or not for your privacy.</p>
+<p>The non-IDFA variant will not compile anything linked with ASIdentifierManager.</p>
 <h2 id="xcframework">XCFramework</h2>
 <p>The latest version of our modules are always available on our github account: https://github.com/TagCommander/iosv5</p>
 <div class="warning"></div>
@@ -82,7 +88,10 @@ pod 'TCServerSide', :podspec =&gt; 'https://raw.githubusercontent.com/TagCommand
 <p>Swift Package Manager is an easy and a simple way to install Commanders Act's iOS libraries:</p>
 <p>&nbsp;&nbsp;1.In Xcode, select “File” → “Swift Packages” → “Add Package Dependency”</p>
 <p>&nbsp;&nbsp;2.Enter https://github.com/CommandersAct/iOSV5/</p>
-<p>&nbsp;&nbsp;3.Choose the right libs for your project</p>
+<p>&nbsp;&nbsp;3.Choose the right products for your project</p>
+<p><strong>/!\ Warning :</strong></p>
+<p>If you need to switch your usage from SPM to cocoapods or local XCFramework, please make sur to clean your build folder.</p>
+<p>If you want to change products variants or add new ones, you'll need to re-add the iOSV5 package dependency and also empty your build folder.</p>
 <h1 id="support-and-contacts">Support and contacts</h1>
 <p><img alt="alt tag" src="../res/ca_logo.png" /></p>
 <hr />
@@ -91,6 +100,6 @@ pod 'TCServerSide', :podspec =&gt; 'https://raw.githubusercontent.com/TagCommand
 <p>http://www.commandersact.com</p>
 <p>Commanders Act | 3/5 rue Saint Georges - 75009 PARIS - France</p>
 <hr />
-<p>This documentation was generated on 16/11/2022 16:47:29</p>
+<p>This documentation was generated on 08/12/2022 16:43:32</p>
 </body>
 </html>

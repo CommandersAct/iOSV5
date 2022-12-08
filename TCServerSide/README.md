@@ -4,8 +4,8 @@
 <p><img alt="alt tag" src="../res/ca_logo.png" /></p>
 <h1 id="serversides-implementation-guide">ServerSide's Implementation Guide</h1>
 <p><strong>iOS</strong></p>
-<p>Last update : <em>16/11/2022</em><br />
-Release version : <em>5.2.0</em></p>
+<p>Last update : <em>08/12/2022</em><br />
+Release version : <em>5.2.1</em></p>
 <p><div id="end_first_page" /></p>
 
 <div class="toc">
@@ -29,7 +29,10 @@ Release version : <em>5.2.0</em></p>
 <li><a href="#using-the-serversides-module">Using the ServerSide's module</a><ul>
 <li><a href="#initialisation">Initialisation</a></li>
 <li><a href="#executing-events">Executing events</a></li>
-<li><a href="#additional-parameters">Additional parameters</a></li>
+<li><a href="#customising-events">Customising Events</a><ul>
+<li><a href="#generic-properties">Generic properties :</a></li>
+</ul>
+</li>
 <li><a href="#custom-events">Custom events</a></li>
 <li><a href="#consent">Consent</a></li>
 <li><a href="#background-mode">Background Mode</a></li>
@@ -152,14 +155,61 @@ TCPurchaseEvent *event = [[TCPurchaseEvent alloc] initWithId: @"ID"
 
 [TCS execute: event];
 </code></pre>
-<h2 id="additional-parameters">Additional parameters</h2>
-<p>Events are tailored for the most common solutions' needs. But you might need to add parameters that are not specified in the event you are trying to send.</p>
-<pre><code>TCPageViewEvent *pageViewEvent = [[TCPageViewEvent alloc] initWithType: @"Consent"];
-pageViewEvent.pageName = @"Configuration";
-[pageViewEvent addAdditionalParameter: @"currentConsent" withValue: @"refused"];
+<h2 id="customising-events">Customising Events</h2>
+<p>Events are tailored for the most common solutions' needs. But you might need to add properties that are not specified in the event you are trying to send.</p>
+<p>You can choose to edit your events by directly accessing the event object property, or you can choose to add new properties. Depending on your needs, you can use the following methods to achieve this.</p>
+<pre><code>- (void) addAdditionalProperty: (NSString *) key withStringValue: (NSString *) value;
+- (void) addAdditionalProperty: (NSString *) key withDictValue: (NSDictionary *) json;
+- (void) addAdditionalProperty: (NSString *) key withBoolValue: (BOOL) value;
+- (void) addAdditionalProperty: (NSString *) key withNumberValue: (NSDecimalNumber *) value;
+- (void) addAdditionalProperty: (NSString *) key withDigitStringValue: (NSString *) value; // value here is a DigitString that'll be parsed to a precised number
+- (void) addAdditionalProperty: (TCDynamicStore *) store;
+</code></pre>
+<p>Also, for accessing &amp; removing already added properties :</p>
+<pre><code>- (NSMutableDictionary *) getAdditionalProperties;
+- (void) removeAdditionalProperty: (NSString *) key;
+- (void) clearAdditionalProperties;
 </code></pre>
 <p>Here for example this could be tracking some user going back to your configuration to open the consent interface. And you would want to know what was the consent before re-opening.
-Of course this is a simple example only here to show the addAdditionalParameter method.</p>
+Of course this is a simple example only here to show the addAdditionalProperty method.</p>
+<pre><code>TCPageViewEvent *pageViewEvent = [[TCPageViewEvent alloc] initWithType: @"Consent"];
+pageViewEvent.pageName = @"Configuration";
+[pageViewEvent addAdditionalProperty: @"currentConsent" withStringValue: @"refused"];
+</code></pre>
+<p>If you want to customize the other fields in your events, you can directly edit properties on the coresponding singleton instance (except for TCLifecycle) or use custimisation methodes.</p>
+<p>Please note that these are constant fields across the events, changes will be applied to all events at once.
+Here's a list of the available editable fields :</p>
+<ul>
+<li>[TCDevice sharedInstance]</li>
+<li>[TCNetwork sharedInstance]</li>
+<li>[TCUser sharedInstance]</li>
+<li>[TCApp sharedInstance]</li>
+<li>[TCLifecycle sharedInstance]</li>
+<li>TCItem and TCProduct objects</li>
+</ul>
+<p>For TCDevice's inner fields, Os &amp; Screen are accessible via :</p>
+<pre><code>[[TCDevice sharedInstance] getOsProperties]
+[[TCDevice sharedInstance] getScreenProperties]
+</code></pre>
+<h4 id="generic-properties">Generic properties :</h4>
+<p>Some properties require access to additional protected resources, bluetooth for example.
+We have default values to always have a valid datalayer for those. But if you need the real value for your partners, you will need to ask for permissions if needed and fill the value by yourself. They are set as public so it should be easy for you.</p>
+<table>
+<thead>
+<tr>
+<th>Class.propertyName</th>
+<th>Value type</th>
+<th>default value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TCNetwork.bluetooth</td>
+<td>Boolean</td>
+<td>false</td>
+</tr>
+</tbody>
+</table>
 <h2 id="custom-events">Custom events</h2>
 <p>In some case, the classic events might not suit your needs, in this case you can build complete custom events.
 It is important to name them properly as this will be the base of forwarding them to your destinations.</p>
@@ -368,6 +418,6 @@ TCPurchaseEvent *event = [[TCPurchaseEvent alloc] initWithId: @"ID" withRevenue:
 <em>support@commandersact.com</em></p>
 <p>http://www.commandersact.com</p>
 <hr />
-<p>This documentation was generated on 16/11/2022 16:47:29</p>
+<p>This documentation was generated on 08/12/2022 16:43:32</p>
 </body>
 </html>
