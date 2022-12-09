@@ -9,15 +9,16 @@ Changelog iOS
 *5.2.1 : 12/08/2022*
 
 	- Removed bitcode variants
-
+	+ New _noIDFA variant.
+	~ All pods renamed to snake_case.
 
 *5.2.0 : 11/16/2022*
 
-  + Added additionalProperties methodes for customizing TCNetwork & TCUser
+	+ Added additionalProperties methodes for customizing TCNetwork & TCUser
 
 *5.1.1 : 09/28/2022*
 
-  + Added support for TVOS inside the XCFramework (only for Core/ServerSide for now)
+	+ Added support for TVOS inside the XCFramework (only for Core/ServerSide for now)
 
 *5.1.0 : 05/24/2022*
 
@@ -179,7 +180,7 @@ Changelog iOS
 
 
 *4.2.1 : 06/27 2018*
-	
+
 	+ Privacy notifications.
 
 

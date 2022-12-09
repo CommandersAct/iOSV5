@@ -8,8 +8,11 @@ Changelog iOS
 
 *5.2.1 : 12/08/2022*
 
-	- Removed bitcode variants
+	- Removed all bitcode variants.
+	- New noIDFA variant.
 	+ Added a way to add a simple json list with addAdditionalParameter
+	~ All pods renamed to snake_case.
+
 
 
 *5.2.0 : 11/16/2022*

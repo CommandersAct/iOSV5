@@ -3,7 +3,9 @@ Changelog iOS
 
 *5.1.3 : 12/08/2022*
 
-	- Removed bitcode variants
+	- Removed noIDFA, noIAB & all bitcode variants.
+	+ New IAB variant.
+	~ All pods renamed to snake_case.
 
 
 *5.1.2 : 09/28/2022*
