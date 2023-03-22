@@ -4,7 +4,7 @@
 <p><img alt="alt tag" src="res/ca_logo.png" /></p>
 <h1 id="developers-implementation-guide">Developers' Implementation Guide</h1>
 <p><strong>iOS</strong></p>
-<p>Last update : <em>08/12/2022</em><br />
+<p>Last update : <em>22/03/2023</em><br />
 Release version : <em>5</em></p>
 <p><div id="end_first_page" /></p>
 
@@ -32,9 +32,9 @@ The modules are the following :</p>
 <p><a href="TCConsent/README.md">Consent : Pass the Consent settings to our tag system</a></p>
 <p>For each of those modules, please check their respective documentation for more information.</p>
 <h1 id="latest-available-versions">Latest available versions</h1>
-<p>Core : <em>5.2.1</em></p>
-<p>ServerSide : <em>5.2.1</em></p>
-<p>Consent : <em>5.1.3</em></p>
+<p>Core : <em>5.2.2</em></p>
+<p>ServerSide : <em>5.3.0</em></p>
+<p>Consent : <em>5.1.4</em></p>
 <p>IAB : <em>5.0.1</em></p>
 <p>Partners : <em>5.0.1</em></p>
 <p>Segment : <em>5.0.0</em></p>
@@ -51,8 +51,8 @@ The modules are the following :</p>
 <p>We renamed all our pods! The names of the pod changed to be able to reflect the exact content of the podspec (and thus preventing the name warning).</p>
 </blockquote>
 <p>All latests now point toward an XCode 12 compiled version. If you still need XCode 11, please check the changelogs and point to the pod inside the latest XCode 11 release available. XCode 11 is not supported anymore and no new releases will be made for it.</p>
-<pre><code>pod 'latest-TCCore', :podspec =&gt; 'https://raw.githubusercontent.com/TagCommander/iOSV5/master/TCCore/latest-TCCore.podspec'
-pod 'latest-TCServerSide', :podspec =&gt; 'https://raw.githubusercontent.com/TagCommander/iOSV5/master/TCServerSide/latest-TCServerSide.podspec'
+<pre><code>pod 'latest_TCCore', :podspec =&gt; 'https://raw.githubusercontent.com/TagCommander/iOSV5/master/TCCore/latest_TCCore.podspec'
+pod 'latest_TCServerSide', :podspec =&gt; 'https://raw.githubusercontent.com/TagCommander/iOSV5/master/TCServerSide/latest_TCServerSide.podspec'
 </code></pre>
 <p>You can also point on a specific version (only for the latests builds):</p>
 <pre><code>pod 'TCCore', :podspec =&gt; 'https://raw.githubusercontent.com/TagCommander/iOSV5/master/TCCore/5/0/0/TCCore.podspec'
@@ -66,7 +66,7 @@ pod 'TCServerSide', :podspec =&gt; 'https://raw.githubusercontent.com/TagCommand
 </blockquote>
 <p>We had several variants depending on your needs, but when Bitcode was removed, we tried our best to limit as much as possible.</p>
 <p>Right now all modules only have one version beside:</p>
-<pre><code>- [for TCServerSide] : one regular version
+<pre><code>- [for TCCore] : one regular version
 - [for TCServerSide] : one version without the code to get the IDFA
 - [for TCConsent] : one regular version
 - [for TCConsent] : one version made to work with IAB
@@ -98,8 +98,8 @@ pod 'TCServerSide', :podspec =&gt; 'https://raw.githubusercontent.com/TagCommand
 <p><strong>Support</strong>
 <em>support@commandersact.com</em></p>
 <p>http://www.commandersact.com</p>
-<p>Commanders Act | 3/5 rue Saint Georges - 75009 PARIS - France</p>
+<p>Commanders Act | 7b rue taylor - 75010 PARIS - France</p>
 <hr />
-<p>This documentation was generated on 08/12/2022 16:43:32</p>
+<p>This documentation was generated on 22/03/2023 17:02:24</p>
 </body>
 </html>

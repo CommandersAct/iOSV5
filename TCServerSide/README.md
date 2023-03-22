@@ -4,8 +4,8 @@
 <p><img alt="alt tag" src="../res/ca_logo.png" /></p>
 <h1 id="serversides-implementation-guide">ServerSide's Implementation Guide</h1>
 <p><strong>iOS</strong></p>
-<p>Last update : <em>08/12/2022</em><br />
-Release version : <em>5.2.1</em></p>
+<p>Last update : <em>22/03/2023</em><br />
+Release version : <em>5.3.0</em></p>
 <p><div id="end_first_page" /></p>
 
 <div class="toc">
@@ -158,7 +158,9 @@ TCPurchaseEvent *event = [[TCPurchaseEvent alloc] initWithId: @"ID"
 <h2 id="customising-events">Customising Events</h2>
 <p>Events are tailored for the most common solutions' needs. But you might need to add properties that are not specified in the event you are trying to send.</p>
 <p>You can choose to edit your events by directly accessing the event object property, or you can choose to add new properties. Depending on your needs, you can use the following methods to achieve this.</p>
-<pre><code>- (void) addAdditionalProperty: (NSString *) key withStringValue: (NSString *) value;
+<pre><code>/!\ - It is possible to access directly additionalProperties for wrapper purposes, but it's highly recommended to avoid doing so as it may break your event paylaod format. Only do it if you know exactly what you're doing.
+
+- (void) addAdditionalProperty: (NSString *) key withStringValue: (NSString *) value;
 - (void) addAdditionalProperty: (NSString *) key withDictValue: (NSDictionary *) json;
 - (void) addAdditionalProperty: (NSString *) key withBoolValue: (BOOL) value;
 - (void) addAdditionalProperty: (NSString *) key withNumberValue: (NSDecimalNumber *) value;
@@ -357,10 +359,11 @@ If you encounter this issue, you need to pass your custom process pool like to T
 <pre><code>[self.ServerSideInstance removePermanentData: @"#VENDOR_ID#"];
 </code></pre>
 <h1 id="swift">Swift</h1>
-<p>If you want to use Swift as your main language, please check the demo <a href="https://github.com/TagCommander/TagCommander-In-Swift">TagCommander-In-Swift</a>.</p>
+<p>If you want to use Swift as your main language, there is absolutely nothing special to do.
+Compile with the latest versions and call our modules as usual.</p>
 <h1 id="example-tcdemo">Example: TCDemo</h1>
-<p>To check an example of how to use this module, please check: </p>
-<p><a href="https://github.com/TagCommander/Privacy-Demo/tree/master/V5/iOS/TCDemo_PrivacyCenter_And_ServerSide">Tag Demo</a></p>
+<p>To check an example of how to use this module, please check:</p>
+<p><a href="https://github.com/CommandersAct/TCMobileDemo-V5/tree/master/iOS/ServerSideOnly">TCDemo_ServerSideOnly</a></p>
 <h1 id="migration-v4-to-v5">Migration v4 to v5</h1>
 <h2 id="why-a-new-version-of-the-sdk">Why a new version of the SDK</h2>
 <p>CommandersAct made a big move forward to bring all his products together in a whole new platform.</p>
@@ -418,6 +421,6 @@ TCPurchaseEvent *event = [[TCPurchaseEvent alloc] initWithId: @"ID" withRevenue:
 <em>support@commandersact.com</em></p>
 <p>http://www.commandersact.com</p>
 <hr />
-<p>This documentation was generated on 08/12/2022 16:43:32</p>
+<p>This documentation was generated on 22/03/2023 17:02:24</p>
 </body>
 </html>

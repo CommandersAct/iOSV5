@@ -3,8 +3,7 @@ Changelog iOS
 
 *5.0.1 : 12/08/2022*
 
-	- Removed bitcode variants.
-	~ All pods renamed to snake_case.
+	- Removed bitcode variants
 
 
 *5.0.0 : 03/28 2022*
@@ -73,7 +72,7 @@ Changelog iOS
 
 	+ Added several new keys to the user defaults.
 	+ IABConsent_SubjectToGDPR which defaults to "1"
-	+ IABConsent_ParsedVendorConsents String of “0”s and “1”s, where the character at position N indicates the consent status to vendorID N as defined in the Global Vendor List.
+	+ IABConsent_ParsedVendorConsents String of “0”s and “1”s, where the character at position N indicates the consent status to vendorID N as defined in the Global Vendor List. 
 	+ IABConsent_ParsedPurposeConsents String of “0”s and “1”s, where the character at position N indicates the consent status to purposeID N as defined in the Global Vendor List.
 
 *4.3.0 : 05/15 2019*

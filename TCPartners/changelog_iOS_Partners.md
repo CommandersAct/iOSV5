@@ -3,8 +3,7 @@ Changelog iOS
 
 *5.0.1 : 12/08/2022*
 
-	- Removed noIDFA & all bitcode variants.
-	~ All pods renamed to snake_case.
+	- Removed bitcode variants
 
 
 *5.0.0 : 03/28 2022*

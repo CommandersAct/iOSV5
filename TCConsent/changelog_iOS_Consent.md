@@ -1,11 +1,14 @@
 Changelog iOS
 =============
 
+
+*5.1.4 : 03/22/2023*
+
+    + Added the version of the Consent module inside the consent hits to help debug.
+
 *5.1.3 : 12/08/2022*
 
-	- Removed noIDFA, noIAB & all bitcode variants.
-	+ New IAB variant.
-	~ All pods renamed to snake_case.
+	- Removed bitcode variants
 
 
 *5.1.2 : 09/28/2022*

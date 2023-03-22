@@ -6,13 +6,18 @@ Changelog iOS
 
 [Previous changelist](../res/changelog_iOS_3.md)
 
+*5.3.0 : 03/22/2023*
+
+	/!\ Requires TCCore 5.2.2
+	+ New events format
+	+ Added consistent_anonymous_id for TCUser 
+	~ Fix idfa variants bug.
+	~ TCDevice.ID renamed to TCDevice.sdkID.
+
 *5.2.1 : 12/08/2022*
 
-	- Removed all bitcode variants.
-	- New noIDFA variant.
+	- Removed bitcode variants
 	+ Added a way to add a simple json list with addAdditionalParameter
-	~ All pods renamed to snake_case.
-
 
 
 *5.2.0 : 11/16/2022*

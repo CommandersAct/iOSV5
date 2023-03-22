@@ -4,7 +4,7 @@
 <p><img alt="alt tag" src="../res/ca_logo.png" /></p>
 <h1 id="tciabs-implementation-guide">TCIAB's Implementation Guide</h1>
 <p><strong>iOS</strong></p>
-<p>Last update : <em>08/12/2022</em><br />
+<p>Last update : <em>22/03/2023</em><br />
 Release version : <em>5.0.1</em></p>
 <p><div id="end_first_page" /></p>
 
@@ -72,6 +72,7 @@ For example, our IAB demo is using purposes-fr.json.</p>
 <p>If you need translation files, download them from https://register.consensu.org/translation under "List of translations for purpose descriptions v2.0". Also keeping the same file name.</p>
 <p>Call this line right after the initialisation of the TCPrivacy module:</p>
 <pre><code>[[TCMobileConsent sharedInstance] setLanguage: @"fr"];
+// Please use ISO 639-1 language codes
 </code></pre>
 <h3 id="privacyjson">privacy.json</h3>
 <p>This file declares information used to save the consent in our dashboards as well as texts present in the interface that are not declared officially by IAB.</p>
@@ -151,6 +152,6 @@ But you have a boolean in TCConsent/TCMobilePrivacy which is named generatePubli
 <p>http://www.commandersact.com</p>
 <p>Commanders Act | 3/5 rue Saint Georges - 75009 PARIS - France</p>
 <hr />
-<p>This documentation was generated on 08/12/2022 16:43:32</p>
+<p>This documentation was generated on 22/03/2023 17:02:24</p>
 </body>
 </html>
