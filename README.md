@@ -4,7 +4,7 @@
 <p><img alt="alt tag" src="res/ca_logo.png" /></p>
 <h1 id="developers-implementation-guide">Developers' Implementation Guide</h1>
 <p><strong>iOS</strong></p>
-<p>Last update : <em>22/03/2023</em><br />
+<p>Last update : <em>20/04/2023</em><br />
 Release version : <em>5</em></p>
 <p><div id="end_first_page" /></p>
 
@@ -33,10 +33,10 @@ The modules are the following :</p>
 <p>For each of those modules, please check their respective documentation for more information.</p>
 <h1 id="latest-available-versions">Latest available versions</h1>
 <p>Core : <em>5.2.2</em></p>
-<p>ServerSide : <em>5.3.0</em></p>
-<p>Consent : <em>5.1.4</em></p>
+<p>ServerSide : <em>5.3.1</em></p>
+<p>Consent : <em>5.1.5</em></p>
 <p>IAB : <em>5.0.1</em></p>
-<p>Partners : <em>5.0.1</em></p>
+<p>Partners : <em>5.0.2</em></p>
 <p>Segment : <em>5.0.0</em></p>
 <h1 id="adding-a-module-to-your-project">Adding a module to your project</h1>
 <p>If you want to add a module to your iOS project, you have several possibilities.</p>
@@ -46,7 +46,6 @@ The modules are the following :</p>
 </code></pre>
 <h1 id="cocoapods">Cocoapods</h1>
 <div class="warning"></div>
-
 <blockquote>
 <p>We renamed all our pods! The names of the pod changed to be able to reflect the exact content of the podspec (and thus preventing the name warning).</p>
 </blockquote>
@@ -60,7 +59,6 @@ pod 'TCServerSide', :podspec =&gt; 'https://raw.githubusercontent.com/TagCommand
 </code></pre>
 <h2 id="build-variants">Build Variants</h2>
 <div class="warning"></div>
-
 <blockquote>
 <p>Starting with XCode 14, Apple will no longer accept releases with Bitcode, so we removed the corresponding variants.</p>
 </blockquote>
@@ -75,7 +73,6 @@ pod 'TCServerSide', :podspec =&gt; 'https://raw.githubusercontent.com/TagCommand
 <h2 id="xcframework">XCFramework</h2>
 <p>The latest version of our modules are always available on our github account: https://github.com/TagCommander/iosv5</p>
 <div class="warning"></div>
-
 <blockquote>
 <p>You will always need to at least add the Core module to your project.</p>
 </blockquote>
@@ -100,6 +97,6 @@ pod 'TCServerSide', :podspec =&gt; 'https://raw.githubusercontent.com/TagCommand
 <p>http://www.commandersact.com</p>
 <p>Commanders Act | 7b rue taylor - 75010 PARIS - France</p>
 <hr />
-<p>This documentation was generated on 22/03/2023 17:02:24</p>
+<p>This documentation was generated on 20/04/2023 14:34:12</p>
 </body>
 </html>

@@ -2,6 +2,13 @@ Changelog iOS
 =============
 
 
+*5.1.5 : 04/20/2023*
+
+    + [IAB] As per legal request displaying the number of IAB vendors used in the bottom of the first consent screen.
+    ~ Changing weight of consent duration sources. Now we have : "SDK default value" < "Value in json" < "setConsentDuration()"
+    ~ Fixing an issue to switch the language to english when it's not the default language.
+
+
 *5.1.4 : 03/22/2023*
 
     + Added the version of the Consent module inside the consent hits to help debug.

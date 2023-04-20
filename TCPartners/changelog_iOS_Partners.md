@@ -1,6 +1,11 @@
 Changelog iOS
 =================
 
+*5.0.2 : 04/07/2023*
+
+	+ Protection around the server-side imports.
+
+
 *5.0.1 : 12/08/2022*
 
 	- Removed bitcode variants

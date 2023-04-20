@@ -4,8 +4,8 @@
 <p><img alt="alt tag" src="../res/ca_logo.png" /></p>
 <h1 id="serversides-implementation-guide">ServerSide's Implementation Guide</h1>
 <p><strong>iOS</strong></p>
-<p>Last update : <em>22/03/2023</em><br />
-Release version : <em>5.3.0</em></p>
+<p>Last update : <em>20/04/2023</em><br />
+Release version : <em>5.3.1</em></p>
 <p><div id="end_first_page" /></p>
 
 <div class="toc">
@@ -331,7 +331,6 @@ We have 3 behaviours:</p>
 </ul>
 <h2 id="common-errors">Common errors</h2>
 <div class="warning"></div>
-
 <blockquote>
 <ul>
 <li>Make sure you have the latest version.</li>
@@ -421,6 +420,6 @@ TCPurchaseEvent *event = [[TCPurchaseEvent alloc] initWithId: @"ID" withRevenue:
 <em>support@commandersact.com</em></p>
 <p>http://www.commandersact.com</p>
 <hr />
-<p>This documentation was generated on 22/03/2023 17:02:24</p>
+<p>This documentation was generated on 20/04/2023 14:34:12</p>
 </body>
 </html>
