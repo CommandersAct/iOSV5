@@ -6,6 +6,9 @@ Changelog iOS
 
 [Previous changelist](../res/changelog_iOS_3.md)
 
+*5.2.3 : 05/04/2023*
+
+  ~ gender property mapping fix on TCUser.
 
 *5.2.2 : 03/22/2023*
 

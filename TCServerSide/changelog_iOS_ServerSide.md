@@ -6,6 +6,10 @@ Changelog iOS
 
 [Previous changelist](../res/changelog_iOS_3.md)
 
+*5.3.2 : 05/05/2023*
+
+	+ Added Video Events
+
 *5.3.1 : 04/07/2023*
 
 	+ Added protection on TCPredefinedVariables imports

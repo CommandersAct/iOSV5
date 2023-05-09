@@ -4,8 +4,8 @@
 <p><img alt="alt tag" src="../res/ca_logo.png" /></p>
 <h1 id="serversides-implementation-guide">ServerSide's Implementation Guide</h1>
 <p><strong>iOS</strong></p>
-<p>Last update : <em>20/04/2023</em><br />
-Release version : <em>5.3.1</em></p>
+<p>Last update : <em>09/05/2023</em><br />
+Release version : <em>5.3.2</em></p>
 <p><div id="end_first_page" /></p>
 
 <div class="toc">
@@ -34,6 +34,7 @@ Release version : <em>5.3.1</em></p>
 </ul>
 </li>
 <li><a href="#custom-events">Custom events</a></li>
+<li><a href="#video-events">Video Events</a></li>
 <li><a href="#consent">Consent</a></li>
 <li><a href="#background-mode">Background Mode</a></li>
 <li><a href="#deactivating-the-serversides-module">Deactivating the ServerSide's module</a></li>
@@ -218,6 +219,23 @@ It is important to name them properly as this will be the base of forwarding the
 <pre><code>TCCustomEvent *event = [[TCCustomEvent alloc] initWithName: @"eventName"];
 [event addAdditionalParameter: @"myParam" withValue: @"myValue"];
 [TCS execute: event];
+</code></pre>
+<h2 id="video-events">Video Events</h2>
+<p>There are 4 main video events classes : TCVideoSettingEvent, TCVideoPlaybackEvent, TCVideoContentEvent &amp; TCVideoAdEvent. </p>
+<p>Every Video event will have multiple modes, choose the  right mode for each event you're sending. </p>
+<p>You'll have to manage your video_session_id across the video events you're sending. </p>
+<p>if you have multiple videos, you'll need to set multiple video_session_id for every one of them. </p>
+<p>example : </p>
+<pre><code>let event = TCVideoAdEvent(wIthMode: video_ad_start, andSessionId: "0000-0000-0001") // first video
+let event_2 = TCVideoAdEvent(wIthMode: video_ad_playing, andSessionId: "0000-0000-0001") // another event for the first video!
+
+serverSide?.execute(event)
+serverSide?.execute(event_2)
+
+let event_3 = TCVideoAdEvent(wIthMode: video_ad_start, andSessionId: "0000-0000-0002") // second video
+let event_4 = TCVideoAdEvent(wIthMode: video_ad_playing, andSessionId: "0000-0000-0002") // another event for the second video !
+serverSide?.execute(event_3)
+serverSide?.execute(event_4)
 </code></pre>
 <h2 id="consent">Consent</h2>
 <p>To manage the privacy of the user's data you can use our Consent product, another product or nothing at all.</p>
@@ -420,6 +438,6 @@ TCPurchaseEvent *event = [[TCPurchaseEvent alloc] initWithId: @"ID" withRevenue:
 <em>support@commandersact.com</em></p>
 <p>http://www.commandersact.com</p>
 <hr />
-<p>This documentation was generated on 20/04/2023 16:11:19</p>
+<p>This documentation was generated on 09/05/2023 16:09:56</p>
 </body>
 </html>
