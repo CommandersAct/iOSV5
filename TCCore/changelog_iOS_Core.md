@@ -6,7 +6,15 @@ Changelog iOS
 
 [Previous changelist](../res/changelog_iOS_3.md)
 
-*5.2.3 : 05/04/2023*
+*5.2.5 : 07/24/2023*
+
+  ~ added required functionalities for IAB TCF v2.2
+
+*5.2.4 : 05/10/2023*
+
+  ~ Logging set to None per default.
+
+*5.2.3 : 05/09/2023*
 
   ~ gender property mapping fix on TCUser.
 

@@ -1,6 +1,14 @@
 Changelog iOS
 =============
 
+*5.1.7 : 07/24/2023*
+
+    - /!\ Requires Core 5.2.4+
+    + Support IAB TCF v2.2
+
+*5.1.6 : 05/09/2023*
+
+    + Adding do_not_track property for privacy stats
 
 *5.1.5 : 04/20/2023*
 

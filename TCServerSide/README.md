@@ -4,7 +4,7 @@
 <p><img alt="alt tag" src="../res/ca_logo.png" /></p>
 <h1 id="serversides-implementation-guide">ServerSide's Implementation Guide</h1>
 <p><strong>iOS</strong></p>
-<p>Last update : <em>09/05/2023</em><br />
+<p>Last update : <em>24/07/2023</em><br />
 Release version : <em>5.3.2</em></p>
 <p><div id="end_first_page" /></p>
 
@@ -28,8 +28,7 @@ Release version : <em>5.3.2</em></p>
 </li>
 <li><a href="#using-the-serversides-module">Using the ServerSide's module</a><ul>
 <li><a href="#initialisation">Initialisation</a></li>
-<li><a href="#executing-events">Executing events</a></li>
-<li><a href="#customising-events">Customising Events</a><ul>
+<li><a href="#executing-events">Executing events</a><ul>
 <li><a href="#generic-properties">Generic properties :</a></li>
 </ul>
 </li>
@@ -88,10 +87,12 @@ We also add "value" and "currency" that are generally used by solutions for this
 <p>You should be provided with a document explaining all events you need to implement inside your application and when they should be sent.</p>
 <p>The event and the information we gather independently will create a hit to our servers with a JSON payload.</p>
 <h2 id="event-details">Event details</h2>
-<p>All events and their payloads are detailed here: <a href="https://community.commandersact.com/platform-x/developers/tracking/events-reference">events-reference</a></p>
+<p><img alt="alt tag" src="../res/warning.png" />
+All events and their payloads are detailed here with code examples: <a href="https://doc.commandersact.com/developers/tracking/events-reference">events-reference</a></p>
 <p>You will also find information about what you can add inside the TCUser which is sent with every hit.
 Be aware that some data inside TCUser require consent from the user te be read and used.</p>
-<p>You can also check this page to see the link between the event names and the SDK's Class names and all information inside the payload here:
+<p><img alt="alt tag" src="../res/warning.png" />
+You can also check this page to see the link between the event names and the SDK's Class names and all information inside the payload here:
 <a href="https://community.commandersact.com/platform-x/developers/tracking/about-events/mobile-sdk-event-specificity">mobile-sdk-event-specificity</a></p>
 <h2 id="executing-an-event">Executing an event</h2>
 <p>When you call the sendData method, a hit will be packaged and sent to Commanders Act's server.</p>
@@ -130,12 +131,19 @@ And a sourceKeyID which will represent the Android source inside your setup.</p>
 <p>If you are using our Consent module, you can also change during this initialisation the default ServerSide behaviour while waiting for the user consent.
 More information a bit later in this document.</p>
 <p>A single line of code is required to properly initialize an instance of ServerSide, and you can add one more for better logging:</p>
+<p>in objective-c :</p>
 <pre><code>//!\\ Important while integrating TCServerSide
 [TCDebug setDebugLevel: TCLogLevel_Verbose];
-ServerSide *TCS = [[ServerSide alloc] initWithSiteID: siteID andSourceKey: sourceKey];
+ServerSide *serverSide = [[ServerSide alloc] initWithSiteID: siteID andSourceKey: sourceKey];
+</code></pre>
+<p>in swift : </p>
+<pre><code>//!\\ Important while integrating TCServerSide
+TCDebug.setNotificationLog(true)
+let serverSide = ServerSide.init(siteID: siteID, andSourceKey: sourceKey)
 </code></pre>
 <h2 id="executing-events">Executing events</h2>
 <p>Each time you are required to launch an event, simply instantiate the corresponding event, fill it with what your tagging plan suggest and execute it.</p>
+<p>in objective-c : </p>
 <pre><code>NSMutableArray *items = [[NSMutableArray alloc] init];
 [items addObject: [[TCItem alloc] initWithItemId: @"iID1"
                                   withProduct: [[TCProduct alloc] initWithProductId: @"pID1" withName: @"pName1" withPrice: @1.5f]
@@ -154,9 +162,17 @@ TCPurchaseEvent *event = [[TCPurchaseEvent alloc] initWithId: @"ID"
                                                   withStatus: @"waiting"
                                                   withItems: items];
 
-[TCS execute: event];
+[serverSide execute: event];
 </code></pre>
-<h2 id="customising-events">Customising Events</h2>
+<p>in swift : </p>
+<pre><code>  let tc_item = TCItem.init(itemId: "iID1", with: TCProduct(productId: "pID1", withName: "pName1", withPrice: 1.5), withQuantity: 1)
+  let tc_item_2 = TCItem.init(itemId: "iID2", with: TCProduct(productId: "pID2", withName: "pName2", withPrice: 2.5), withQuantity: 2)
+  let items = [tc_item, tc_item_2];
+
+  let event = TCPurchaseEvent(id: "ID", withRevenue: 1.1, withValue: 12.2, withCurrency: "EUR", withType: "purchase", withPaymentMethod: "CreditCard", withStatus: "waiting", withItems: items)
+  serverSide?.execute(event)Customising Events
+</code></pre>
+<hr />
 <p>Events are tailored for the most common solutions' needs. But you might need to add properties that are not specified in the event you are trying to send.</p>
 <p>You can choose to edit your events by directly accessing the event object property, or you can choose to add new properties. Depending on your needs, you can use the following methods to achieve this.</p>
 <pre><code>/!\ - It is possible to access directly additionalProperties for wrapper purposes, but it's highly recommended to avoid doing so as it may break your event paylaod format. Only do it if you know exactly what you're doing.
@@ -175,9 +191,15 @@ TCPurchaseEvent *event = [[TCPurchaseEvent alloc] initWithId: @"ID"
 </code></pre>
 <p>Here for example this could be tracking some user going back to your configuration to open the consent interface. And you would want to know what was the consent before re-opening.
 Of course this is a simple example only here to show the addAdditionalProperty method.</p>
+<p>in objective-c : </p>
 <pre><code>TCPageViewEvent *pageViewEvent = [[TCPageViewEvent alloc] initWithType: @"Consent"];
 pageViewEvent.pageName = @"Configuration";
 [pageViewEvent addAdditionalProperty: @"currentConsent" withStringValue: @"refused"];
+</code></pre>
+<p>in swift : </p>
+<pre><code>let pageViewEvent = TCPageViewEvent(type: "Consent")
+pageViewEvent.pageName = @"Configuration";
+pageViewEvent?.addAdditionalProperty("currentConsent", withBoolValue: "refused")
 </code></pre>
 <p>If you want to customize the other fields in your events, you can directly edit properties on the coresponding singleton instance (except for TCLifecycle) or use custimisation methodes.</p>
 <p>Please note that these are constant fields across the events, changes will be applied to all events at once.
@@ -190,9 +212,14 @@ Here's a list of the available editable fields :</p>
 <li>[TCLifecycle sharedInstance]</li>
 <li>TCItem and TCProduct objects</li>
 </ul>
-<p>For TCDevice's inner fields, Os &amp; Screen are accessible via :</p>
+<p>For TCDevice's inner fields, Os &amp; Screen are accessible via :
+in objective-c : </p>
 <pre><code>[[TCDevice sharedInstance] getOsProperties]
 [[TCDevice sharedInstance] getScreenProperties]
+</code></pre>
+<p>in swift : </p>
+<pre><code>TCDevice.sharedInstance().getOsProperties()
+TCDevice.sharedInstance().getScreenProperties()
 </code></pre>
 <h4 id="generic-properties">Generic properties :</h4>
 <p>Some properties require access to additional protected resources, bluetooth for example.
@@ -216,9 +243,15 @@ We have default values to always have a valid datalayer for those. But if you ne
 <h2 id="custom-events">Custom events</h2>
 <p>In some case, the classic events might not suit your needs, in this case you can build complete custom events.
 It is important to name them properly as this will be the base of forwarding them to your destinations.</p>
+<p>in objective-c :</p>
 <pre><code>TCCustomEvent *event = [[TCCustomEvent alloc] initWithName: @"eventName"];
 [event addAdditionalParameter: @"myParam" withValue: @"myValue"];
 [TCS execute: event];
+</code></pre>
+<p>in swift :</p>
+<pre><code>let event = TCCustomEvent(name: "eventName")
+event?.addAdditionalProperty("myParam", "myValue")
+tc?.execute(event)
 </code></pre>
 <h2 id="video-events">Video Events</h2>
 <p>There are 4 main video events classes : TCVideoSettingEvent, TCVideoPlaybackEvent, TCVideoContentEvent &amp; TCVideoAdEvent. </p>
@@ -226,6 +259,20 @@ It is important to name them properly as this will be the base of forwarding the
 <p>You'll have to manage your video_session_id across the video events you're sending. </p>
 <p>if you have multiple videos, you'll need to set multiple video_session_id for every one of them. </p>
 <p>example : </p>
+<p>in objective-c : </p>
+<pre><code>TCVideoAdEvent *event = [[TCVideoAdEvent alloc] initWithMode: video_ad_start andSessionId: @"0000-0000-0001"];// first video
+TCVideoAdEvent *event_2 = [[TCVideoAdEvent alloc] initWithMode: video_ad_playing andSessionId: @"0000-0000-0001"];// another event for the first video!
+
+[serverSide execute: event];
+[serverSide execute: event_2];
+
+TCVideoAdEvent *event_3 = [[TCVideoAdEvent alloc] initWithMode: video_ad_start andSessionId: @"0000-0000-0002"];// second video
+TCVideoAdEvent *event_4 = [[TCVideoAdEvent alloc] initWithMode: video_ad_playing andSessionId: @"0000-0000-0002"];// another event for the second video!
+
+[serverSide execute: event_3];
+[serverSide execute: event_4];
+</code></pre>
+<p>in swift : </p>
 <pre><code>let event = TCVideoAdEvent(wIthMode: video_ad_start, andSessionId: "0000-0000-0001") // first video
 let event_2 = TCVideoAdEvent(wIthMode: video_ad_playing, andSessionId: "0000-0000-0001") // another event for the first video!
 
@@ -250,21 +297,39 @@ We have 3 behaviours:</p>
 </code></pre>
 <p>Consent will then be forwarded inside the TCUser. For more information, please check documentation about the <a href="../TCConsent/README.md">Consent module</a>. </p>
 <p>To initialise the ServerSide with another behaviour, please call the following function:</p>
+<p>in objective-c : </p>
 <pre><code>ServerSide *tc = [[ServerSide alloc] initWithSiteID: andSourceKey: sourceKey siteID andDefaultBehaviour: PB_ALWAYS_ENABLED];
+</code></pre>
+<p>in swift : </p>
+<pre><code>let tc = ServerSide.init(siteID: siteID, andSourceKey: sourceKey, andDefaultBehaviour: PB_DEFAULT_BEHAVIOUR)
 </code></pre>
 <h2 id="background-mode">Background Mode</h2>
 <p>While the application is goind to background, the ServerSide's module sends all data that was already queued then stops. This is in order to preserve battery life and not use carrier data when not required.</p>
 <p>But some applications need to be able to continue sending data because they have real background activities. For example listening to music.</p>
 <p>For those cases, we added a way to bypass the way the ServerSide's module usually react to background. Please call:</p>
+<p>in objective-c :</p>
 <pre><code>[tc enableRunningInBackground];
+</code></pre>
+<p>in swift :</p>
+<pre><code>tc?.enableRunningInBackground()
 </code></pre>
 <p>One drawback is that we're not able to ascertain when the application will really be killed. In normal mode, we're saving all hits not sent when going in the background, which is not possible here anymore. To be sure to not loose any hits in background mode, we will save much more often the offline hits.</p>
 <p>Please assure that your application has background modes enabled to use this feature.</p>
 <h2 id="deactivating-the-serversides-module">Deactivating the ServerSide's module</h2>
 <p>If you want to show a privacy message to your users allowing them to stop the tracking, you might want to use the following function to stop it if they refuse to be tracked.</p>
-<p>[TCS disableServerSide];</p>
+<p>in objective-c : </p>
+<pre><code>[TCS disableServerSide];
+</code></pre>
+<p>in swift : </p>
+<pre><code>tc.disableServerSide();
+</code></pre>
 <p>What this function does is stopping all systems in the ServerSide's module that update automatically or listen to notifications like background or internet reachability. This will also ignore all calls to the ServerSide's module by your application so that nothing is treated anymore and you don't have to protect those calls manually.</p>
-<p>[TCS enableServerSide];</p>
+<p>in objective-c : </p>
+<pre><code>[TCS enableServerSide];
+</code></pre>
+<p>in swift : </p>
+<pre><code>tc. enableServerSide();
+</code></pre>
 <p>In the case you need to re-enable it after disabling it the first time, you can use this function.</p>
 <h2 id="wait-for-user-agent">Wait for User-agent</h2>
 <p>As Apple removed the old class which allowed us to get the user-agent synchroneously, we sometimes have a bit of delay before the user-agent is available. And for unknown reasons, this delay is sometimes more than a minute on real devices.</p>
@@ -284,11 +349,18 @@ We have 3 behaviours:</p>
 <p>The ServerSide also offers methods to help you with the Quality Assessment of the implementation.</p>
 <h2 id="debugging">Debugging</h2>
 <p>We recommend using TCLogLevel_Verbose while developing your application:</p>
+<p>in objective-c : </p>
 <pre><code>// Put it before the TagCommander initialization
 #ifdef DEBUG
     [TCDebug setDebugLevel: TCLogLevel_Verbose];
     [TCDebug setNotificationLog: YES];
 #end
+</code></pre>
+<p>in swift : </p>
+<pre><code>#if DEBUG
+    TCDebug.setDebugLevel(TCLogLevel_Verbose)
+    TCDebug.setNotificationLog(true)
+#endif
 </code></pre>
 <ul>
 <li>
@@ -348,7 +420,7 @@ We have 3 behaviours:</p>
 <li>You can also use a network monitor like Wireshark or Charles to check directly what is being sent on the wire to your vendors.</li>
 </ul>
 <h2 id="common-errors">Common errors</h2>
-<div class="warning"></div>
+<p><img alt="alt tag" src="../res/warning.png" /></p>
 <blockquote>
 <ul>
 <li>Make sure you have the latest version.</li>
@@ -370,10 +442,19 @@ If you encounter this issue, you need to pass your custom process pool like to T
 <h2 id="persisting-variables">Persisting variables</h2>
 <p>ServerSide's module permits storing of variables that remain the same in the whole application, such as vendors ID, in a ServerSide's instance, instead of sending them each time you want to send data.</p>
 <p>These variables will have a lower priority to the one given by the addData method but will persist for the whole run of the application.</p>
+<p>in objective-c : </p>
 <pre><code>[self.ServerSideInstance addPermanentData: @"#VENDOR_ID#" withValue: @"UE-556XXXXX-01"];
+
+// They can also be removed if necessary.
+
+[self.ServerSideInstance removePermanentData: @"#VENDOR_ID#"];
 </code></pre>
-<p>They can also be removed if necessary.</p>
-<pre><code>[self.ServerSideInstance removePermanentData: @"#VENDOR_ID#"];
+<p>in swift : </p>
+<pre><code>ServerSideInstance?.addPermanentData("#VENDOR_ID#", withValue: "UE-556XXXXX-01")
+
+// They can also be removed if necessary.
+
+ServerSideInstance?.removePermanentData("#VENDOR_ID#")
 </code></pre>
 <h1 id="swift">Swift</h1>
 <p>If you want to use Swift as your main language, there is absolutely nothing special to do.
@@ -413,12 +494,12 @@ TCPrivacy/TCIABPrivacyCenterViewController -&gt; TCConsent/TCPrivacyCenterViewCo
 <p>You don't need to put any ServerSide instance in your Consent implementation anymore.</p>
 <p>You might need to use the TCUser class to forward relevant information about your user.</p>
 <h2 id="example">Example</h2>
+<p>in objective-c : </p>
 <pre><code>// Only sourceKey is new here, it's available on the platform and can be used to disable specific sources.
 int TC_SITE_ID = 29; // defines this site account ID
-int TC_PRIVACY_ID = 6; // defines this container ID
 NSString *sourceKey = @"NJtcKaoCYuZEFEzDSGZDxRgMBMUw==";
 
-ServerSide *TCS = [[ServerSide alloc] initWithSiteID: siteID andSourceKey: @"sourceKey" andDefaultBehaviour: PB_DEFAULT_BEHAVIOUR];    TCS = new TCServerSide(TC_SITE_ID, sourceKey, context, ETCConsentBehaviour.PB_DEFAULT_BEHAVIOUR);
+ServerSide *TCS = [[ServerSide alloc] initWithSiteID: siteID andSourceKey: @"sourceKey" andDefaultBehaviour: PB_DEFAULT_BEHAVIOUR];
 
 // You can set in stone some information about your user and that will be sent with each events.
 [TCUser sharedInstance].email = @"superUser@gmal.coum";
@@ -430,6 +511,24 @@ TCPurchaseEvent *event = [[TCPurchaseEvent alloc] initWithId: @"ID" withRevenue:
 
 [TCS execute: event];
 </code></pre>
+<p>in swift : </p>
+<pre><code>    // Only sourceKey is new here, it's available on the platform and can be used to disable specific sources.
+    let TC_SITE_ID = Int32(29); // defines this site account ID
+    let sourceKey = "NJtcKaoCYuZEFEzDSGZDxRgMBMUw==";
+
+    let TCS = ServerSide.init(siteID: TC_SITE_ID, andSourceKey: sourceKey, andDefaultBehaviour: PB_DEFAULT_BEHAVIOUR)
+
+    // You can set in stone some information about your user and that will be sent with each events.
+    TCUser.sharedInstance().email = "superUser@gmal.coum";
+
+    // Here an example of a purchase event with the item purchased.
+    let tc_product = TCProduct(productId: "pID1", withName: "some product", withPrice: 1.5)
+    let tc_item = TCItem(itemId: "iID1", with: tc_product, withQuantity: 1)
+
+    let event = TCPurchaseEvent.init(id: "ID", withRevenue: 1.1, withValue: 12.2, withCurrency: "EUR", withType: "purchase", withPaymentMethod: "CreditCard", withStatus: "waiting", withItems: [tc_item])
+
+    TCS?.execute(event)
+</code></pre>
 <p>And that's it!</p>
 <h1 id="support-and-contacts">Support and contacts</h1>
 <p><img alt="alt tag" src="../res/ca_logo.png" /></p>
@@ -438,6 +537,6 @@ TCPurchaseEvent *event = [[TCPurchaseEvent alloc] initWithId: @"ID" withRevenue:
 <em>support@commandersact.com</em></p>
 <p>http://www.commandersact.com</p>
 <hr />
-<p>This documentation was generated on 09/05/2023 16:24:01</p>
+<p>This documentation was generated on 24/07/2023 14:33:32</p>
 </body>
 </html>

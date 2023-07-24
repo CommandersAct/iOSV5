@@ -6,7 +6,7 @@ Changelog iOS
 
 [Previous changelist](../res/changelog_iOS_3.md)
 
-*5.3.2 : 05/05/2023*
+*5.3.2 : 05/09/2023*
 
 	+ Added Video Events
 
@@ -19,6 +19,7 @@ Changelog iOS
 	/!\ Requires TCCore 5.2.2
 	+ New events format
 	+ Added consistent_anonymous_id for TCUser 
+	~ TCUser.id isn't valorised per default anymore.
 	~ Fix idfa variants bug.
 	~ TCDevice.ID renamed to TCDevice.sdkID.
 

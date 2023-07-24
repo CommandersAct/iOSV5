@@ -4,7 +4,7 @@
 <p><img alt="alt tag" src="../res/ca_logo.png" /></p>
 <h1 id="tciabs-implementation-guide">TCIAB's Implementation Guide</h1>
 <p><strong>iOS</strong></p>
-<p>Last update : <em>09/05/2023</em><br />
+<p>Last update : <em>24/07/2023</em><br />
 Release version : <em>5.0.1</em></p>
 <p><div id="end_first_page" /></p>
 
@@ -71,7 +71,12 @@ Keeping the same name.</p>
 For example, our IAB demo is using purposes-fr.json.</p>
 <p>If you need translation files, download them from https://register.consensu.org/translation under "List of translations for purpose descriptions v2.0". Also keeping the same file name.</p>
 <p>Call this line right after the initialisation of the TCPrivacy module:</p>
+<p>in objective-c : </p>
 <pre><code>[[TCMobileConsent sharedInstance] setLanguage: @"fr"];
+// Please use ISO 639-1 language codes
+</code></pre>
+<p>in swift : </p>
+<pre><code>TCMobileConsent.sharedInstance().setLanguage("fr")
 // Please use ISO 639-1 language codes
 </code></pre>
 <h3 id="privacyjson">privacy.json</h3>
@@ -83,7 +88,11 @@ For example, our IAB demo is using purposes-fr.json.</p>
 <p>It is here to represent the restrictions a publisher (your company) is applying its partners.</p>
 <p>If you have a file, you need to put it with the other json configurations and add a small line later in the code.
 Call this line right after the initialisation of the TCConsent module:</p>
+<p>in objective-c : </p>
 <pre><code>[[TCMobileConsent sharedInstance] useCustomPublisherRestrictions];
+</code></pre>
+<p>in swift : </p>
+<pre><code>TCMobileConsent.sharedInstance().useCustomPublisherRestrictions()
 </code></pre>
 <p>/!\ This should normally be decided by your project manager and the file should be created by your Commanders Act contact.</p>
 <h3 id="google-atp-listjson">google-atp-list.json</h3>
@@ -91,7 +100,12 @@ Call this line right after the initialisation of the TCConsent module:</p>
 <p>Only use this file if you are using Google AC-String.</p>
 <p>If you have a file, you need to put it with the other json configurations.
 To init it, you will have to call the following line BEFORE the initialization of the Consent module:
-[[TCMobileConsent sharedInstance] useAcString: YES];</p>
+in objective-c : </p>
+<pre><code>[[TCMobileConsent sharedInstance] useAcString: YES];
+</code></pre>
+<p>in swift : </p>
+<pre><code>TCMobileConsent.sharedInstance().useAcString(true)
+</code></pre>
 <p>If you are using AC-String please verify that you have a list of google vendors inside your privacy.json as well.</p>
 <p>This file can only be provided by your consultant and will be updated by the library automatically.</p>
 <h2 id="filtering-vendors">Filtering vendors</h2>
@@ -115,6 +129,7 @@ Starting September 2020 the CNIL asks that if you have an "Accept all" button, y
 </code></pre>
 <p>You can add those lines and select the needing ones. For example, if you don't want a refuse all button, just remove "RefuseAll".</p>
 <h2 id="initialisation">Initialisation</h2>
+<p>in objective-c : </p>
 <pre><code>// If you need to use callbacks.
 [[TCMobileConsent sharedInstance] registerCallback: self];
 
@@ -122,6 +137,15 @@ Starting September 2020 the CNIL asks that if you have an "Accept all" button, y
 
 // Use this if you need to use a specific language
 [[TCMobileConsent sharedInstance] setLanguage: @"fr"];
+</code></pre>
+<p>in swift :</p>
+<pre><code>// If you need to use callbacks.
+TCMobileConsent.sharedInstance().registerCallback(self)
+
+TCMobileConsent.sharedInstance().setSiteID(3311, andPrivacyID: 320)
+
+// Use this if you need to use a specific language
+TCMobileConsent.sharedInstance().setLanguage("fr")
 </code></pre>
 <h2 id="with-the-serverside">With the ServerSide</h2>
 <p>You can use classic Tag Management with IAB if needed. Doing this is really simple as all saved information used for IAB configuration will be forwarded to each server-side call.
@@ -137,12 +161,22 @@ But you have a boolean in TCConsent/TCMobilePrivacy which is named generatePubli
 <p>By default, the screen loaded is what we call the first layer screen (or pop-up screen). Then from this screen you'll be able to go to the purpose screen and from the purpose screen to the vendor screen. Both of which are called the second layer.</p>
 <p>if you want to have your own first layer, you'll want to be able to open from this page either of our second layer pages.</p>
 <p>To do this, we created other ways to open the privacy center as follow:</p>
+<p>in objective-c : </p>
 <pre><code>TCPrivacyCenterViewController *PCM = [[TCPrivacyCenterViewController alloc] init];
 [PCM startWithPurposeScreen];
 [self.navigationController pushViewController: PCM animated: NO];
 </code></pre>
+<p>in swift : </p>
+<pre><code>let PCM = TCPrivacyCenterViewController()
+PCM.startWithPurposeScreen()
+self.navigationController.pushViewController(PCM, animated: false)
+</code></pre>
 <p>or for the vendor screen:</p>
+<p>in objective-c : </p>
 <pre><code>[PCM startWithVendorScreen];
+</code></pre>
+<p>in swift : </p>
+<pre><code>PCM.startWithVendorScreen()
 </code></pre>
 <h1 id="support-and-contacts">Support and contacts</h1>
 <p><img alt="alt tag" src="../res/ca_logo.png" /></p>
@@ -152,6 +186,6 @@ But you have a boolean in TCConsent/TCMobilePrivacy which is named generatePubli
 <p>http://www.commandersact.com</p>
 <p>Commanders Act | 3/5 rue Saint Georges - 75009 PARIS - France</p>
 <hr />
-<p>This documentation was generated on 09/05/2023 16:24:01</p>
+<p>This documentation was generated on 24/07/2023 14:33:32</p>
 </body>
 </html>

@@ -4,8 +4,8 @@
 <p><img alt="alt tag" src="../res/ca_logo.png" /></p>
 <h1 id="consents-implementation-guide">Consent's Implementation Guide</h1>
 <p><strong>iOS</strong></p>
-<p>Last update : <em>09/05/2023</em><br />
-Release version : <em>5.1.5</em></p>
+<p>Last update : <em>24/07/2023</em><br />
+Release version : <em>5.1.7</em></p>
 <p><div id="end_first_page" /></p>
 
 <div class="toc">
@@ -40,6 +40,7 @@ Release version : <em>5.1.5</em></p>
 </ul>
 </li>
 <li><a href="#privacy-statistics">Privacy statistics</a></li>
+<li><a href="#stop-privacy-stats-tracking">Stop privacy stats tracking</a></li>
 <li><a href="#tcdemo">TCDemo</a></li>
 </ul>
 </li>
@@ -84,30 +85,54 @@ We express this duration in months. The duration of a month is calculated by 365
 Please first call the following method before initializing the Consent module else:</p>
 <pre><code>[[TCMobileConsent sharedInstance] setConsentDuration: 13];
 </code></pre>
+<p>in swift : </p>
+<pre><code>TCMobileConsent.sharedInstance().consentDuration = 13
+</code></pre>
 <h3 id="with-the-serverside">With the ServerSide</h3>
 <p>Modules: Core, Consent, ServerSide</p>
 <p>This module can use the same model you are using on the web, if you do so, please start by getting the IDs of the categories you are going to use.
 Join those IDs with a "consent version". Default is 1, but if you change the implementation, increment this version.</p>
-<p>The setup is really simple, pass to the TCMobileConsent object your site ID and privacy ID. If you want to add your consent version, you can add it to the parameters as a NSString.</p>
-<pre><code>[[TCMobileConsent sharedInstance] setSiteID: 3311 andPrivacyID: 320];
+<p>The setup is really simple, pass to the TCMobileConsent object your site ID and privacy ID. If you want to add your consent version, you can add it to the parameters as a NSString.
+in objective-c : </p>
+<pre><code>[[TCMobileConsent sharedInstance] setSiteID: siteID andPrivacyID: privacyID];
+</code></pre>
+<p>in swift : </p>
+<pre><code>TCMobileConsent.sharedInstance().setSiteID(siteID, andPrivacyID: privacyID)
 </code></pre>
 <p>If you're using you're own Privacy Center, use the following function instead:</p>
-<p>[[TCMobileConsent sharedInstance] customPCMSetSiteID: siteID andPrivacyID: privacyID];</p>
+<p>in objective-c : </p>
+<pre><code>[[TCMobileConsent sharedInstance] customPCMSetSiteID: siteID andPrivacyID: privacyID];
+</code></pre>
+<p>in swift : </p>
+<pre><code>TCMobileConsent.sharedInstance().customPCMSetSiteID(siteID, andPrivacyID: privacyID)
+</code></pre>
 <p>This call will check the saved consent, putting the SDK on hold if nothing is fount, and start/stop the SDK if something is saved.
 It will then the check the consent validity, if it's too old, you can implement a callback treating what to do then. Please check the Callback part.</p>
 <p>Please note that start and stop have a notification sent with them, you can listen to them if needed: kTCNotification_EnablingTheServerSide and kTCNotification_StoppingTheServerSide.</p>
 <p>If you need to store configuration files in another bundle than the main one, you can call the following line:</p>
+<p>It must be called <em>before</em> calling any [TCMobileConsent sharedInstance].</p>
+<p>in objective-c : </p>
 <pre><code>[[TCConfigurationFileFactory sharedInstance] setBundle: myBundle forConfiguration: @"vendorlist"];
 </code></pre>
-<p>But please call this <em>before</em> calling [TCMobileConsent sharedInstance].</p>
+<p>in swift : </p>
+<pre><code>TCConfigurationFileFactory.sharedInstance().setBundle(myBundle, forConfiguration: "vendorlist")
+</code></pre>
 <h3 id="standalone">Standalone</h3>
 <p>Modules: Core, Consent</p>
 <p>You won't need the ServerSide module, and will need to implement a callback to manage your solutions when consent is given or re-loaded.</p>
 <p>The setup is really simple, pass to the TCMobileConsent object your site ID  and privacyID.</p>
+<p>in objective-c : </p>
 <pre><code>[[TCMobileConsent sharedInstance] setSiteID: siteID andPrivacyID: privacyID];
 </code></pre>
+<p>in swift : </p>
+<pre><code>TCMobileConsent.sharedInstance().setSiteID(siteID, andPrivacyID: privacyID)
+</code></pre>
 <p>If you're using you're own Privacy Center, use the following function instead:</p>
+<p>in objective-c : </p>
 <pre><code>[[TCMobileConsent sharedInstance] customPCMSetSiteID: siteID andPrivacyID: privacyID];
+</code></pre>
+<p>in swift : </p>
+<pre><code>TCMobileConsent.sharedInstance().customPCMSetSiteID(siteID, andPrivacyID: privacyID)
 </code></pre>
 <h2 id="saving-consent">Saving consent</h2>
 <p>Here is where the IDs of the categories matters.</p>
@@ -115,7 +140,8 @@ It will then the check the consent validity, if it's too old, you can implement 
 <p>If you're using the Privacy Center, nothing has to be done here, it will automatically propagate the consent to all other systems. And the ID will be the one used in the configuration file. Please check the Privacy Center part for more information.</p>
 <p>Please keep your category IDs between 1 and 999.</p>
 <h3 id="manually-displayed-consent">Manually displayed consent</h3>
-<p>Once the user validated his consent, you can then send the information to the Consent module as follows:</p>
+<p>Once the user validated his consent, you can then send the information to the Consent module as follows:
+in objective-c : </p>
 <pre><code>NSMutableDictionary *consent = [[NSMutableDictionary alloc] initWithCapacity: 3];
 [consent setObject: @"1" forKey: @"PRIVACY_CAT_1"];
 [consent setObject: @"0" forKey: @"PRIVACY_CAT_2"];
@@ -124,6 +150,10 @@ It will then the check the consent validity, if it's too old, you can implement 
 </code></pre>
 <p>ETCConsentSource is either "Popup" or "PrivacyCenter".</p>
 <p>ETCConsentAction is either "AcceptAll", "RefuseAll", "Save"</p>
+<p>in swift : </p>
+<pre><code>let consent = ["PRIVACY_CAT_1" : "1", "PRIVACY_CAT_2" : "0", "PRIVACY_CAT_3" : "2"];
+TCMobileConsent.sharedInstance().save(consent, from: ETCConsentSource.Popup, withPrivacyAction: ETCConsentAction.Save)
+</code></pre>
 <p>Please prefix your category IDs with "PRIVACY_CAT_" and your vendor IDs with "PRIVACY_VEN_.</p>
 <p>The value expected are:</p>
 <ul>
@@ -144,19 +174,29 @@ It will then the check the consent validity, if it's too old, you can implement 
 <p>Only if you use Server-Side and a consent manually displayed and consent external to our platform. 
 Otherwise, everything is done automatically, so nothing to do here.</p>
 <p>You will need to add consent to the TCUser object to forward it to our server-side.</p>
+<p>in objective-c : </p>
 <pre><code>NSMutableDictionary *ext = [[NSMutableDictionary alloc] init];
 [ext setValue: @"true" forKey: @"key01"];
 [ext setValue: @"1" forKey: @"key02"];
 [ext setValue: @"3" forKey: @"312"];
 [[TCUser sharedInstance] setExternalConsent: ext];
 </code></pre>
+<p>in swift : </p>
+<pre><code>let ext = ["key01" : "true", "key02" : "1", "312" : "3"];'
+TCUser.sharedInstance().setExternalConsent(ext)
+</code></pre>
 <p>Since it's external, and we don't really know how it's working, you can pass any string/string and we'll forward it as is.</p>
 <h3 id="acceptall-refuseall">AcceptAll / RefuseAll</h3>
 <p>/!\ Those methods only work if you are using our interface and thus have a privacy.json in your project (and maybe IAB's JSON as well).</p>
 <p>Those are intended for clients that are displaying a first "popup" screen before our interfaces and that have a way to either open the privacy center of accept/refuse the consent.</p>
 <p>We created functions to call if you want to create a simple way to accept or refuse all consent from outside our user interface.</p>
+<p>objective-c :</p>
 <pre><code>[[TCMobileConsent sharedInstance] acceptAllConsent];
 [[TCMobileConsent sharedInstance] refuseAllConsent];
+</code></pre>
+<p>in swift : </p>
+<pre><code>TCMobileConsent.sharedInstance().acceptAllConsent()
+TCMobileConsent.sharedInstance().refuseAllConsent()
 </code></pre>
 <h2 id="retaining-consent">Retaining consent</h2>
 <p>The saving of the consent on our servers is done automatically.</p>
@@ -168,7 +208,11 @@ Otherwise, everything is done automatically, so nothing to do here.</p>
 <p>You will be able to get the information more easily since this is an ID available by several means for you.
 You will be able to get the information more easily since this is an ID available by several means for you.
 To modify the ID used for saving the consent, you can change the information inside the TCUSer.</p>
+<p>in objective-c :</p>
 <pre><code>[TCUser sharedInstance].consentID = @"myConsentID";
+</code></pre>
+<p>in swift :</p>
+<pre><code>TCUser.sharedInstance().consentID = "myConsentID"
 </code></pre>
 <h3 id="displaying-chosen-id">Displaying chosen ID</h3>
 <p>You might want to be able to display to your end user the ID used to save the consent. You can simply get it like this:</p>
@@ -207,7 +251,11 @@ We created a function to get the privacy as a JSON string so you can save it ins
 </code></pre>
 <h2 id="changing-consent-version">Changing consent version</h2>
 <p>If the case you need to manually change the consent version (if you're using your own privacy center for example), you can use the following:</p>
+<p>in objective-c : </p>
 <pre><code>[[TCMobileConsent sharedInstance] setConsentVersion: @"132"];
+</code></pre>
+<p>in swift : </p>
+<pre><code>    TCMobileConsent.sharedInstance().consentVersion = "132"
 </code></pre>
 <h2 id="consent-internal-api">Consent internal API</h2>
 <p>We created several methods to check given consent. They are simple, but make it easier to work with consent information at any given time.
@@ -314,7 +362,11 @@ The offline JSON should be inside the project code folder.</p>
 <p>Since we have a view controller, you can call it by pushing it. It's quite easy.</p>
 <p>Some part of the Privacy Center can be customised with your code.</p>
 <h3 id="change-the-default-state-of-the-switch-button-to-disabled">Change the default state of the switch button to disabled:</h3>
+<p>in objective-c : </p>
 <pre><code>[TCMobileConsent sharedInstance].switchDefaultState = NO;
+</code></pre>
+<p>in swift : </p>
+<pre><code>TCMobileConsent.sharedInstance().switchDefaultState = true
 </code></pre>
 <h2 id="privacy-statistics">Privacy statistics</h2>
 <p>We have dashboards that allow to have detailed statistics on the choices your users are making.
@@ -333,18 +385,38 @@ Otherwise, please check the above section "Manually displayed consent" for how t
 <img alt="alt tag" src="../res/CustomBanner.jpeg" />
 <img alt="alt tag" src="../res/CustomPC.jpeg" /></p>
 <p>Copy/paste-able list of functions for our interfaces:</p>
+<p>in objective-c :</p>
 <pre><code>[[TCMobileConsent sharedInstance] refuseAllConsent];
 [[TCMobileConsent sharedInstance] acceptAllConsent];
 [[TCMobileConsent sharedInstance] statEnterPCToVendorScreen];
 [[TCMobileConsent sharedInstance] statViewPrivacyPoliciesFromBanner];
 </code></pre>
+<p>in swift :</p>
+<pre><code>TCMobileConsent.sharedInstance().refuseAllConsent()
+TCMobileConsent.sharedInstance().acceptAllConsent()
+TCMobileConsent.sharedInstance().statEnterPCToVendorScreen()
+TCMobileConsent.sharedInstance().statViewPrivacyPoliciesFromBanner()
+</code></pre>
 <p>Copy/paste-able list of functions for custom interfaces:</p>
+<p>in objective-c :</p>
 <pre><code>[[TCMobileConsent sharedInstance] saveConsent: (NSDictionary *) consent fromConsentSource: (enum ETCConsentSource) source withPrivacyAction: (enum ETCConsentAction) action];
 [[TCMobileConsent sharedInstance] statEnterPCToVendorScreen];
 [[TCMobileConsent sharedInstance] statViewPrivacyPoliciesFromBanner];
 [[TCMobileConsent sharedInstance] statViewPrivacyPoliciesFromPrivacyCenter];
 [[TCMobileConsent sharedInstance] statViewPrivacyCenter];
 [[TCMobileConsent sharedInstance] statShowVendorScreen];
+</code></pre>
+<p>in swift :</p>
+<pre><code>    TCMobileConsent.sharedInstance().save([AnyHashable : Any]!, from: ETCConsentSource, withPrivacyAction: ETCConsentAction)
+    TCMobileConsent.sharedInstance().statEnterPCToVendorScreen()
+    TCMobileConsent.sharedInstance().statViewPrivacyPoliciesFromBanner()
+    TCMobileConsent.sharedInstance().statViewPrivacyPoliciesFromPrivacyCenter()
+    TCMobileConsent.sharedInstance().statViewPrivacyCenter()
+    TCMobileConsent.sharedInstance().statShowVendorScreen()
+</code></pre>
+<h2 id="stop-privacy-stats-tracking">Stop privacy stats tracking</h2>
+<p>You can set your <code>do_not_track</code> property on your privacy stats payload :</p>
+<pre><code>    [[TCMobileConsent sharedInstance].do_not_track = value;
 </code></pre>
 <h2 id="tcdemo">TCDemo</h2>
 <p>You can, of course, check our demo project for a simple implementation example.</p>
@@ -357,6 +429,6 @@ Otherwise, please check the above section "Manually displayed consent" for how t
 <p>http://www.commandersact.com</p>
 <p>Commanders Act | 3/5 rue Saint Georges - 75009 PARIS - France</p>
 <hr />
-<p>This documentation was generated on 09/05/2023 16:24:01</p>
+<p>This documentation was generated on 24/07/2023 14:33:32</p>
 </body>
 </html>
