@@ -4,7 +4,7 @@ Changelog iOS
 *5.1.7 : 07/24/2023*
 
     - /!\ Requires Core 5.2.4+
-    + Support IAB TCF v2.2
+    + Support IAB TCF v2.2, Please check TCIAB documentation for more. 
 
 *5.1.6 : 05/09/2023*
 
