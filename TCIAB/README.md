@@ -13,7 +13,11 @@ Release version : <em>5.0.1</em></p>
 <li><a href="#tciabs-implementation-guide">TCIAB's Implementation Guide</a></li>
 <li><a href="#introduction">Introduction</a></li>
 <li><a href="#setup">Setup</a></li>
+<<<<<<< .merge_file_gTTeXX
 <li><a href="#iab-21">IAB 2.1</a></li>
+=======
+<li><a href="#iab-21">IAB 2.1</a><ul>
+>>>>>>> .merge_file_wOU6ZO
 <li><a href="#iab-22">IAB 2.2</a><ul>
 <li><a href="#json-configurations">JSON Configurations</a><ul>
 <li><a href="#vendor-listjson">Vendor-list.json</a></li>
@@ -62,6 +66,7 @@ All of those configurations will update automatically but having an offline vers
 </code></pre>
 <p>```</p>
 <h1 id="iab-22">IAB 2.2</h1>
+<<<<<<< .merge_file_gTTeXX
 <p>We support IAB 2.2, the following steps are required once you decide to upgrade your TCConsent to a IABv2.2 compatible version, wich is TCConsent:5.1.8+  or higher.</p>
 <pre><code>- Please update all of your offline in-app jsons to a V2.2 compatible version, this includes your offline vendor-list.json &amp; any purposes-xx.json translation file you're using.
 - Update your privacy.json offline &amp; cdn file with a refreshed IABv2.2 compatible version and recheck your iab vendors filter, `vendors` key on root.
@@ -69,6 +74,16 @@ All of those configurations will update automatically but having an offline vers
 </code></pre>
 <p>Here are the lines you need to add in order to display the new information properly :</p>
 <p><code>texts_xx": {
+=======
+<p>We support IAB 2.2, the following steps are required once you decide to upgrade your TCConsent to a IABv2.2 compatible version, wich is TCConsent:5.1.7+ or higher. 
+<ul>
+<li>Please update all of your offline in-app jsons to a V2.2 compatible version, this includes your offline vendor-list.json & any purposes-xx.json translation file you're using.</li>
+<li>Update your privacy.json offline & cdn file with a refreshed IABv2.2 compatible version and recheck your iab vendors filter, `vendors` key on root.</li>
+<li>Also make sure to have a `{total_number}` inside your `text-> popup -> purposeTitle ` value.</li>
+</ul>
+<p>Here are the lines you need to add in order to display the new information properly :</p>
+<pre><code>  texts_xx": {
+>>>>>>> .merge_file_wOU6ZO
     "generic" : {
         "illustationsButton": "illustrations:",
         "dataCategoriesDef": "Data Categories:",
@@ -79,7 +94,12 @@ All of those configurations will update automatically but having an offline vers
     "popup" : {
         "purposeTitle": "We and our {total_number} partners"
     }
+<<<<<<< .merge_file_gTTeXX
   },</code></p>
+=======
+  },
+</code></pre>
+>>>>>>> .merge_file_wOU6ZO
 <h2 id="json-configurations">JSON Configurations</h2>
 <h3 id="vendor-listjson">Vendor-list.json</h3>
 <p>This file contains all vendors that have a partnership with IAB. It also contains the definition (in English only) for all purposes, special purposes, features, special features and what the vendors are using.
