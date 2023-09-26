@@ -4,7 +4,7 @@
 <p><img alt="alt tag" src="../res/ca_logo.png" /></p>
 <h1 id="tciabs-implementation-guide">TCIAB's Implementation Guide</h1>
 <p><strong>iOS</strong></p>
-<p>Last update : <em>24/07/2023</em><br />
+<p>Last update : <em>26/09/2023</em><br />
 Release version : <em>5.0.1</em></p>
 <p><div id="end_first_page" /></p>
 
@@ -13,7 +13,8 @@ Release version : <em>5.0.1</em></p>
 <li><a href="#tciabs-implementation-guide">TCIAB's Implementation Guide</a></li>
 <li><a href="#introduction">Introduction</a></li>
 <li><a href="#setup">Setup</a></li>
-<li><a href="#iab-21">IAB 2.1</a><ul>
+<li><a href="#iab-21">IAB 2.1</a></li>
+<li><a href="#iab-22">IAB 2.2</a><ul>
 <li><a href="#json-configurations">JSON Configurations</a><ul>
 <li><a href="#vendor-listjson">Vendor-list.json</a></li>
 <li><a href="#purposes-xxjson">purposes-xx.json</a></li>
@@ -60,6 +61,25 @@ All of those configurations will update automatically but having an offline vers
   },
 </code></pre>
 <p>```</p>
+<h1 id="iab-22">IAB 2.2</h1>
+<p>We support IAB 2.2, the following steps are required once you decide to upgrade your TCConsent to a IABv2.2 compatible version, wich is TCConsent:5.1.8+  or higher.</p>
+<pre><code>- Please update all of your offline in-app jsons to a V2.2 compatible version, this includes your offline vendor-list.json &amp; any purposes-xx.json translation file you're using.
+- Update your privacy.json offline &amp; cdn file with a refreshed IABv2.2 compatible version and recheck your iab vendors filter, `vendors` key on root.
+- Also make sure to have a `{total_number}` inside your `text-&gt; popup -&gt; purposeTitle ` value.
+</code></pre>
+<p>Here are the lines you need to add in order to display the new information properly :</p>
+<p><code>texts_xx": {
+    "generic" : {
+        "illustationsButton": "illustrations:",
+        "dataCategoriesDef": "Data Categories:",
+    }, 
+    "vendors" : {
+        "legIntClaimTitle": "Politique de legitimate"
+    },
+    "popup" : {
+        "purposeTitle": "We and our {total_number} partners"
+    }
+  },</code></p>
 <h2 id="json-configurations">JSON Configurations</h2>
 <h3 id="vendor-listjson">Vendor-list.json</h3>
 <p>This file contains all vendors that have a partnership with IAB. It also contains the definition (in English only) for all purposes, special purposes, features, special features and what the vendors are using.
@@ -186,6 +206,6 @@ self.navigationController.pushViewController(PCM, animated: false)
 <p>http://www.commandersact.com</p>
 <p>Commanders Act | 3/5 rue Saint Georges - 75009 PARIS - France</p>
 <hr />
-<p>This documentation was generated on 24/07/2023 14:33:32</p>
+<p>This documentation was generated on 26/09/2023 16:18:22</p>
 </body>
 </html>

@@ -4,7 +4,7 @@
 <p><img alt="alt tag" src="res/ca_logo.png" /></p>
 <h1 id="developers-implementation-guide">Developers' Implementation Guide</h1>
 <p><strong>iOS</strong></p>
-<p>Last update : <em>24/07/2023</em><br />
+<p>Last update : <em>26/09/2023</em><br />
 Release version : <em>5</em></p>
 <p><div id="end_first_page" /></p>
 
@@ -32,9 +32,9 @@ The modules are the following :</p>
 <p><a href="TCConsent/README.md">Consent : Pass the Consent settings to our tag system</a></p>
 <p>For each of those modules, please check their respective documentation for more information.</p>
 <h1 id="latest-available-versions">Latest available versions</h1>
-<p>Core : <em>5.2.5</em></p>
-<p>ServerSide : <em>5.3.2</em></p>
-<p>Consent : <em>5.1.7</em></p>
+<p>Core : <em>5.3.0</em></p>
+<p>ServerSide : <em>5.4.0</em></p>
+<p>Consent : <em>5.1.8</em></p>
 <p>IAB : <em>5.0.1</em></p>
 <p>Partners : <em>5.0.2</em></p>
 <p>Segment : <em>5.0.0</em></p>
@@ -97,6 +97,6 @@ pod 'TCServerSide', :podspec =&gt; 'https://raw.githubusercontent.com/TagCommand
 <p>http://www.commandersact.com</p>
 <p>Commanders Act | 7b rue taylor - 75010 PARIS - France</p>
 <hr />
-<p>This documentation was generated on 24/07/2023 14:33:32</p>
+<p>This documentation was generated on 26/09/2023 16:18:22</p>
 </body>
 </html>

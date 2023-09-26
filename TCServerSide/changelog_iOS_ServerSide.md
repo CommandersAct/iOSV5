@@ -6,6 +6,14 @@ Changelog iOS
 
 [Previous changelist](../res/changelog_iOS_3.md)
 
+*5.4.0 : 26/09/2023*
+	/!\ Requires TCCore 5.3.0
+	+ Added Firebase destination
+	~ Code refactoring for new TCCore
+	+ Added device->language as the device default language
+	+ Added device->region as the 2 letter country code for the language
+	~ Fixing typo in payment_info event name
+
 *5.3.2 : 05/09/2023*
 
 	+ Added Video Events

@@ -6,6 +6,15 @@ Changelog iOS
 
 [Previous changelist](../res/changelog_iOS_3.md)
 
+*5.3.0 : 09/26/2023*
+
+	/!\ Need to be updated alongside TCServerSide 5.4.0
+	~ Modifed many imports and 
+
+*5.2.6 : 08/29/2023*
+
+  ~ Bug fix when user agent takes time to initialize. 
+
 *5.2.5 : 07/24/2023*
 
   ~ added required functionalities for IAB TCF v2.2
