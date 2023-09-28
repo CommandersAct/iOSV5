@@ -4,7 +4,7 @@
 <p><img alt="alt tag" src="../res/ca_logo.png" /></p>
 <h1 id="serversides-implementation-guide">ServerSide's Implementation Guide</h1>
 <p><strong>iOS</strong></p>
-<p>Last update : <em>26/09/2023</em><br />
+<p>Last update : <em>28/09/2023</em><br />
 Release version : <em>5.4.0</em></p>
 <p><div id="end_first_page" /></p>
 
@@ -88,10 +88,12 @@ We also add "value" and "currency" that are generally used by solutions for this
 <p>You should be provided with a document explaining all events you need to implement inside your application and when they should be sent.</p>
 <p>The event and the information we gather independently will create a hit to our servers with a JSON payload.</p>
 <h2 id="event-details">Event details</h2>
-<p>All events and their payloads are detailed here: <a href="https://community.commandersact.com/platform-x/developers/tracking/events-reference">events-reference</a></p>
+<p><img alt="alt tag" src="../res/warning.png" />
+All events and their payloads are detailed here with code examples: <a href="https://doc.commandersact.com/developers/tracking/events-reference">events-reference</a></p>
 <p>You will also find information about what you can add inside the TCUser which is sent with every hit.
 Be aware that some data inside TCUser require consent from the user te be read and used.</p>
-<p>You can also check this page to see the link between the event names and the SDK's Class names and all information inside the payload here:
+<p><img alt="alt tag" src="../res/warning.png" />
+You can also check this page to see the link between the event names and the SDK's Class names and all information inside the payload here:
 <a href="https://community.commandersact.com/platform-x/developers/tracking/about-events/mobile-sdk-event-specificity">mobile-sdk-event-specificity</a></p>
 <h2 id="executing-an-event">Executing an event</h2>
 <p>When you call the sendData method, a hit will be packaged and sent to Commanders Act's server.</p>
@@ -453,7 +455,7 @@ Once you have your firebase SDK running and your <code>google-services.json</cod
 <li>You can also use a network monitor like Wireshark or Charles to check directly what is being sent on the wire to your vendors.</li>
 </ul>
 <h2 id="common-errors">Common errors</h2>
-<div class="warning"></div>
+<p><img alt="alt tag" src="../res/warning.png" /></p>
 <blockquote>
 <ul>
 <li>Make sure you have the latest version.</li>
@@ -570,6 +572,6 @@ TCPurchaseEvent *event = [[TCPurchaseEvent alloc] initWithId: @"ID" withRevenue:
 <em>support@commandersact.com</em></p>
 <p>http://www.commandersact.com</p>
 <hr />
-<p>This documentation was generated on 26/09/2023 16:18:22</p>
+<p>This documentation was generated on 28/09/2023 10:53:00</p>
 </body>
 </html>

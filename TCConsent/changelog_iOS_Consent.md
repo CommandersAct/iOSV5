@@ -6,8 +6,9 @@ Changelog iOS
 	~ added missing function "urlButtonAction" for nonIAB privacyCenter
 
 *5.1.7 : 07/24/2023*
-    - /!\ Requires Core 5.2.4+
-    + Support IAB TCF v2.2, Please check TCIAB documentation for more. 
+
+    - /!\ Requires Core 5.2.5+
+    + Support IAB TCF v2.2
 
 *5.1.6 : 05/09/2023*
 
