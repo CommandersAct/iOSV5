@@ -6,10 +6,14 @@ Changelog iOS
 
 [Previous changelist](../res/changelog_iOS_3.md)
 
+*5.3.1 : 10/19/2023*
+
+  ~ translations fix on migrating to iab v2.2.
+
 *5.3.0 : 09/26/2023*
 
-	/!\ Need to be updated alongside TCServerSide 5.4.0
-	~ Modifed many imports and 
+  /!\ Need to be updated alongside TCServerSide 5.4.0
+  ~ Modifed many imports and 
 
 *5.2.6 : 08/29/2023*
 

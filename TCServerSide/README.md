@@ -4,8 +4,8 @@
 <p><img alt="alt tag" src="../res/ca_logo.png" /></p>
 <h1 id="serversides-implementation-guide">ServerSide's Implementation Guide</h1>
 <p><strong>iOS</strong></p>
-<p>Last update : <em>28/09/2023</em><br />
-Release version : <em>5.4.0</em></p>
+<p>Last update : <em>19/10/2023</em><br />
+Release version : <em>5.4.1</em></p>
 <p><div id="end_first_page" /></p>
 
 <div class="toc">
@@ -60,6 +60,7 @@ Release version : <em>5.4.0</em></p>
 <li><a href="#event-based">Event based</a></li>
 <li><a href="#changes">Changes</a></li>
 <li><a href="#example">Example</a></li>
+<li><a href="#useful-methods">Useful methods</a></li>
 </ul>
 </li>
 <li><a href="#support-and-contacts">Support and contacts</a></li>
@@ -565,6 +566,16 @@ TCPurchaseEvent *event = [[TCPurchaseEvent alloc] initWithId: @"ID" withRevenue:
     TCS?.execute(event)
 </code></pre>
 <p>And that's it!</p>
+<h2 id="useful-methods">Useful methods</h2>
+<p>You might have been using an ID to identify your user in v4. If you were using TC_IDFA or TC_SDK_ID or TC_NORMALIZED_ID nothing additional to do.</p>
+<p>But if you were using TC_UNIQUEID you can push this ID instead of the new one for either:</p>
+<pre><code>- the consentID which is used to push consent inside the dashboards
+- the user anonymousID which is used the same way as the TCID in the web
+</code></pre>
+<p>we have 2 methods for that, both are in TCPredefinedVariables:</p>
+<pre><code>- (void) useLegacyUniqueIDForAnonymousID;
+- (void) useLegacyUniqueIDForConsentID;
+</code></pre>
 <h1 id="support-and-contacts">Support and contacts</h1>
 <p><img alt="alt tag" src="../res/ca_logo.png" /></p>
 <hr />
@@ -572,6 +583,6 @@ TCPurchaseEvent *event = [[TCPurchaseEvent alloc] initWithId: @"ID" withRevenue:
 <em>support@commandersact.com</em></p>
 <p>http://www.commandersact.com</p>
 <hr />
-<p>This documentation was generated on 28/09/2023 10:53:00</p>
+<p>This documentation was generated on 19/10/2023 10:04:28</p>
 </body>
 </html>

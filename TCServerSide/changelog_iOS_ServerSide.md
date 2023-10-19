@@ -6,7 +6,12 @@ Changelog iOS
 
 [Previous changelist](../res/changelog_iOS_3.md)
 
-*5.4.0 : 26/09/2023*
+*5.4.1 : 10/19/2023*
+
+	~ using language and country code from the device and not from the app.
+	+ Added 2 function to use legacy ID TC_UNIQUEID to ensure continuity for the old clients still using it.
+
+*5.4.0 : 09/26/2023*
 	/!\ Requires TCCore 5.3.0
 	+ Added Firebase destination
 	~ Code refactoring for new TCCore

@@ -1,6 +1,12 @@
 Changelog iOS
 =============
 
+*5.1.9 : 10/19/2023*
+
+	~ [IAB] illustrations fix on privacy center.
+	- [IAB] Remove consentOutdated callback when migrating to iabv2.2.
+	+ [IAB] Added a function to get the number of IAB vendors.
+
 *5.1.8 : 09/26/2023*
 
 	~ added missing function "urlButtonAction" for nonIAB privacyCenter
