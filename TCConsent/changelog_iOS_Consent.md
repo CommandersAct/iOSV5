@@ -1,6 +1,11 @@
 Changelog iOS
 =============
 
+*5.1.10 : 12/08/2023*
+
+	+ Pushing consent version to CoreVariable to use it (Requires Core 5.3.3+)
+	~ Added logs when bad TCMobileConsent initialization.
+
 *5.1.9 : 10/19/2023*
 
 	~ [IAB] illustrations fix on privacy center.

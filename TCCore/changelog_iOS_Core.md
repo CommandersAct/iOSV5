@@ -6,6 +6,11 @@ Changelog iOS
 
 [Previous changelist](../res/changelog_iOS_3.md)
 
+*5.3.2 : 12/08/2023*
+
+	+ Added constant to push consentVersion in the server-side payload. 
+  ~ Fix events payload after waiting for user agent.
+
 *5.3.1 : 10/19/2023*
 
   ~ translations fix on migrating to iab v2.2.
