@@ -1,6 +1,11 @@
 Changelog iOS
 =============
 
+*5.1.11 : 01/08/2024*
+
+	~ Fix policyVersion to 4 for IAB v2.2.
+
+
 *5.1.10 : 12/08/2023*
 
 	+ Pushing consent version to CoreVariable to use it (Requires Core 5.3.3+)

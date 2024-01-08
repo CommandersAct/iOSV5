@@ -4,7 +4,7 @@
 <p><img alt="alt tag" src="res/ca_logo.png" /></p>
 <h1 id="developers-implementation-guide">Developers' Implementation Guide</h1>
 <p><strong>iOS</strong></p>
-<p>Last update : <em>08/12/2023</em><br />
+<p>Last update : <em>08/01/2024</em><br />
 Release version : <em>5</em></p>
 <p><div id="end_first_page" /></p>
 
@@ -33,7 +33,7 @@ The modules are the following :</p>
 <h1 id="latest-available-versions">Latest available versions</h1>
 <p>Core : <em>5.3.2</em></p>
 <p>ServerSide : <em>5.4.2</em></p>
-<p>Consent : <em>5.1.10</em></p>
+<p>Consent : <em>5.1.11</em></p>
 <p>IAB : <em>5.0.1</em></p>
 <p>Partners : <em>5.0.2</em></p>
 <h1 id="adding-a-module-to-your-project">Adding a module to your project</h1>
@@ -95,6 +95,6 @@ pod 'TCServerSide', :podspec =&gt; 'https://raw.githubusercontent.com/TagCommand
 <p>http://www.commandersact.com</p>
 <p>Commanders Act | 7b rue taylor - 75010 PARIS - France</p>
 <hr />
-<p>This documentation was generated on 08/12/2023 15:08:51</p>
+<p>This documentation was generated on 08/01/2024 16:15:57</p>
 </body>
 </html>

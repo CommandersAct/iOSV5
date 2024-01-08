@@ -8,7 +8,7 @@ Changelog iOS
 
 *5.3.2 : 12/08/2023*
 
-	+ Added constant to push consentVersion in the server-side payload. 
+  + Added constant to push consentVersion in the server-side payload. 
   ~ Fix events payload after waiting for user agent.
 
 *5.3.1 : 10/19/2023*
