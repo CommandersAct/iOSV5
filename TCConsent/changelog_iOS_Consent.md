@@ -1,25 +1,28 @@
 Changelog iOS
 =============
 
+*5.2.0 : 29/01/2024*
+
+   + Added Google Consent Mode (Requires TCCore 5.3.3+).
+
 *5.1.11 : 01/08/2024*
 
-	~ Fix policyVersion to 4 for IAB v2.2.
-
+    ~ Fix policyVersion to 4 for IAB v2.2.
 
 *5.1.10 : 12/08/2023*
 
-	+ Pushing consent version to CoreVariable to use it (Requires Core 5.3.3+)
-	~ Added logs when bad TCMobileConsent initialization.
+    + Pushing consent version to CoreVariable to use it (Requires TCCore 5.3.2+)
+    ~ Added logs when bad TCMobileConsent initialization.
 
 *5.1.9 : 10/19/2023*
 
-	~ [IAB] illustrations fix on privacy center.
-	- [IAB] Remove consentOutdated callback when migrating to iabv2.2.
-	+ [IAB] Added a function to get the number of IAB vendors.
+    ~ [IAB] illustrations fix on privacy center.
+    - [IAB] Remove consentOutdated callback when migrating to iabv2.2.
+    + [IAB] Added a function to get the number of IAB vendors.
 
 *5.1.8 : 09/26/2023*
 
-	~ added missing function "urlButtonAction" for nonIAB privacyCenter
+    ~ added missing function "urlButtonAction" for nonIAB privacyCenter
 
 *5.1.7 : 07/24/2023*
 

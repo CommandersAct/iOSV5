@@ -4,8 +4,8 @@
 <p><img alt="alt tag" src="../res/ca_logo.png" /></p>
 <h1 id="consents-implementation-guide">Consent's Implementation Guide</h1>
 <p><strong>iOS</strong></p>
-<p>Last update : <em>08/01/2024</em><br />
-Release version : <em>5.1.11</em></p>
+<p>Last update : <em>30/01/2024</em><br />
+Release version : <em>5.2.0</em></p>
 <p><div id="end_first_page" /></p>
 
 <div class="toc">
@@ -33,6 +33,10 @@ Release version : <em>5.1.11</em></p>
 <li><a href="#displaying-consent">Displaying consent</a></li>
 <li><a href="#reacting-to-consent">Reacting to consent</a></li>
 <li><a href="#forwarding-consent-to-webviews">Forwarding consent to webViews</a></li>
+<li><a href="#forwarding-consent-to-firebaseanalytics">Forwarding consent to FirebaseAnalytics :</a><ul>
+<li><a href="#debug-google-consent-mode">Debug Google Consent Mode :</a></li>
+</ul>
+</li>
 <li><a href="#changing-consent-version">Changing consent version</a></li>
 <li><a href="#consent-internal-api">Consent internal API</a></li>
 <li><a href="#privacy-center">Privacy Center</a><ul>
@@ -249,6 +253,52 @@ We created a function to get the privacy as a JSON string so you can save it ins
 /!\ This function only help to save it to the local storage by giving the required format, you will still need to have JS code in the web container to use it. Please ask your consultant for this part.</p>
 <pre><code>- (NSString *) getConsentAsJson;
 </code></pre>
+<h2 id="forwarding-consent-to-firebaseanalytics">Forwarding consent to FirebaseAnalytics :</h2>
+<p>If you want to use our TCConsent to collect and set your Google Consent Mode, you can configure the TCConsent module to forward and set the consent to FirebaseAnalytics once the user has opted-in/out for your mapped categories. </p>
+<p>To do so, make sure FirebaseAnalytics library is added and correctly configured into your project (check Google documentation). 
+Then add the following section to the root of your privacy.json : </p>
+<p><code>"google_consent_mode": {
+        "use_consent_mode": true, // boolean value to activate the mapping
+        "infer_ad_from_tcf": false, // boolean value for default IAB mapping
+        "category_mapping": { // Custom categories ID mapping only
+            "ad_storage": 1, 
+            "ad_user_data": 2,
+            "ad_personalization": 3,
+            "analytics_storage": 4
+        }
+    }</code></p>
+<p>You will need to implement the firebaseConsentChanged callback in your TCPrivacyCallbacks with the following code : </p>
+<p>```
+import FirebaseCore</p>
+<p>class MyPrivacyCallbacks : NSObject, TCPrivacyCallbacks
+{</p>
+<p>/<strong> other code &amp; callbacks </strong>/ </p>
+<pre><code>func firebaseConsentChanged(_ firebaseConsent: [String : NSNumber]!) 
+{
+    if let analytics_storage_consent = firebaseConsent["analytics_storage"]?.boolValue{
+        Analytics.setConsent([.analyticsStorage: analytics_storage_consent ? .granted : .denied])
+    }
+
+    if let ad_storage_consent = firebaseConsent["ad_storage"]?.boolValue{
+        Analytics.setConsent([.adStorage: ad_storage_consent ? .granted : .denied])
+    }
+
+    if let ad_user_data_consent = firebaseConsent["ad_user_data"]?.boolValue{
+        Analytics.setConsent([.adUserData: ad_user_data_consent ? .granted : .denied])
+    }
+
+    if let ad_personalization_consent = firebaseConsent["ad_personalization"]?.boolValue{
+        Analytics.setConsent([.adPersonalization: ad_personalization_consent ? .granted : .denied])
+    }
+}
+</code></pre>
+<p>}
+```</p>
+<p>Don't forget to set callbacks before initialising the TCConsent : </p>
+<p><code>TCMobileConsent.sharedInstance().callback = MyPrivacyCallbacks()
+        TCMobileConsent.sharedInstance().setSiteID(siteID, andPrivacyID: privacyID)</code></p>
+<h3 id="debug-google-consent-mode">Debug Google Consent Mode :</h3>
+<p>Once Consent is collected, you can look into firebase logs on Xcode console directly for new GCM categories consent values, more info <a href="https://developers.google.com/tag-platform/security/guides/app-consent?platform=ios">here</a>.</p>
 <h2 id="changing-consent-version">Changing consent version</h2>
 <p>If the case you need to manually change the consent version (if you're using your own privacy center for example), you can use the following:</p>
 <p>in objective-c : </p>
@@ -431,6 +481,6 @@ TCMobileConsent.sharedInstance().getNumberOfIABVendors()
 <p>http://www.commandersact.com</p>
 <p>Commanders Act | 3/5 rue Saint Georges - 75009 PARIS - France</p>
 <hr />
-<p>This documentation was generated on 08/01/2024 16:15:57</p>
+<p>This documentation was generated on 30/01/2024 16:43:27</p>
 </body>
 </html>
