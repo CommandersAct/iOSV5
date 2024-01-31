@@ -4,7 +4,7 @@
 <p><img alt="alt tag" src="res/ca_logo.png" /></p>
 <h1 id="developers-implementation-guide">Developers' Implementation Guide</h1>
 <p><strong>iOS</strong></p>
-<p>Last update : <em>30/01/2024</em><br />
+<p>Last update : <em>31/01/2024</em><br />
 Release version : <em>5</em></p>
 <p><div id="end_first_page" /></p>
 
@@ -95,6 +95,6 @@ pod 'TCServerSide', :podspec =&gt; 'https://raw.githubusercontent.com/TagCommand
 <p>http://www.commandersact.com</p>
 <p>Commanders Act | 7b rue taylor - 75010 PARIS - France</p>
 <hr />
-<p>This documentation was generated on 30/01/2024 16:43:27</p>
+<p>This documentation was generated on 31/01/2024 13:26:11</p>
 </body>
 </html>
