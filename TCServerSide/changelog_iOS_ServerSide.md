@@ -6,6 +6,10 @@ Changelog iOS
 
 [Previous changelist](../res/changelog_iOS_3.md)
 
+*5.4.3 : 03/05/2024*
+
+	+ Added privacy manifest file.
+
 *5.4.2 : 12/08/2023*
 
 	+ Adding consent_version to the payload when consent is used. (Requires consent 5.1.10+ and Core 5.3.3+)

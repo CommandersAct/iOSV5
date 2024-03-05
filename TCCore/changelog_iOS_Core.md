@@ -6,9 +6,13 @@ Changelog iOS
 
 [Previous changelist](../res/changelog_iOS_3.md)
 
-*5.3.3 : 01/29/2024*
+*5.3.4 : 03/05/2024*
 
-  + Added Google Consent Mode utilities.
+	+ Added privacy manifest file.
+
+*5.3.3 : 01/31/2024*
+
+	+ Added Google Consent Mode utilities.
 
 *5.3.2 : 12/08/2023*
 

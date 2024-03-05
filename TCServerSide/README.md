@@ -4,8 +4,8 @@
 <p><img alt="alt tag" src="../res/ca_logo.png" /></p>
 <h1 id="serversides-implementation-guide">ServerSide's Implementation Guide</h1>
 <p><strong>iOS</strong></p>
-<p>Last update : <em>31/01/2024</em><br />
-Release version : <em>5.4.2</em></p>
+<p>Last update : <em>05/03/2024</em><br />
+Release version : <em>5.4.3</em></p>
 <p><div id="end_first_page" /></p>
 
 <div class="toc">
@@ -14,7 +14,7 @@ Release version : <em>5.4.2</em></p>
 <li><a href="#introduction">Introduction</a><ul>
 <li><a href="#main-technical-specifications">Main Technical Specifications</a></li>
 <li><a href="#event">Event</a></li>
-<li><a href="#event-details">Event details</a></li>
+<li><a href="#commanders-acts-tcevent-payloads-data">Commanders Act's TCEvent payloads Data</a></li>
 <li><a href="#executing-an-event">Executing an event</a></li>
 </ul>
 </li>
@@ -88,7 +88,10 @@ We also add "value" and "currency" that are generally used by solutions for this
 <p>Your company alongside our consulting team will usually define step by step what events the want the application to send and what parameters are needed for the solutions which will in turn treat those events.</p>
 <p>You should be provided with a document explaining all events you need to implement inside your application and when they should be sent.</p>
 <p>The event and the information we gather independently will create a hit to our servers with a JSON payload.</p>
-<h2 id="event-details">Event details</h2>
+<h2 id="commanders-acts-tcevent-payloads-data">Commanders Act's TCEvent payloads Data</h2>
+<p>Our TCEvents payloads consist of various sections organized within a JSON payload sent to our CommandersAct servers once you call the <code>execute</code> function.
+Each section has its specific behaviour. Refer to the provided scheme for insights into each section, guidance on manipulation, changing values, and understanding intended behavior.</p>
+<p><img alt="alt tag" src="../res/TCEvent.png" /></p>
 <p><img alt="alt tag" src="../res/warning.png" />
 All events and their payloads are detailed here with code examples: <a href="https://doc.commandersact.com/developers/tracking/events-reference">events-reference</a></p>
 <p>You will also find information about what you can add inside the TCUser which is sent with every hit.
@@ -583,6 +586,6 @@ TCPurchaseEvent *event = [[TCPurchaseEvent alloc] initWithId: @"ID" withRevenue:
 <em>support@commandersact.com</em></p>
 <p>http://www.commandersact.com</p>
 <hr />
-<p>This documentation was generated on 31/01/2024 13:26:11</p>
+<p>This documentation was generated on 05/03/2024 15:31:36</p>
 </body>
 </html>

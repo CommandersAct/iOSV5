@@ -1,6 +1,10 @@
 Changelog iOS
 =============
 
+*5.0.2 : 03/05/2024*
+
+    + Added privacy manifest file.
+
 *5.0.1 : 12/08/2022*
 
 	- Removed bitcode variants

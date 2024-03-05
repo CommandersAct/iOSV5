@@ -1,9 +1,16 @@
 Changelog iOS
 =============
 
-*5.2.0 : 29/01/2024*
+*5.2.1 : 03/05/2024*
 
-   + Added Google Consent Mode (Requires TCCore 5.3.3+).
+    ~ Vendors details drop-down may crash on closing fix.
+    + Added privacy manifest file.
+    ~ Fixed Layout Constraints warnings on purposes screen.
+    ~ Illustrations button not always displayed fixed on purposes screen.
+
+*5.2.0 : 01/31/2024*
+
+	+ Added Google Consent Mode (Requires TCCore 5.3.3+).
 
 *5.1.11 : 01/08/2024*
 
