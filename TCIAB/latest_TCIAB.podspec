@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "latest_TCIAB"
-  s.version      = "5.0.2"
+  s.version      = "5.1.0"
   s.homepage     = "https://github.com/TagCommander/iOSV5/tree/master/TCIAB"
   s.license      = { :type => 'proprietary', :text => <<-LICENSE
                         Copyright 2013 - present Commanders Act. All rights reserved.
@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
            Go to https://github.com/TagCommander/iOSV5/tree/master/TCIAB for more details
                    DESC
   s.platform     = :ios, '8.0'
-  s.source   = { :http => "https://github.com/TagCommander/iOSV5/raw/master/TCIAB/5/0/2/TCIAB.zip" }
+  s.source   = { :http => "https://github.com/TagCommander/iOSV5/raw/master/TCIAB/5/1/0/TCIAB.zip" }
   s.preserve_paths      = 'TCIAB.xcframework'
   #s.public_header_files = 'TCIAB.framework/Headers/*.h'
   s.vendored_frameworks = 'TCIAB.xcframework'
