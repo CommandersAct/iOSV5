@@ -6,6 +6,11 @@ Changelog iOS
 
 [Previous changelist](../res/changelog_iOS_3.md)
 
+*5.4.0 : 04/22/2024*
+
+    + Added internal functionalities for new unified TCConsent variant  (Requires TCIAB 5.1.0+ && TCConsent 5.3.0+).
+    ~ Remove refused_vendors from TCUser when no Consent is available.
+
 *5.3.4 : 03/05/2024*
 
 	+ Added privacy manifest file.

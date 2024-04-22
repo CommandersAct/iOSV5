@@ -1,7 +1,11 @@
 Changelog iOS
 =============
 
-*5.2.1 : 03/05/2024*
+*5.3.0 : 04/22/2024*
+
+    - [TCConsent_IAB removed] Unified TCConsent variant for both IAB & non-IAB users (Requires TCCore 5.4.0+ && TCIAB 5.1.0+).
+
+*5.2.1 : 03/04/2024*
 
     ~ Vendors details drop-down may crash on closing fix.
     + Added privacy manifest file.
