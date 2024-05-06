@@ -32,31 +32,31 @@ let package = Package(
         .binaryTarget(
             name: "TCServerSide_noIDFA",
             url: "https://github.com/CommandersAct/iOSV5/raw/5.4.8/TCServerSide/5/4/3/TCServerSide_noIDFA.zip",
-            checksum: "4e76d7beba66a43b930f627d912e78832cb0b9bb1fac331757180662cd494b9a"
+            checksum: "af9a72f77f372ab9fbbeb11329aedd6c88c1e32eddd20ca90276ea0fb3a2b3f9"
         ),
         .binaryTarget(
             name: "TCCore",
             url: "https://github.com/CommandersAct/iOSV5/raw/5.4.8/TCCore/5/4/0/TCCore.zip",
-            checksum: "318bccdf94c8fe962681d09d4cced572fa3b6b80cef118f98f03fdd1e2625200"
+            checksum: "4d0e63181eb031ea054462cc271c32116500f9f42375e616b3c6e5d6e9ad6121"
         ),
         .binaryTarget(
             name: "TCServerSide",
             url: "https://github.com/CommandersAct/iOSV5/raw/5.4.8/TCServerSide/5/4/3/TCServerSide.zip",
-            checksum: "24cfec5bfaaadd7479da5d2795a7ac47ad5e5256974fdc8be0a395fb3f392cc5"
+            checksum: "9369f1d240e4a7b436c723aac4c58a86a45c29aa3affde1d60655b9c49ec0727"
         ),
         .binaryTarget(
             name: "TCIAB",
             url: "https://github.com/CommandersAct/iOSV5/raw/5.4.8/TCIAB/5/1/0/TCIAB.zip",
-            checksum: "7224fa6f3fcab4390c14625049c7bbaf3a7da48330c2168b4715b11c7b1c4544"
+            checksum: "43bd6ded16b4be768bdc8568a05fcc88a3f4e35533373cc81619b47870f2eab7"
         ),
         .binaryTarget(
             name: "TCConsent",
             url: "https://github.com/CommandersAct/iOSV5/raw/5.4.8/TCConsent/5/3/1/TCConsent.zip",
-            checksum: "21760ec1420beb23edb1b076e33da41db3ce246d3d03dbbf0e973ad6d8bdd247"
+            checksum: "13ecf7aa7b0dfba7010cbac159d7e5239faa853742e4fd9e4849a3ea91a4572b"
         ),
         .binaryTarget(
             name: "TCPartners",
             url: "https://github.com/CommandersAct/iOSV5/raw/5.4.8/TCPartners/5/0/2/TCPartners.zip",
-            checksum: "25bc864f11bdeed6adce18323fba77717dc117511d6a9cce3c8fb019121bd572"
+            checksum: "def3a327955c7ad0aa9ec4128266a2f8a8d9cbb8d4565eab47ccedf7f881ba4b"
         ),  ]
 )
