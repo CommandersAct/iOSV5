@@ -1,6 +1,10 @@
 Changelog iOS
 =============
 
+*5.3.1 : 05/06/2024*
+
+    - Removing tracking URL from privacy manifest as it doesn't concern ads.
+
 *5.3.0 : 04/22/2024*
 
     - [TCConsent_IAB removed] Unified TCConsent variant for both IAB & non-IAB users (Requires TCCore 5.4.0+ && TCIAB 5.1.0+).

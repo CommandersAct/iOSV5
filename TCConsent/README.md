@@ -4,8 +4,8 @@
 <p><img alt="alt tag" src="../res/ca_logo.png" /></p>
 <h1 id="consents-implementation-guide">Consent's Implementation Guide</h1>
 <p><strong>iOS</strong></p>
-<p>Last update : <em>22/04/2024</em><br />
-Release version : <em>5.3.0</em></p>
+<p>Last update : <em>06/05/2024</em><br />
+Release version : <em>5.3.1</em></p>
 <p><div id="end_first_page" /></p>
 
 <div class="toc">
@@ -481,6 +481,6 @@ TCMobileConsent.sharedInstance().getNumberOfIABVendors()
 <p>http://www.commandersact.com</p>
 <p>Commanders Act | 3/5 rue Saint Georges - 75009 PARIS - France</p>
 <hr />
-<p>This documentation was generated on 22/04/2024 15:02:05</p>
+<p>This documentation was generated on 06/05/2024 11:17:19</p>
 </body>
 </html>

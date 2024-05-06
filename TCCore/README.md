@@ -4,7 +4,7 @@
 <p><img alt="alt tag" src="../res/ca_logo.png" /></p>
 <h1 id="core-guide">Core Guide</h1>
 <p><strong>iOS</strong></p>
-<p>Last update : <em>22/04/2024</em><br />
+<p>Last update : <em>06/05/2024</em><br />
 Release version : <em>5.4.0</em></p>
 <p><div id="end_first_page" /></p>
 
@@ -29,6 +29,6 @@ Release version : <em>5.4.0</em></p>
 <em>support@commandersact.com</em></p>
 <p>http://www.commandersact.com</p>
 <hr />
-<p>This documentation was generated on 22/04/2024 15:02:05</p>
+<p>This documentation was generated on 06/05/2024 11:17:19</p>
 </body>
 </html>
