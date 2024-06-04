@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
            Go to https://github.com/TagCommander/iOSV5/tree/master/TCServerSide for more details
                    DESC
   s.platform     = :ios, '8.0'
-  s.source   = { :http => "https://github.com/TagCommander/iOSV5/raw/5.4.8/TCServerSide/5/4/3/TCServerSide.zip" }
+  s.source   = { :http => "https://github.com/TagCommander/iOSV5/raw/5.4.9/TCServerSide/5/4/3/TCServerSide.zip" }
   s.preserve_paths      = 'TCServerSide.xcframework'
   #s.public_header_files = 'TCServerSide.framework/Headers/*.h'
   s.vendored_frameworks = 'TCServerSide.xcframework'
