@@ -4,7 +4,7 @@
 <p><img alt="alt tag" src="res/ca_logo.png" /></p>
 <h1 id="developers-implementation-guide">Developers' Implementation Guide</h1>
 <p><strong>iOS</strong></p>
-<p>Last update : <em>06/05/2024</em><br />
+<p>Last update : <em>04/06/2024</em><br />
 Release version : <em>5</em></p>
 <p><div id="end_first_page" /></p>
 
@@ -33,9 +33,9 @@ The modules are the following :</p>
 <h1 id="latest-available-versions">Latest available versions</h1>
 <p>Core : <em>5.4.0</em></p>
 <p>ServerSide : <em>5.4.3</em></p>
-<p>Consent : <em>5.3.1</em></p>
+<p>Consent : <em>5.3.2</em></p>
 <p>IAB : <em>5.1.0</em></p>
-<p>Partners : <em>5.0.2</em></p>
+<p>Partners : <em>5.0.3</em></p>
 <h1 id="adding-a-module-to-your-project">Adding a module to your project</h1>
 <p>If you want to add a module to your iOS project, you have several possibilities.</p>
 <pre><code>- Using cocoapods to manage the dependency.
@@ -95,6 +95,6 @@ pod 'TCServerSide', :podspec =&gt; 'https://raw.githubusercontent.com/TagCommand
 <p>http://www.commandersact.com</p>
 <p>Commanders Act | 7b rue taylor - 75010 PARIS - France</p>
 <hr />
-<p>This documentation was generated on 06/05/2024 16:43:37</p>
+<p>This documentation was generated on 04/06/2024 11:21:13</p>
 </body>
 </html>

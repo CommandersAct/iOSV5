@@ -1,6 +1,10 @@
 Changelog iOS
 =============
 
+*5.3.2 : 06/04/2024*
+
+    ~ Fix bug on TCConsentAPI.isIABSpecialFeatureAccepted() that always returns flase.
+
 *5.3.1 : 05/06/2024*
 
     - Removing tracking URL from privacy manifest as it doesn't concern ads.
