@@ -1,6 +1,10 @@
 Changelog iOS
 =============
 
+*5.3.3 : 09/10/2024*
+
+	~ [IAB] Updated possible languages for IAB translation.
+
 *5.3.2 : 06/04/2024*
 
     ~ Fix bug on TCConsentAPI.isIABSpecialFeatureAccepted() that always returns flase.

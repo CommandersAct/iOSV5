@@ -4,7 +4,7 @@
 <p><img alt="alt tag" src="res/ca_logo.png" /></p>
 <h1 id="developers-implementation-guide">Developers' Implementation Guide</h1>
 <p><strong>iOS</strong></p>
-<p>Last update : <em>04/06/2024</em><br />
+<p>Last update : <em>10/09/2024</em><br />
 Release version : <em>5</em></p>
 <p><div id="end_first_page" /></p>
 
@@ -18,6 +18,7 @@ Release version : <em>5</em></p>
 <li><a href="#build-variants">Build Variants</a></li>
 <li><a href="#xcframework">XCFramework</a></li>
 <li><a href="#spm-support">SPM support</a></li>
+<li><a href="#demo-application">Demo Application</a></li>
 </ul>
 </li>
 <li><a href="#support-and-contacts">Support and contacts</a></li>
@@ -33,8 +34,8 @@ The modules are the following :</p>
 <h1 id="latest-available-versions">Latest available versions</h1>
 <p>Core : <em>5.4.0</em></p>
 <p>ServerSide : <em>5.4.3</em></p>
-<p>Consent : <em>5.3.2</em></p>
-<p>IAB : <em>5.1.0</em></p>
+<p>Consent : <em>5.3.3</em></p>
+<p>IAB : <em>5.1.1</em></p>
 <p>Partners : <em>5.0.3</em></p>
 <h1 id="adding-a-module-to-your-project">Adding a module to your project</h1>
 <p>If you want to add a module to your iOS project, you have several possibilities.</p>
@@ -87,14 +88,17 @@ pod 'TCServerSide', :podspec =&gt; 'https://raw.githubusercontent.com/TagCommand
 <p><strong>/!\ Warning :</strong></p>
 <p>If you need to switch your usage from SPM to cocoapods or local XCFramework, please make sur to clean your build folder.</p>
 <p>If you want to change products variants or add new ones, you'll need to re-add the iOSV5 package dependency and also empty your build folder.</p>
+<h2 id="demo-application">Demo Application</h2>
+<p>You can find a full example of a working app integrating our libraries in the following repo :</p>
+<p>https://github.com/CommandersAct/tcmobiledemo-v5</p>
 <h1 id="support-and-contacts">Support and contacts</h1>
-<p><img alt="alt tag" src="../res/ca_logo.png" /></p>
+<p><img alt="alt tag" src="./res/ca_logo.png" /></p>
 <hr />
 <p><strong>Support</strong>
 <em>support@commandersact.com</em></p>
 <p>http://www.commandersact.com</p>
 <p>Commanders Act | 7b rue taylor - 75010 PARIS - France</p>
 <hr />
-<p>This documentation was generated on 04/06/2024 11:21:13</p>
+<p>This documentation was generated on 10/09/2024 15:17:32</p>
 </body>
 </html>

@@ -4,8 +4,8 @@
 <p><img alt="alt tag" src="../res/ca_logo.png" /></p>
 <h1 id="consents-implementation-guide">Consent's Implementation Guide</h1>
 <p><strong>iOS</strong></p>
-<p>Last update : <em>04/06/2024</em><br />
-Release version : <em>5.3.2</em></p>
+<p>Last update : <em>10/09/2024</em><br />
+Release version : <em>5.3.3</em></p>
 <p><div id="end_first_page" /></p>
 
 <div class="toc">
@@ -31,9 +31,12 @@ Release version : <em>5.3.2</em></p>
 </ul>
 </li>
 <li><a href="#displaying-consent">Displaying consent</a></li>
-<li><a href="#reacting-to-consent">Reacting to consent</a></li>
+<li><a href="#reacting-to-consent">Reacting to consent</a><ul>
+<li><a href="#resetting-consent">Resetting consent :</a></li>
+</ul>
+</li>
 <li><a href="#forwarding-consent-to-webviews">Forwarding consent to webViews</a></li>
-<li><a href="#forwarding-consent-to-firebaseanalytics">Forwarding consent to FirebaseAnalytics :</a><ul>
+<li><a href="#forwarding-consent-to-firebaseanalytics-setting-up-gcm">Forwarding consent to FirebaseAnalytics, setting-up GCM :</a><ul>
 <li><a href="#debug-google-consent-mode">Debug Google Consent Mode :</a></li>
 </ul>
 </li>
@@ -247,13 +250,19 @@ But when this change is adding or removing a category, or changing an ID, we sho
 <pre><code>- (void) significantChangesInPrivacy;
 </code></pre>
 <p>This one is slightly different from the last one, it was created for IAB and will not be sent automatically. It is conditionned by the field "significantChanges" in the privacy.json so that it will only launch when you need it to.</p>
+<h3 id="resetting-consent">Resetting consent :</h3>
+<p>To reset user consent on devices, you can use the following method:</p>
+<pre><code>    TCMobileConsent.sharedInstance().resetSavedConsent()
+</code></pre>
+<p>Please note that this method resets the consent on the device each time it is called. If you need to handle resets for specific app versions, you will have to manage that manually.</p>
+<p>Alternatively, if you are using our PrivacyCenter, you can use the resetSave field in your privacy.json. For implementation details, please contact your consultant.</p>
 <h2 id="forwarding-consent-to-webviews">Forwarding consent to webViews</h2>
 <p>Some clients need to have the consent forwarded in their webViews to manage a web container inside it.
 We created a function to get the privacy as a JSON string so you can save it inside the webView's local storage.
 /!\ This function only help to save it to the local storage by giving the required format, you will still need to have JS code in the web container to use it. Please ask your consultant for this part.</p>
 <pre><code>- (NSString *) getConsentAsJson;
 </code></pre>
-<h2 id="forwarding-consent-to-firebaseanalytics">Forwarding consent to FirebaseAnalytics :</h2>
+<h2 id="forwarding-consent-to-firebaseanalytics-setting-up-gcm">Forwarding consent to FirebaseAnalytics, setting-up GCM :</h2>
 <p>If you want to use our TCConsent to collect and set your Google Consent Mode, you can configure the TCConsent module to forward and set the consent to FirebaseAnalytics once the user has opted-in/out for your mapped categories. </p>
 <p>To do so, make sure FirebaseAnalytics library is added and correctly configured into your project (check Google documentation). 
 Then add the following section to the root of your privacy.json : </p>
@@ -272,7 +281,7 @@ Then add the following section to the root of your privacy.json : </p>
 import FirebaseCore</p>
 <p>class MyPrivacyCallbacks : NSObject, TCPrivacyCallbacks
 {</p>
-<p>/<strong> other code &amp; callbacks </strong>/ </p>
+<p>// other code &amp; callbacks</p>
 <pre><code>func firebaseConsentChanged(_ firebaseConsent: [String : NSNumber]!) 
 {
     if let analytics_storage_consent = firebaseConsent["analytics_storage"]?.boolValue{
@@ -294,8 +303,9 @@ import FirebaseCore</p>
 </code></pre>
 <p>}
 ```</p>
-<p>Don't forget to set callbacks before initialising the TCConsent : </p>
-<p><code>TCMobileConsent.sharedInstance().callback = MyPrivacyCallbacks()
+<p>Now register your callbacks and set TC_GCM_DEVELOPER_ID value for developer_id key in your firebaseDefaultParameters all before initializing your TCConsent module  : </p>
+<p><code>firebaseAnalytics.setDefaultEventParameters("developer_id", TC_GCM_DEVELOPER_ID)
+        TCMobileConsent.sharedInstance().callback = MyPrivacyCallbacks()
         TCMobileConsent.sharedInstance().setSiteID(siteID, andPrivacyID: privacyID)</code></p>
 <h3 id="debug-google-consent-mode">Debug Google Consent Mode :</h3>
 <p>Once Consent is collected, you can look into firebase logs on Xcode console directly for new GCM categories consent values, more info <a href="https://developers.google.com/tag-platform/security/guides/app-consent?platform=ios">here</a>.</p>
@@ -429,7 +439,7 @@ Depending on your app privacy configuration you might have to call some addition
 <p>Whenever saveConsent* is called you will need to provide the full list of purposes and vendors that have been consented to and refused.</p>
 <p>We reworked saveConsent methods to only use one. If you are using the old functions they will still work for now.
 Otherwise, please check the above section "Manually displayed consent" for how this method works.</p>
-<p>Also, please note that you will need to call statViewBanner when you display your custom banner.</p>
+<p>/!\ Also, please note that you will need to call <strong>statViewBanner</strong> when you display your custom banner.</p>
 <p><img alt="alt tag" src="../res/TCPC_customBanner.jpeg" />
 <img alt="alt tag" src="../res/TCPC_PC.jpeg" />
 <img alt="alt tag" src="../res/CustomBanner.jpeg" />
@@ -481,6 +491,6 @@ TCMobileConsent.sharedInstance().getNumberOfIABVendors()
 <p>http://www.commandersact.com</p>
 <p>Commanders Act | 3/5 rue Saint Georges - 75009 PARIS - France</p>
 <hr />
-<p>This documentation was generated on 04/06/2024 11:21:13</p>
+<p>This documentation was generated on 10/09/2024 15:17:32</p>
 </body>
 </html>

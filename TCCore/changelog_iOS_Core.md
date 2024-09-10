@@ -6,6 +6,10 @@ Changelog iOS
 
 [Previous changelist](../res/changelog_iOS_3.md)
 
+*5.4.1 : 06/19/2024*
+
+    ~ Added base code for new Google Consent Mode update. 
+
 *5.4.0 : 04/22/2024*
 
     + Added internal functionalities for new unified TCConsent variant  (Requires TCIAB 5.1.0+ && TCConsent 5.3.0+).

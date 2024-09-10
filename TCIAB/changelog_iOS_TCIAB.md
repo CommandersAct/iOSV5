@@ -1,6 +1,10 @@
 Changelog iOS
 =============
 
+*5.1.1 : 09/10/2024*
+
+	~ [IAB] Updated tcfPolicyVersion to 5.
+
 *5.1.0 : 03/28/2024*
 
     + Added internal functionalities for new unified TCConsent variant (Requires TCCore 5.4.0+ && TCConsent 5.3.0+).

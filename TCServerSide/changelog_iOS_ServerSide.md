@@ -6,6 +6,10 @@ Changelog iOS
 
 [Previous changelist](../res/changelog_iOS_3.md)
 
+*5.4.4 : 19/06/2024*
+
+	~ Updated code for FirebaseAnalytics.
+
 *5.4.3 : 03/05/2024*
 
 	+ Added privacy manifest file.
