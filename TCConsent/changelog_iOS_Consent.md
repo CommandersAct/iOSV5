@@ -1,6 +1,10 @@
 Changelog iOS
 =============
 
+*5.3.4 : 10/01/2024*
+
+	~ [IAB] Fix display bug on Special purposes data retention duration.
+
 *5.3.3 : 09/10/2024*
 
 	~ [IAB] Updated possible languages for IAB translation.
