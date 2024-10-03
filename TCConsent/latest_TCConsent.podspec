@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
            Go to https://github.com/CommandersAct/iOSV5/tree/master/TCConsent for more details
                    DESC
   s.platform     = :ios, '8.0'
-  s.source   = { :http => "https://github.com/CommandersAct/iOSV5/raw/5.4.11/TCConsent/5/3/4/TCConsent.zip" }
+  s.source   = { :http => "https://github.com/CommandersAct/iOSV5/raw/5.4.12/TCConsent/5/3/4/TCConsent.zip" }
   s.preserve_paths      = 'TCConsent.xcframework'
   #s.public_header_files = 'TCConsent.framework/Headers/*.h'
   s.vendored_frameworks = 'TCConsent.xcframework'
