@@ -4,7 +4,7 @@
 <p><img alt="alt tag" src="../res/ca_logo.png" /></p>
 <h1 id="tciabs-implementation-guide">TCIAB's Implementation Guide</h1>
 <p><strong>iOS</strong></p>
-<p>Last update : <em>01/10/2024</em><br />
+<p>Last update : <em>03/10/2024</em><br />
 Release version : <em>5.1.1</em></p>
 <p><div id="end_first_page" /></p>
 
@@ -206,6 +206,6 @@ self.navigationController.pushViewController(PCM, animated: false)
 <p>http://www.commandersact.com</p>
 <p>Commanders Act | 3/5 rue Saint Georges - 75009 PARIS - France</p>
 <hr />
-<p>This documentation was generated on 01/10/2024 14:51:33</p>
+<p>This documentation was generated on 03/10/2024 11:37:22</p>
 </body>
 </html>
