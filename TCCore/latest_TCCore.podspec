@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
            Go to https://github.com/CommandersAct/iOSV5/tree/master/TCCore for more details
                    DESC
   s.platform     = :ios, '8.0'
-  s.source   = { :http => "https://github.com/CommandersAct/iOSV5/raw/5.4.12/TCCore/5/4/1/TCCore.zip" }
+  s.source   = { :http => "https://github.com/CommandersAct/iOSV5/raw/5.4.13/TCCore/5/4/1/TCCore.zip" }
   s.preserve_paths      = 'TCCore.xcframework'
   #s.public_header_files = 'TCCore.framework/Headers/*.h'
   s.vendored_frameworks = 'TCCore.xcframework'
