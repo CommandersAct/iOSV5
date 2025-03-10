@@ -1,9 +1,16 @@
 Changelog iOS
 =============
 
+*5.3.5 : 03/10/2025*
+
+	~ [IAB] Display vendors count for every IAB category on Privacy Center.
+    ~ Fixing significantChanges not resetting shouldDisplayPrivacyCenter when no call back are registred.
+
+
 *5.3.4 : 10/01/2024*
 
 	~ [IAB] Fix display bug on Special purposes data retention duration.
+
 
 *5.3.3 : 09/10/2024*
 
