@@ -46,7 +46,7 @@ let package = Package(
         ),
         .binaryTarget(
             name: "TCIAB",
-            url: "https://github.com/CommandersAct/iOSV5/raw/5.4.13/TCIAB/5/1/1/TCIAB.zip",
+            url: "https://github.com/CommandersAct/iOSV5/raw/5.4.12/TCIAB/5/1/1/TCIAB.zip",
             checksum: "fd6fbd7d0e101c37c6347a3cfea25a83dbb368f99730126c33aa9593891ee0e1"
         ),
         .binaryTarget(
