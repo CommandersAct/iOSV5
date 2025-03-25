@@ -47,7 +47,7 @@ let package = Package(
         .binaryTarget(
             name: "TCIAB",
             url: "https://github.com/CommandersAct/iOSV5/raw/5.4.12/TCIAB/5/1/1/TCIAB.zip",
-            checksum: "fd6fbd7d0e101c37c6347a3cfea25a83dbb368f99730126c33aa9593891ee0e1"
+            checksum: "f7d8c6b5012657845c4eebf14c9cbb530e1e9691db6291d932107e305b2aa8ab"
         ),
         .binaryTarget(
             name: "TCConsent",
