@@ -1,10 +1,9 @@
 Changelog iOS
 =============
 
-<div class="warning"></div>
->  If you want to check the previous version's changelog, you can find it here :
+*5.4.2 : 07/08/2025*
 
-[Previous changelist](../res/changelog_iOS_3.md)
+    ~ Fix TCLogger log level minor issue. 
 
 *5.4.1 : 06/19/2024*
 

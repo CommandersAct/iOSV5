@@ -1,5 +1,5 @@
 Pod::Spec.new do |s|
-  s.name         = "latest_TCPartners"
+  s.name         = "TCPartners"
   s.version      = "5.0.4"
   s.homepage     = "https://github.com/CommandersAct/iOSV5/tree/master/TCPartners"
   s.license      = { :type => 'proprietary', :text => <<-LICENSE

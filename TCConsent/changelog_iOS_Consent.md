@@ -1,6 +1,10 @@
 Changelog iOS
 =============
 
+*5.3.6 : 07/08/2025*
+
+	~ Internal import paths refactored.
+
 *5.3.5 : 03/10/2025*
 
 	~ [IAB] Display vendors count for every IAB category on Privacy Center.

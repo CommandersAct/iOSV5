@@ -1,10 +1,9 @@
 Changelog iOS
 =============
 
-<div class="warning"></div>
->  If you want to check the previous version's changelog, you can find it here :
+*5.4.5 : 08/07/2025*
 
-[Previous changelist](../res/changelog_iOS_3.md)
+	~ Updated mapping for FirebaseAnalytics.
 
 *5.4.4 : 19/06/2024*
 

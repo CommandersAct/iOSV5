@@ -4,8 +4,8 @@
 <p><img alt="alt tag" src="../res/ca_logo.png" /></p>
 <h1 id="serversides-implementation-guide">ServerSide's Implementation Guide</h1>
 <p><strong>iOS</strong></p>
-<p>Last update : <em>10/03/2025</em><br />
-Release version : <em>5.4.4</em></p>
+<p>Last update : <em>08/07/2025</em><br />
+Release version : <em>5.4.5</em></p>
 <p><div id="end_first_page" /></p>
 
 <div class="toc">
@@ -40,6 +40,7 @@ Release version : <em>5.4.4</em></p>
 <li><a href="#wait-for-user-agent">Wait for User-agent</a></li>
 <li><a href="#getting-idfa">Getting IDFA</a></li>
 <li><a href="#firebase-destination">Firebase Destination</a></li>
+<li><a href="#supported-firebase-event">Supported Firebase Event</a></li>
 </ul>
 </li>
 <li><a href="#troubleshooting">Troubleshooting</a><ul>
@@ -354,9 +355,40 @@ We have 3 behaviours:</p>
 <p>You'll need to correctly set up Firebase SDK first into your app, please refer to the official firebase documentation to do so.
 Once you have your firebase SDK running and your <code>google-services.json</code> into your app bundle, you only need to pass the firebase instance into your ServerSide instance initialisation. </p>
 <p><code>tc = ServerSide.init(siteID: siteID, andSourceKey: sourceKey, andFirebaseInstance: Analytics.self)</code></p>
-<p>Once done, every time you execute a TCEvent, it will be remapped and sent to google.</p>
-<p>All of the TCEvents properties will be re-mapped into a Firebase event holding your executed TCEvent name.</p>
-<p>For TCEcommerce events (TCAddToCartEvent, TCRemoveFromCartEvent ...etc), we use the following mapping :</p>
+<h2 id="supported-firebase-event">Supported Firebase Event</h2>
+<p>We highly recommend only using TCCustomEvent when forwarding events to firebase. 
+Make sure your events are compatible with firebase specifications to prevent any errors.</p>
+<p>code example in swift : </p>
+<p>```
+        let item_1: [String: Any] = [
+            "item_id" : "1234",
+            "item_name" : "XWU-1",
+            "item_category" : "football",
+            "item_variant" : "blue"
+        ]</p>
+<pre><code>    let item_2: [String: Any] = [
+        AnalyticsParameterItemID : "5678", // You can still use Firebase Constants
+        AnalyticsParameterItemName : "ZPA-13",
+        "item_category" : "basketball",
+        "item_variant" : "orange"
+    ]
+
+    let items =  [item_1, item_2] as [Any]?
+    let add_to_cart_event = TCCustomEvent(name: "add_to_cart")
+    add_to_cart_event?.addAdditionalProperty("currency", withStringValue: "USD")
+    add_to_cart_event?.addAdditionalProperty("value", withNumberValue: 30)
+    add_to_cart_event?.addAdditionalProperty("items", withArrayValue: items)
+    add_to_cart_event?.addAdditionalProperty("item_variant", withStringValue: "1234")
+    add_to_cart_event?.addAdditionalProperty("price", withNumberValue: 1234)
+
+
+
+    tc?.execute(add_to_cart_event)
+</code></pre>
+<p>```</p>
+<p>Specs and requirements differ between TCEvents and Firebase Events, if you still want to use our TCEvents, you'll need to make sure that your TCEvents match Firebase recommendations too (required, allowed and non authorized parameters)
+Events will be mapped like the following, and the TCServerSide will try and log the event to firebase.
+You'll also need to configure every new parameter in your firebase console</p>
 <table>
 <thead>
 <tr>
@@ -371,7 +403,7 @@ Once you have your firebase SDK running and your <code>google-services.json</cod
 </tr>
 <tr>
 <td>event.items[i].X</td>
-<td>event.items[i].tc_item_X</td>
+<td>event.items[i].X</td>
 </tr>
 <tr>
 <td>event.items[i].product.name</td>
@@ -586,6 +618,6 @@ TCPurchaseEvent *event = [[TCPurchaseEvent alloc] initWithId: @"ID" withRevenue:
 <em>support@commandersact.com</em></p>
 <p>http://www.commandersact.com</p>
 <hr />
-<p>This documentation was generated on 10/03/2025 16:53:49</p>
+<p>This documentation was generated on 08/07/2025 18:10:39</p>
 </body>
 </html>

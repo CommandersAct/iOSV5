@@ -1,6 +1,10 @@
 Changelog iOS
 =============
 
+*5.1.2 : 08/07/2025*
+
+	+ Google Additional Consent (ACString) V2 support.
+
 *5.1.1 : 09/10/2024*
 
 	~ [IAB] Updated tcfPolicyVersion to 5.
