@@ -1,6 +1,10 @@
 Changelog iOS
 =============
 
+*5.2.0 : 08/18/2025*
+
+	+ Supporting IAB TCF v2.3.
+
 *5.1.2 : 08/07/2025*
 
 	+ Google Additional Consent (ACString) V2 support.

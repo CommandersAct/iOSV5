@@ -1,6 +1,10 @@
 Changelog iOS
 =============
 
+*5.4.3 : 08/18/2025*
+
+    ~ Enhance hits metadata, adding right Http content-type headers. 
+
 *5.4.2 : 07/08/2025*
 
     ~ Fix TCLogger log level minor issue. 

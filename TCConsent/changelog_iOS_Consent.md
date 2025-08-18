@@ -1,11 +1,15 @@
 Changelog iOS
 =============
 
+*5.3.7 : 08/18/2025*
+
+	~ vendors count fix for categories.
+
 *5.3.6 : 07/08/2025*
 
 	~ Internal import paths refactored.
 
-*5.3.5 : 03/10/2025*
+*5.3.5 : 03/10/2024*
 
 	~ [IAB] Display vendors count for every IAB category on Privacy Center.
     ~ Fixing significantChanges not resetting shouldDisplayPrivacyCenter when no call back are registred.

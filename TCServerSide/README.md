@@ -4,7 +4,7 @@
 <p><img alt="alt tag" src="../res/ca_logo.png" /></p>
 <h1 id="serversides-implementation-guide">ServerSide's Implementation Guide</h1>
 <p><strong>iOS</strong></p>
-<p>Last update : <em>08/07/2025</em><br />
+<p>Last update : <em>18/08/2025</em><br />
 Release version : <em>5.4.5</em></p>
 <p><div id="end_first_page" /></p>
 
@@ -618,6 +618,6 @@ TCPurchaseEvent *event = [[TCPurchaseEvent alloc] initWithId: @"ID" withRevenue:
 <em>support@commandersact.com</em></p>
 <p>http://www.commandersact.com</p>
 <hr />
-<p>This documentation was generated on 08/07/2025 18:10:39</p>
+<p>This documentation was generated on 18/08/2025 16:35:19</p>
 </body>
 </html>
