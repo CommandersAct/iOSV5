@@ -1,6 +1,12 @@
 Changelog iOS
 =============
 
+*5.3.8 : 01/13/2026*
+
+	~ /!\ Requires Core 5.4.4+ and ServerSide 5.4.6+.
+	~ Fixing rare consent state bug on relaunch.
+	~ non-IAB Privacy Center enhacement when no vendors are available.
+
 *5.3.7 : 08/18/2025*
 
 	~ vendors count fix for categories.

@@ -1,6 +1,11 @@
 Changelog iOS
 =============
 
+*5.4.4 : 01/13/2026*
+
+	~ /!\ Requires Consent 5.3.8+ and ServerSide 5.4.6+
+	~ fixing rare consent state bug on relaunch
+
 *5.4.3 : 08/18/2025*
 
     ~ Enhance hits metadata, adding right Http content-type headers. 

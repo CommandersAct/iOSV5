@@ -39,11 +39,11 @@ For each of those modules, please check their respective documentation for more 
 Latest available versions
 =========================
 
-Core : *5.4.3*
+Core : *5.4.4*
 
-ServerSide : *5.4.5*
+ServerSide : *5.4.6*
 
-Consent : *5.3.7*
+Consent : *5.3.8*
 
 IAB : *5.2.0*
 
@@ -145,4 +145,4 @@ http://www.commandersact.com
 Commanders Act | 7b rue taylor - 75010 PARIS - France
 ***
 
-This documentation was generated on 14/01/2026 14:33:50
+This documentation was generated on 14/01/2026 16:25:09

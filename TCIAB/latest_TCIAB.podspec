@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
            Go to https://github.com/CommandersAct/iOSV5/tree/master/TCIAB for more details
                    DESC
   s.platform     = :ios, '8.0'
-  s.source   = { :http => "https://github.com/CommandersAct/iOSV5/raw/5.4.17/TCIAB/5/2/0/TCIAB.zip" }
+  s.source   = { :http => "https://github.com/CommandersAct/iOSV5/raw/5.4.18/TCIAB/5/2/0/TCIAB.zip" }
   s.preserve_paths      = 'TCIAB.xcframework'
   #s.public_header_files = 'TCIAB.framework/Headers/*.h'
   s.vendored_frameworks = 'TCIAB.xcframework'

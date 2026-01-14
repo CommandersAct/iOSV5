@@ -1,6 +1,11 @@
 Changelog iOS
 =============
 
+*5.4.6 : 01/13/2026*
+
+	~ /!\ Requires Core 5.4.4+ and Consent 5.3.8+
+	~ fixing rare consent state bug on relaunch
+
 *5.4.5 : 08/07/2025*
 
 	~ Updated mapping for FirebaseAnalytics.
