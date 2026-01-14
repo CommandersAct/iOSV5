@@ -1,4 +1,4 @@
-![alt tag](../res/ca_logo.png)
+![alt tag](./res/ca_logo.png)
 
 Developers' Implementation Guide
 ================================
@@ -134,7 +134,7 @@ https://github.com/CommandersAct/tcmobiledemo-v5
 
 Support and contacts
 ====================
-![alt tag](../res/ca_logo.png)
+![alt tag](./res/ca_logo.png)
 
 ***
 **Support**
