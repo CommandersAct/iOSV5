@@ -3,8 +3,8 @@
 ServerSide's Implementation Guide
 =================================
 
-Last update : *14/01/2026*
-Release version : *5.4.6*
+Last update : *19/02/2026*
+Release version : *5.4.7*
 
 ## Table of Contents
 
@@ -814,4 +814,4 @@ Support and contacts
 http://www.commandersact.com
 ***
 
-This documentation was generated on 14/01/2026 16:25:09
+This documentation was generated on 19/02/2026 14:12:03

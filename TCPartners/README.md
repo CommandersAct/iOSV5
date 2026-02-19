@@ -3,7 +3,7 @@
 Partners' Implementation Guide
 ==============================
 
-Last update : *14/01/2026*
+Last update : *19/02/2026*
 
 Release version : *5.0.4*
 
@@ -147,4 +147,4 @@ http://www.commandersact.com
 Commanders Act | 7b rue taylor - 75010 PARIS - France
 ***
 
-This documentation was generated on 14/01/2026 16:25:09
+This documentation was generated on 19/02/2026 14:12:03

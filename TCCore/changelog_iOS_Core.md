@@ -1,6 +1,10 @@
 Changelog iOS
 =============
 
+*5.4.5 : 02/19/2026*
+
+	~ Bug fix on ServerSide standalone configurations.
+
 *5.4.4 : 01/13/2026*
 
 	~ /!\ Requires Consent 5.3.8+ and ServerSide 5.4.6+

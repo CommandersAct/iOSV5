@@ -1,5 +1,5 @@
 Pod::Spec.new do |s|
-  s.name         = "latest_TCServerSide_noIDFA"
+  s.name         = "TCServerSide_noIDFA"
   s.version      = "5.4.7"
   s.homepage     = "https://github.com/CommandersAct/iOSV5/tree/master/TCServerSide"
   s.license      = { :type => 'proprietary', :text => <<-LICENSE

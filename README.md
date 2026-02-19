@@ -1,9 +1,9 @@
-![alt tag](./res/ca_logo.png)
+![alt tag](../res/ca_logo.png)
 
 Developers' Implementation Guide
 ================================
 
-Last update : *14/01/2026*
+Last update : *19/02/2026*
 
 Release version : *5*
 
@@ -39,9 +39,9 @@ For each of those modules, please check their respective documentation for more 
 Latest available versions
 =========================
 
-Core : *5.4.4*
+Core : *5.4.5*
 
-ServerSide : *5.4.6*
+ServerSide : *5.4.7*
 
 Consent : *5.3.8*
 
@@ -134,7 +134,7 @@ https://github.com/CommandersAct/tcmobiledemo-v5
 
 Support and contacts
 ====================
-![alt tag](./res/ca_logo.png)
+![alt tag](../res/ca_logo.png)
 
 ***
 **Support**
@@ -145,4 +145,4 @@ http://www.commandersact.com
 Commanders Act | 7b rue taylor - 75010 PARIS - France
 ***
 
-This documentation was generated on 14/01/2026 16:25:09
+This documentation was generated on 19/02/2026 14:12:03

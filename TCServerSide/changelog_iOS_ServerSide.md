@@ -1,6 +1,11 @@
 Changelog iOS
 =============
 
+*5.4.7 : 02/19/2026*
+
+	~ /!\ Requires Core 5.4.5+
+	~ Bug fix on ServerSide Standalone configuration.
+
 *5.4.6 : 01/13/2026*
 
 	~ /!\ Requires Core 5.4.4+ and Consent 5.3.8+
