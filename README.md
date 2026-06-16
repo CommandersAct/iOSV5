@@ -1,9 +1,9 @@
-![alt tag](../res/ca_logo.png)
+![alt tag](./res/ca_logo.png)
 
 Developers' Implementation Guide
 ================================
 
-Last update : *19/02/2026*
+Last update : *16/06/2026*
 
 Release version : *5*
 
@@ -11,29 +11,34 @@ Release version : *5*
 
 - [Developers' Implementation Guide](#developers-implementation-guide)
 - [Introduction](#introduction)
+- [Modules](#modules)
 - [Latest available versions](#latest-available-versions)
 - [Adding a module to your project](#adding-a-module-to-your-project)
-- [Cocoapods](#cocoapods)
+  - [CocoaPods](#cocoapods)
   - [Build Variants](#build-variants)
   - [XCFramework](#xcframework)
-  - [SPM support](#spm-support)
+  - [SPM](#spm)
   - [Demo Application](#demo-application)
 - [Support and contacts](#support-and-contacts)
 
 Introduction
 ============
 
-TagCommander for mobile is a collection of small SDKs each designed to serve a dedicated purpose.
-The modules are the following :
+TagCommander for mobile is a collection of small SDKs, each designed to serve a dedicated purpose. Adding only the modules you need keeps your binary lightweight — the Core module alone is under 50 KB, and each additional module adds roughly 110–120 KB.
 
-[Core : Used as a base by the other modules.](TCCore/README.md)
+**Minimum supported iOS version: 13.0**
 
-[ServerSide : Tag management system collecting data through a server-side approach.](TCServerSide/README.md)
+Modules
+=======
 
-[Consent : Pass the Consent settings to our tag system](TCConsent/README.md)
+| Module | Purpose | Documentation |
+|--------|---------|---------------|
+| **Core** | Base module required by all other modules | [Core guide](TCCore/README.md) |
+| **ServerSide** | Tag management via a server-side approach | [ServerSide guide](TCServerSide/README.md) |
+| **Consent** | Collect and manage user privacy consent | [Consent guide](TCConsent/README.md) |
+| **IAB** | IAB TCF v2 consent string support | [IAB guide](TCIAB/README.md) |
 
-
-For each of those modules, please check their respective documentation for more information.
+For each module, check the respective documentation for setup and usage details.
 
 
 Latest available versions
@@ -41,9 +46,9 @@ Latest available versions
 
 Core : *5.4.5*
 
-ServerSide : *5.4.7*
+ServerSide : *5.5.0*
 
-Consent : *5.3.8*
+Consent : *5.4.0*
 
 IAB : *5.2.0*
 
@@ -52,25 +57,23 @@ Partners : *5.0.4*
 Adding a module to your project
 ===============================
 
-If you want to add a module to your iOS project, you have several possibilities.
+You have three options for integrating a module into your iOS project: 
 
-	- Using cocoapods to manage the dependency.
-	- Using directly the framework files in your project.
-    - Using SPM
+- CocoaPods 
+- Swift Package Manager (SPM)
+- Directly using the XCFramework files.
 
 
-Cocoapods
-=========
+CocoaPods
+---------
 
 > [!NOTE]  
->  We renamed all our pods! The names of the pod changed to be able to reflect the exact content of the podspec (and thus preventing the name warning).
-
-All latests now point toward an XCode 12 compiled version. If you still need XCode 11, please check the changelogs and point to the pod inside the latest XCode 11 release available. XCode 11 is not supported anymore and no new releases will be made for it.
+> We renamed all our pods. The pod names now reflect the exact content of the podspec (resolving the previous name warning).
 
 	pod 'latest_TCCore', :podspec => 'https://raw.githubusercontent.com/TagCommander/iOSV5/master/TCCore/latest_TCCore.podspec'
 	pod 'latest_TCServerSide', :podspec => 'https://raw.githubusercontent.com/TagCommander/iOSV5/master/TCServerSide/latest_TCServerSide.podspec'
 
-You can also point on a specific version (only for the latests builds):
+You can also pin a specific version:
 
 	pod 'TCCore', :podspec => 'https://raw.githubusercontent.com/TagCommander/iOSV5/master/TCCore/5/0/0/TCCore.podspec'
 	pod 'TCServerSide', :podspec => 'https://raw.githubusercontent.com/TagCommander/iOSV5/master/TCServerSide/5/0/0/TCServerSide.podspec'
@@ -78,63 +81,59 @@ You can also point on a specific version (only for the latests builds):
 Build Variants
 --------------
 
-> [!NOTE]  
->  Starting with XCode 14, Apple will no longer accept releases with Bitcode, so we removed the corresponding variants.
+Each module now ships as a single variant, except:
 
-We had several variants depending on your needs, but when Bitcode was removed, we tried our best to limit as much as possible.
-
-Right now all modules only have one version beside:
-
-	- [for TCCore] : one regular version
-    - [for TCServerSide] : one version without the code to get the IDFA
-    - [for TCConsent] : one regular version
-	- [for TCConsent] : one version made to work with IAB
-
-
-The non-IDFA variant will not compile anything linked with ASIdentifierManager.
-
+- TCServerSide: one version without IDFA-related code (will not compile anything linked with `ASIdentifierManager`)
 
 XCFramework
 -----------
 
-The latest version of our modules are always available on our github account: https://github.com/TagCommander/iosv5
+The latest versions are always available on GitHub: https://github.com/TagCommander/iosv5
 
 > [!NOTE]  
->  You will always need to at least add the Core module to your project.
+> You must always include the Core module in your project.
 
-Add the modules you need to your project and confirm that XCode really added them for your Target at the following places:
+After adding the frameworks, verify that Xcode has linked them correctly by checking:
 
-	- In the "general" tab under "Linked Frameworks and Libraries"
-	- In the "Build Phases" tab under "Link Binary With Libraries"
-	- That the FRAMEWORK_SEARCH_PATHS do include the places where the frameworks are.
+- **General** tab → **Linked Frameworks and Libraries**
+- **Build Phases** tab → **Link Binary With Libraries**
+- That `FRAMEWORK_SEARCH_PATHS` includes the directories where the frameworks reside
 
-SPM support
------------
+SPM
+---
 
-Swift Package Manager is an easy and a simple way to install Commanders Act's iOS libraries:
+Swift Package Manager is the easiest way to add Commanders Act's iOS libraries:
 
-    - In Xcode, select “File” → “Swift Packages” → “Add Package Dependency”
+1. In Xcode, select **File → Swift Packages → Add Package Dependency**
+2. Enter `https://github.com/CommandersAct/iOSV5/`
+3. Choose the products you need
 
-    - Enter https://github.com/CommandersAct/iOSV5/
-
-    - Choose the right products for your project
-
-> [!WARNING]
-> If you need to switch your usage from SPM to cocoapods or local XCFramework, please make sur to clean your build folder.
+> [!TIP]
+> If you switch from SPM to CocoaPods or a local XCFramework, clean your build folder first.
 >
-> If you want to change products variants or add new ones, you'll need to re-add the iOSV5 package dependency and also empty your build folder.
+> If you change product variants or add new ones, re-add the iOSV5 package dependency and empty your build folder.
 
+### Lightweight SPM repository
+
+For faster Xcode checkouts, a dedicated binary-free repository is also available at [`CommandersAct/iOSV5-spm`](https://github.com/CommandersAct/iOSV5-spm) — it only contains the `Package.swift` file, with no binaries bundled.
+
+The main repository ([`CommandersAct/iOSV5`](https://github.com/CommandersAct/iOSV5)) remains the primary source and will continue receiving all updates. The SPM repository is released alongside it as a lightweight alternative.
+
+To use it, replace the package URL in step 2 with:
+```
+https://github.com/CommandersAct/iOSV5-spm
+```
 
 Demo Application
 ----------------
 
-You can find a full example of a working app integrating our libraries in the following repo :
+A full working example app integrating our libraries:
 
 https://github.com/CommandersAct/tcmobiledemo-v5
 
 Support and contacts
 ====================
-![alt tag](../res/ca_logo.png)
+![alt tag](./res/ca_logo.png)
 
 ***
 **Support**
@@ -142,7 +141,7 @@ Support and contacts
 
 http://www.commandersact.com
 
-Commanders Act | 7b rue taylor - 75010 PARIS - France
+Commanders Act | 25 rue de Tolbiac, 75013 Paris - France
 ***
 
-This documentation was generated on 19/02/2026 14:12:03
+This documentation was generated on 16/06/2026 15:03:17

@@ -1,5 +1,5 @@
 Pod::Spec.new do |s|
-  s.name         = "latest_TCConsent"
+  s.name         = "TCConsent"
   s.version      = "5.4.0"
   s.homepage     = "https://github.com/CommandersAct/iOSV5/tree/master/TCConsent"
   s.license      = { :type => 'proprietary', :text => <<-LICENSE

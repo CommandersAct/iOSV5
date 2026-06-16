@@ -3,7 +3,7 @@
 Core Guide
 ==========
 
-Last update : *19/02/2026*
+Last update : *16/06/2026*
 
 Release version : *5.4.5*
 
@@ -17,16 +17,16 @@ Release version : *5.4.5*
 Introduction
 ============
 
-As we expended Commanders Act's mobile possibilities, it rapidly became apparent that we could not fit everything at the same time for everybody in only one big library. In fact, it's contradictory with Tag Management itself, so we decided to cut capabilities into smaller modules so people wouldn't need to add everything in their project, saving space in your application.
+As Commanders Act's mobile capabilities grew, it became clear that bundling everything into a single library would be both impractical and at odds with the goals of Tag Management itself. Capabilities are therefore split into smaller, focused modules so you only include what your project actually needs.
 
-But even with that said, a part of our code is pretty useful in several of our modules, so we created a Core module to prevent code repetition and thus also bigger applications if you need several modules.
+That said, a significant portion of code is shared across modules. The Core module centralises that shared code, preventing duplication and keeping your binary smaller when you use multiple modules.
 
 Dependencies
 ============
 
-The Core module is mandatory if you are using Commanders Act's mobile solution, so we simply put the dependencies needed for the Core module directly in the documentations of the other modules.
+Core is a required dependency for all other Commanders Act mobile modules. The individual module guides list any dependencies they add on top of Core.
 
-On iOS Core isn't compiling with any dependencies.
+On iOS, Core has no external dependencies.
 
 Support and contacts
 ====================
@@ -39,4 +39,4 @@ Support and contacts
 http://www.commandersact.com
 ***
 
-This documentation was generated on 19/02/2026 14:12:03
+This documentation was generated on 16/06/2026 15:03:17

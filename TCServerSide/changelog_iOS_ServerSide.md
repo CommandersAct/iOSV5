@@ -1,6 +1,12 @@
 Changelog iOS
 =============
 
+*5.5.0 : 06/16/2026*
+
+	~ Moved frequently-changing values from UserDefaults to in-memory storage, eliminating unnecessary listener notifications.
+	~ New data-layer key, 'is_prev_cycle_cleaned', check TCServerSide documentation for more info.
+	~ **Added a lightweight SPM repository ([iOSV5-spm](https://github.com/CommandersAct/iOSV5-spm)) for faster Xcode checkouts — see [SPM docs](#lightweight-spm-repository).**
+
 *5.4.7 : 02/19/2026*
 
 	~ /!\ Requires Core 5.4.5+

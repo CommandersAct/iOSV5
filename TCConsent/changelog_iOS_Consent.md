@@ -1,6 +1,12 @@
 Changelog iOS
 =============
 
+*5.4.0 : 06/15/2026*
+
+	+ [IAB/non-IAB] New TCBanner UI — a faster, modern, on-screen way to save consent without leaving the current view, check documentation for more info.
+	~ Refactored internal components to modern Swift concurrency — no API changes, drop-in update.
+	~ **Added a lightweight SPM repository ([iOSV5-spm](https://github.com/CommandersAct/iOSV5-spm)) for faster Xcode checkouts — see [SPM docs](#lightweight-spm-repository).**
+
 *5.3.8 : 01/13/2026*
 
 	~ /!\ Requires Core 5.4.4+ and ServerSide 5.4.6+.

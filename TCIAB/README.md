@@ -1,20 +1,20 @@
 ![alt tag](../res/ca_logo.png)
 
-TCIAB's Implementation Guide
-==============================
+TCIAB Implementation Guide
+===========================
 
-Last update : *19/02/2026*
+Last update : *16/06/2026*
 
 Release version : *5.2.0*
 
 ## Table of Contents
 
-- [TCIAB's Implementation Guide](#tciabs-implementation-guide)
+- [TCIAB Implementation Guide](#tciab-implementation-guide)
 - [Introduction](#introduction)
 - [Setup](#setup)
   - [IAB 2.1](#iab-21)
   - [IAB 2.2](#iab-22)
-- [JSON Configurations](#json-configurations)
+- [JSON Configuration Files](#json-configuration-files)
   - [vendor-list.json](#vendor-listjson)
   - [purposes-xx.json](#purposes-xxjson)
   - [privacy.json](#privacyjson)
@@ -22,313 +22,338 @@ Release version : *5.2.0*
   - [google-atp-list.json](#google-atp-listjson)
 - [Filtering vendors](#filtering-vendors)
 - [Selecting buttons](#selecting-buttons)
+  - [Initialisation](#initialisation)
 - [With the ServerSide](#with-the-serverside)
 - [Retaining consent](#retaining-consent)
 - [Reacting to consent](#reacting-to-consent)
-- [Generating publisher TC in consent String](#generating-publisher-tc-in-consent-string)
+- [Generating publisher TC in consent string](#generating-publisher-tc-in-consent-string)
 - [Loading a specific screen directly](#loading-a-specific-screen-directly)
+- [Troubleshooting](#troubleshooting)
 - [Support and contacts](#support-and-contacts)
 
 Introduction
 ============
 
-This module has been made especially to support the creation of the IAB consent string.
+The TCIAB module adds IAB TCF v2 support to the Consent module. When TCIAB is linked alongside TCConsent, things that change:
 
-/!\ It only supports the version 2 of the consent string. Namely, TCF v2.
+- The Privacy Center (`TCPrivacyCenterViewController`) adds an IAB-compliant first layer on launch, before the category/vendor screen.
+
+- The Privacy Center's category and vendor screens include IAB categories and vendors alongside any custom categories and vendors you have defined.
+
+- When consent is saved, TCF Consent String and other required value are also created and saved in-app.
+
+Everything else — how consent is saved, forwarded to ServerSide, and accessed via callbacks — works identically to a non-IAB setup.
+
+> [!NOTE]
+> This module only supports TCF v2. TCF v1 is not supported.
 
 Setup
 =====
 
-You need to have this module alongside the Consent Module in your project.
+Add the TCIAB module alongside the TCConsent module. No additional initialisation code is required — once both modules are present, the Privacy Center automatically shows the IAB first layer on launch and generates the IAB consent string.
 
-You will need several configuration files to use this module.
-All of those configurations will update automatically but having an offline version will prevent any hazardous behaviour over bad internet connection.
+You will need several JSON configuration files. These are updated automatically by the library, but offline copies in your project prevent issues on poor or missing connections.
 
 IAB 2.1
 -------
 
-We support IAB 2.1, but you will need to add some translation in your privacy.json file. Hereafter are the lines you need to add in order to display the new information properly.
+We support IAB 2.1. Add the following translation keys to your `privacy.json` to display the new information correctly:
 
-
-```javascript
-	 "texts": {
-      "generic": {
-            "month": "months",
-            "day": "days",
-            "seconds": "seconds",
-            "hours": "hours"
-      },
-
-      "vendors": {
-            "deviceStorageTitle": "Storage Type:",
-            "deviceStorageCookieLifetime": "Cookie lifetime: ",
-            "deviceStorageOther": "Others",
-            "deviceStorageCookies": "Cookies"
-      },
-
+```json
+"texts": {
+    "generic": {
+        "month": "months",
+        "day": "days",
+        "seconds": "seconds",
+        "hours": "hours"
+    },
+    "vendors": {
+        "deviceStorageTitle": "Storage Type:",
+        "deviceStorageCookieLifetime": "Cookie lifetime: ",
+        "deviceStorageOther": "Others",
+        "deviceStorageCookies": "Cookies"
+    }
+}
 ```
 
 IAB 2.2
 -------
 
-We support IAB 2.2, the following steps are required once you decide to upgrade your TCConsent to a IABv2.2 compatible version, wich is TCConsent:5.3.8+  or higher.
+To upgrade to IAB 2.2, first upgrade TCConsent to version `5.4.0` or higher, then:
 
-	- Please update all of your offline in-app jsons to a V2.2 compatible version, this includes your offline vendor-list.json & any purposes-xx.json translation file you're using.
-	- Update your privacy.json offline & cdn file with a refreshed IABv2.2 compatible version and recheck your iab vendors filter, `vendors` key on root.
-	- Also make sure to have a `{total_number}` inside your `text-> popup -> purposeTitle ` value.
+1. Replace all offline in-app JSON files with IAB 2.2 compatible versions. This includes `vendor-list.json` and any `purposes-xx.json` translation files.
+2. Update your `privacy.json` (both the offline copy and your CDN version) to be IAB 2.2 compatible. Review the `vendors` key at the root to re-check your IAB vendor filter.
+3. Ensure your `"popup" → "purposeTitle"` value contains the `{total_number}` placeholder.
 
-Here are the lines you need to add in order to display the new information properly :
+Add the following keys to your `privacy.json`:
 
-```
-  texts_xx": {
-    "generic" : {
+```json
+"texts_xx": {
+    "generic": {
         "illustationsButton": "illustrations:",
-        "dataCategoriesDef": "Data Categories:",
-    }, 
-    "vendors" : {
+        "dataCategoriesDef": "Data Categories:"
+    },
+    "vendors": {
         "legIntClaimTitle": "Politique de legitimate"
     },
-    "popup" : {
+    "popup": {
         "purposeTitle": "We and our {total_number} partners"
     }
-  },
+}
 ```
 
-JSON Configurations
-===================
+JSON Configuration Files
+=========================
 
 vendor-list.json
 ----------------
 
-This file contains all vendors that have a partnership with IAB. It also contains the definition (in English only) for all purposes, special purposes, features, special features and what the vendors are using.
-This file is created and supported by IAB.
+This file contains all IAB-registered vendors, along with definitions (in English) for all purposes, special purposes, features, and special features.
 
-Please download and put an offline copy in your project of https://vendorlist.consensu.org/v2/vendor-list.json
-Keeping the same name.
-
+Download an offline copy from https://vendorlist.consensu.org/v3/vendor-list.json and include it in your project under the same filename.
 
 purposes-xx.json
 ----------------
 
-If you are using more than one language in your application you will need to also have a copy of those files. Those files are created and supported by IAB.
-For example, our IAB demo is using purposes-fr.json.
+If your application supports multiple languages, you will need translation files for each language. These files are maintained by IAB.
 
-If you need translation files, download them from https://register.consensu.org/translation under "List of translations for purpose descriptions v2.0". Also keeping the same file name.
+Download translation files from https://register.consensu.org/translations/translationsEu under "List of translations for purpose descriptions TCF EU:", keeping the original filenames.
 
-Call this line right after the initialisation of the TCPrivacy module:
+Call the following line right after initialising `TCMobileConsent` to set the language:
 
-in objective-c : 
-
-```objc
-	[[TCMobileConsent sharedInstance] setLanguage: @"fr"];
-	// Please use ISO 639-1 language codes
-```
-
-in swift : 
+in swift:
 
 ```swift
-	TCMobileConsent.sharedInstance().setLanguage("fr")
-	// Please use ISO 639-1 language codes
+TCMobileConsent.sharedInstance().setLanguage("fr")
+// Use ISO 639-1 language codes
+```
+
+in objective-c:
+
+```objc
+[[TCMobileConsent sharedInstance] setLanguage: @"fr"];
+// Use ISO 639-1 language codes
 ```
 
 privacy.json
 ------------
 
-This file declares information used to save the consent in our dashboards as well as texts present in the interface that are not declared officially by IAB.
+This file declares the information used to record consent in our dashboards, as well as any texts in the interface that are not defined by IAB.
 
-/!\ This file should be provided by one of our consultant.
+> [!WARNING]
+> This file should be provided by your Commanders Act consultant.
 
-If you are using several languages, you should find, in addition to "texts" which have the default values, "texts_xx" for each language.
-
+If you are using multiple languages, you will find `"texts"` (the default) and one `"texts_xx"` block per additional language.
 
 TCIABPublisherRestrictions.json
--------------------------------
+--------------------------------
 
-/!\ This file is a bit more specific and not mandatory.
+> [!NOTE]
+> This file is optional.
 
-It is here to represent the restrictions a publisher (your company) is applying its partners.
+This file represents the restrictions your company (as publisher) applies to its partners. If you have one, include it alongside the other configuration files and call the following line right after initialising the Consent module:
 
-If you have a file, you need to put it with the other json configurations and add a small line later in the code.
-Call this line right after the initialisation of the TCConsent module:
-
-in objective-c : 
-
-```objc
-    [[TCMobileConsent sharedInstance] useCustomPublisherRestrictions];
-```
-
-in swift : 
+in swift:
 
 ```swift
-    TCMobileConsent.sharedInstance().useCustomPublisherRestrictions()
+TCMobileConsent.sharedInstance().useCustomPublisherRestrictions()
 ```
 
-> [!WARNING]  
-> This should normally be decided by your project manager and the file should be created by your Commanders Act contact.
+in objective-c:
+
+```objc
+[[TCMobileConsent sharedInstance] useCustomPublisherRestrictions];
+```
+
+> [!WARNING]
+> This should be decided by your project manager. The file should be created by your Commanders Act contact.
 
 google-atp-list.json
 --------------------
 
-> [!NOTE]  
-> This file is a bit more specific and not mandatory.
+> [!NOTE]
+> This file is optional and only needed if you are using Google AC String.
 
-Only use this file if you are using Google AC-String.
+Include this file alongside the other configuration files. Call the following line **before** initialising the Consent module:
 
-If you have a file, you need to put it with the other json configurations.
-To init it, you will have to call the following line BEFORE the initialization of the Consent module:
-
-in objective-c : 
-
-```objc
-	[[TCMobileConsent sharedInstance] useAcString: YES];
-```
-
-in swift : 
+in swift:
 
 ```swift
-	TCMobileConsent.sharedInstance().useAcString(true)
+TCMobileConsent.sharedInstance().useAcString(true)
 ```
 
-If you are using AC-String please verify that you have a list of google vendors inside your privacy.json as well.
+in objective-c:
 
-This file can only be provided by your consultant and will be updated by the library automatically.
+```objc
+[[TCMobileConsent sharedInstance] useAcString: YES];
+```
+
+If you are using AC String, also make sure your `privacy.json` contains a list of Google vendors. This file can only be provided by your consultant and will be updated automatically by the library.
 
 Filtering vendors
 =================
 
-It is possible that instead of displaying all the hundreds of vendors in the vendor list, you'd rather display only the one your company needs. This will also filter all purposes and special features that we ask the user to consent to.
+By default, the full IAB vendor list is displayed. To show only the vendors your company uses, add a `vendors` field inside the `"information"` section of `privacy.json`:
 
-If you want to filter, nothing has to be done inside the code, but you should find inside the privacy.json in "information" a field like : "vendors": "8,18,467,310".
+```json
+"information": {
+    "vendors": "8,18,467,310"
+}
+```
 
-This tells that you are only using the vendors which IDs are 8, 18, 467 and 310. Those IDs refer to the IDs they are given inside the vendor-list.
+This filters the displayed vendors to those with the given IDs, and also filters the purposes and special features the user is asked to consent to.
 
-> [!WARNING]  
-> This should normally be decided by your project manager and added inside the json by your Commanders Act contact.
+> [!WARNING]
+> This should be decided by your project manager and added to the JSON by your Commanders Act contact.
 
 Selecting buttons
 =================
 
-The IAB interface is separated in 2 layers. The first layer is the first screen you'll see when opening the privacy center.
-The second layer is the purpose screen as well as the vendor screen.
+The IAB interface has two layers. The first layer is the initial popup screen. The second layer includes the purpose screen and the vendor screen.
 
-In those 2 interfaces, the default buttons are defined as followed:
+Default buttons:
 
-First layer: "Detail" (lead to the purpose detail screen), "Accept All" and "Refuse All"
-Second layer: "Save" (use the current state of all switches), "Accept All" and "Refuse All"
+- First layer: **Detail** (opens the purpose screen), **Accept All**, **Refuse All**
+- Second layer: **Save** (saves the current switch state), **Accept All**, **Refuse All**
 
-IAB asks that you have at least a "Detail" button on the first layer, and a "Save" on the second.
-Starting September 2020 the CNIL asks that if you have an "Accept all" button, you need a "Refuse all" button with an identical visual.
+IAB requires at least a **Detail** button on the first layer and a **Save** button on the second. Since September 2020, the CNIL requires that if you have an **Accept All** button, a **Refuse All** button with equal visual prominence must also be present.
 
-Meanwhile, you can select the button you want to see as well as the order they'll appear in among the default ones by changing part of the privacy JSON.
+To configure which buttons appear and in what order, add the following to your `privacy.json`:
 
-```
-	"components": {
-	    "firstLayerButton": ["Detail", "AcceptAll", "RefuseAll"],
-	    "secondLayerButton": ["Save", "AcceptAll", "RefuseAll"],
-	},
+```json
+"components": {
+    "firstLayerButton": ["Detail", "AcceptAll", "RefuseAll"],
+    "secondLayerButton": ["Save", "AcceptAll", "RefuseAll"]
+}
 ```
 
-You can add those lines and select the needing ones. For example, if you don't want a refuse all button, just remove "RefuseAll".
+Remove entries you do not want. For example, to remove the Refuse All button, remove `"RefuseAll"` from the array.
 
 Initialisation
+--------------
 
-in objective-c : 
-
-```objc 
-	// If you need to use callbacks.
-	[[TCMobileConsent sharedInstance] registerCallback: self];
-
-	[[TCMobileConsent sharedInstance] setSiteID: 3311 andPrivacyID: 320];
-
-	// Use this if you need to use a specific language
-	[[TCMobileConsent sharedInstance] setLanguage: @"fr"];
-```
-
-in swift :
+In swift:
 
 ```swift
-	// If you need to use callbacks.
-	TCMobileConsent.sharedInstance().registerCallback(self)
+// Register callbacks first if needed.
+TCMobileConsent.sharedInstance().registerCallback(self)
 
-	TCMobileConsent.sharedInstance().setSiteID(3311, andPrivacyID: 320)
+TCMobileConsent.sharedInstance().setSiteID(3311, andPrivacyID: 320)
 
-	// Use this if you need to use a specific language
-	TCMobileConsent.sharedInstance().setLanguage("fr")
+// Set language if needed.
+TCMobileConsent.sharedInstance().setLanguage("fr")
+```
+
+In objective-c:
+
+```objc
+// Register callbacks first if needed.
+[[TCMobileConsent sharedInstance] registerCallback: self];
+
+[[TCMobileConsent sharedInstance] setSiteID: 3311 andPrivacyID: 320];
+
+// Set language if needed.
+[[TCMobileConsent sharedInstance] setLanguage: @"fr"];
 ```
 
 With the ServerSide
 ===================
 
-You can use classic Tag Management with IAB if needed. Doing this is really simple as all saved information used for IAB configuration will be forwarded to each server-side call.
-This mean that you can use any IAB purpose as a category and create rules in your container accordingly.
+Using IAB with ServerSide requires no special handling. All saved IAB consent information is automatically forwarded in every ServerSide hit, so you can use any IAB purpose as a consent category and build rules around it in your container.
 
 Retaining consent
 =================
 
-[Please see the specific documentation here](../TCConsent#retaining-consent)
+[See the Consent module documentation.](../TCConsent/README.md#retaining-consent)
 
 Reacting to consent
 ===================
 
-[Please see the specific documentation here](../TCConsent#reacting-to-consent)
+[See the Consent module documentation.](../TCConsent/README.md#reacting-to-consent)
 
-Generating publisher TC in consent String
-=========================================
+Generating publisher TC in consent string
+==========================================
 
-By default, as some clients asked, the publisher TC part of the consent string is not generated.
-But you have a boolean in TCConsent/TCMobilePrivacy which is named generatePublisherTC that you can change to true.
+The publisher TC part of the consent string is not generated by default. To enable it, set the following boolean on `TCMobilePrivacy`:
+
+```swift
+TCMobilePrivacy.sharedInstance().generatePublisherTC = true
+```
 
 Loading a specific screen directly
-==================================
+====================================
 
-By default, the screen loaded is what we call the first layer screen (or pop-up screen). Then from this screen you'll be able to go to the purpose screen and from the purpose screen to the vendor screen. Both of which are called the second layer.
+By default, launching the Privacy Center with TCIAB shows the IAB first layer screen. If you have built your own first layer and want to open the Privacy Center directly to the second layer (purpose or vendor screen), bypassing the IAB first layer, use the following:
 
-if you want to have your own first layer, you'll want to be able to open from this page either of our second layer pages.
+**Purpose screen:**
 
-To do this, we created other ways to open the privacy center as follow:
-
-
-in objective-c : 
-
-```objc
-    TCPrivacyCenterViewController *PCM = [[TCPrivacyCenterViewController alloc] init];
-    [PCM startWithPurposeScreen];
-    [self.navigationController pushViewController: PCM animated: NO];
-```
-
-in swift : 
+in swift:
 
 ```swift
-    let PCM = TCPrivacyCenterViewController()
-    PCM.startWithPurposeScreen()
-    self.navigationController.pushViewController(PCM, animated: false)
+let PCM = TCPrivacyCenterViewController()
+PCM.startWithPurposeScreen()
+self.navigationController?.pushViewController(PCM, animated: false)
 ```
 
-or for the vendor screen:
-
-in objective-c : 
+in objective-c:
 
 ```objc
-    [PCM startWithVendorScreen];
+TCPrivacyCenterViewController *PCM = [[TCPrivacyCenterViewController alloc] init];
+[PCM startWithPurposeScreen];
+[self.navigationController pushViewController: PCM animated: NO];
 ```
 
-in swift : 
+**Vendor screen:**
+
+in swift:
 
 ```swift
-    PCM.startWithVendorScreen()
+PCM.startWithVendorScreen()
 ```
+
+in objective-c:
+
+```objc
+[PCM startWithVendorScreen];
+```
+
+Troubleshooting
+===============
+
+Enable verbose logging before initialising the module:
+
+in swift:
+
+```swift
+#if DEBUG
+    TCDebug.setLogLevel(.verbose)
+#endif
+```
+
+After the user saves consent in the Privacy Center, check the Xcode console for a log entry containing the generated IAB consent string. It will look something like:
+
+```
+[TCIAB] TC String generated: COwGmGhOwGmGh...
+```
+
+If this line does not appear:
+
+- Confirm that `vendor-list.json` and `privacy.json` are present in your project bundle.
+- Confirm that both TCIAB and TCConsent are linked in your target.
+- Confirm that you are using a TCConsent version that supports IAB 2.2 if you have upgraded your JSON files to 2.2.
 
 Support and contacts
 ====================
 
 ![alt tag](../res/ca_logo.png)
 
+***
 **Support**
 *support@commandersact.com*
 
 http://www.commandersact.com
 
-Commanders Act | 7b rue taylor - 75010 PARIS - France
+Commanders Act | 25 rue de Tolbiac, 75013 Paris - France
 ***
 
-This documentation was generated on 19/02/2026 14:12:03
+This documentation was generated on 16/06/2026 15:03:17

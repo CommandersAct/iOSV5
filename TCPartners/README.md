@@ -3,7 +3,7 @@
 Partners' Implementation Guide
 ==============================
 
-Last update : *19/02/2026*
+Last update : *16/06/2026*
 
 Release version : *5.0.4*
 
@@ -144,7 +144,7 @@ And to recover the segments:
 
 http://www.commandersact.com
 
-Commanders Act | 7b rue taylor - 75010 PARIS - France
+Commanders Act | 25 rue de Tolbiac, 75013 Paris - France
 ***
 
-This documentation was generated on 19/02/2026 14:12:03
+This documentation was generated on 16/06/2026 15:03:17
