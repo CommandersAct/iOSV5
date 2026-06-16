@@ -16,11 +16,11 @@ Release version : *5.5.0*
   - [Event](#event)
   - [Commanders Act's TCEvent Payload](#commanders-acts-tcevent-payload)
   - [Executing an event](#executing-an-event)
-  - [How to customise your payload](#how-to-customise-your-payload)
 - [ServerSide module integration](#serverside-module-integration)
   - [Steps](#steps)
   - [Initialisation](#initialisation)
   - [Executing events](#executing-events)
+  - [How to customise your payload](#how-to-customise-your-payload)
 - [Using the ServerSide module](#using-the-serverside-module)
   - [Customising Events — Code Reference](#customising-events-code-reference)
   - [Generic properties](#generic-properties)
@@ -107,6 +107,92 @@ Executing an event
 When you call `execute`, the hit is packaged and sent to Commanders Act's servers.
 
 ![alt tag](../res/server_side_module_scheme.png)
+
+ServerSide module integration
+===============================
+
+Steps
+-----
+
+1. Add the Core and ServerSide libraries to your project.
+2. Initialise the ServerSide module and instrument events in your application.
+3. Verify that hits are being sent correctly.
+
+Initialisation
+--------------
+
+Initialise `TCServerSide` in your `AppDelegate`'s `applicationDidFinishLaunchingWithOptions` so it is ready as early as possible.
+
+You will need two values from your consulting team:
+
+- **siteID** — identifies your web platform setup
+- **sourceKey** — identifies this iOS source within your configuration
+
+If you are using the Consent module, you can also set the default ServerSide behaviour while waiting for user consent. See the [Consent section](#consent) below for details.
+
+in swift:
+
+```swift
+// Important while integrating TCServerSide
+#if DEBUG
+    TCDebug.setLogLevel(.verbose)
+    TCDebug.setNotificationLog(true)
+#endif
+let serverSide = ServerSide(siteID: siteID, andSourceKey: sourceKey)
+```
+
+in objective-c:
+
+```objc
+// Important while integrating TCServerSide
+#ifdef DEBUG
+    [TCDebug setDebugLevel: TCLogLevel_Verbose];
+    [TCDebug setNotificationLog: YES];
+#endif
+ServerSide *serverSide = [[ServerSide alloc] initWithSiteID: siteID andSourceKey: sourceKey];
+```
+
+> [!TIP]
+> If you are not seeing hits in the platform, or are unsure whether events are queued or actually sending, see the [Troubleshooting](#troubleshooting) section for log patterns and common issues.
+
+Executing events
+----------------
+
+Instantiate the relevant event class, populate it according to your tagging plan, then call `execute`.
+
+in swift:
+
+```swift
+let tc_item = TCItem(itemId: "iID1", with: TCProduct(productId: "pID1", withName: "pName1", withPrice: 1.5), withQuantity: 1)
+let tc_item_2 = TCItem(itemId: "iID2", with: TCProduct(productId: "pID2", withName: "pName2", withPrice: 2.5), withQuantity: 2)
+let items = [tc_item, tc_item_2]
+
+let event = TCPurchaseEvent(id: "ID", withRevenue: 1.1, withValue: 12.2, withCurrency: "EUR", withType: "purchase", withPaymentMethod: "CreditCard", withStatus: "waiting", withItems: items)
+serverSide?.execute(event)
+```
+
+in objective-c:
+
+```objc
+NSMutableArray *items = [[NSMutableArray alloc] init];
+[items addObject: [[TCItem alloc] initWithItemId: @"iID1"
+                                    withProduct: [[TCProduct alloc] initWithProductId: @"pID1" withName: @"pName1" withPrice: @1.5f]
+                                   withQuantity: 1]];
+[items addObject: [[TCItem alloc] initWithItemId: @"iID2"
+                                    withProduct: [[TCProduct alloc] initWithProductId: @"pID2" withName: @"pName2" withPrice: [[NSDecimalNumber alloc] initWithFloat: 2.5f]]
+                                   withQuantity: 2]];
+
+TCPurchaseEvent *event = [[TCPurchaseEvent alloc] initWithId: @"ID"
+                                                 withRevenue: [[NSDecimalNumber alloc] initWithString: @"1.1"]
+                                                   withValue: [[NSDecimalNumber alloc] initWithString: @"12.2"]
+                                                withCurrency: @"EUR"
+                                                    withType: @"purchase"
+                                           withPaymentMethod: @"CreditCard"
+                                                  withStatus: @"waiting"
+                                                   withItems: items];
+[serverSide execute: event];
+```
+
 
 How to customise your payload
 -----------------------------
@@ -216,99 +302,12 @@ in objective-c:
 | Attach an arbitrary key/value to every event | `serverSide.addPermanentData(...)` | All events until removed |
 
 
-ServerSide module integration
-===============================
-
-Steps
------
-
-1. Add the Core and ServerSide libraries to your project.
-2. Initialise the ServerSide module and instrument events in your application.
-3. Verify that hits are being sent correctly.
-
-Initialisation
---------------
-
-Initialise `TCServerSide` in your `AppDelegate`'s `applicationDidFinishLaunchingWithOptions` so it is ready as early as possible.
-
-You will need two values from your consulting team:
-
-- **siteID** — identifies your web platform setup
-- **sourceKey** — identifies this iOS source within your configuration
-
-If you are using the Consent module, you can also set the default ServerSide behaviour while waiting for user consent. See the [Consent section](#consent) below for details.
-
-in swift:
-
-```swift
-// Important while integrating TCServerSide
-#if DEBUG
-    TCDebug.setLogLevel(.verbose)
-    TCDebug.setNotificationLog(true)
-#endif
-let serverSide = ServerSide(siteID: siteID, andSourceKey: sourceKey)
-```
-
-in objective-c:
-
-```objc
-// Important while integrating TCServerSide
-#ifdef DEBUG
-    [TCDebug setDebugLevel: TCLogLevel_Verbose];
-    [TCDebug setNotificationLog: YES];
-#endif
-ServerSide *serverSide = [[ServerSide alloc] initWithSiteID: siteID andSourceKey: sourceKey];
-```
-
-> [!TIP]
-> If you are not seeing hits in the platform, or are unsure whether events are queued or actually sending, see the [Troubleshooting](#troubleshooting) section for log patterns and common issues.
-
-Executing events
-----------------
-
-Instantiate the relevant event class, populate it according to your tagging plan, then call `execute`.
-
-in swift:
-
-```swift
-let tc_item = TCItem(itemId: "iID1", with: TCProduct(productId: "pID1", withName: "pName1", withPrice: 1.5), withQuantity: 1)
-let tc_item_2 = TCItem(itemId: "iID2", with: TCProduct(productId: "pID2", withName: "pName2", withPrice: 2.5), withQuantity: 2)
-let items = [tc_item, tc_item_2]
-
-let event = TCPurchaseEvent(id: "ID", withRevenue: 1.1, withValue: 12.2, withCurrency: "EUR", withType: "purchase", withPaymentMethod: "CreditCard", withStatus: "waiting", withItems: items)
-serverSide?.execute(event)
-```
-
-in objective-c:
-
-```objc
-NSMutableArray *items = [[NSMutableArray alloc] init];
-[items addObject: [[TCItem alloc] initWithItemId: @"iID1"
-                                    withProduct: [[TCProduct alloc] initWithProductId: @"pID1" withName: @"pName1" withPrice: @1.5f]
-                                   withQuantity: 1]];
-[items addObject: [[TCItem alloc] initWithItemId: @"iID2"
-                                    withProduct: [[TCProduct alloc] initWithProductId: @"pID2" withName: @"pName2" withPrice: [[NSDecimalNumber alloc] initWithFloat: 2.5f]]
-                                   withQuantity: 2]];
-
-TCPurchaseEvent *event = [[TCPurchaseEvent alloc] initWithId: @"ID"
-                                                 withRevenue: [[NSDecimalNumber alloc] initWithString: @"1.1"]
-                                                   withValue: [[NSDecimalNumber alloc] initWithString: @"12.2"]
-                                                withCurrency: @"EUR"
-                                                    withType: @"purchase"
-                                           withPaymentMethod: @"CreditCard"
-                                                  withStatus: @"waiting"
-                                                   withItems: items];
-[serverSide execute: event];
-```
-
 Using the ServerSide module
 ===========================
 
 Customising Events — Code Reference
 -------------------------------------
 
-> [!NOTE]
-> This section is a code reference for the `addAdditionalProperty` API. For a conceptual overview of all three customisation layers and when to use each, see [How to customise your payload](#how-to-customise-your-payload) in the Introduction.
 
 Use the `addAdditionalProperty` family of methods to add or override fields on any event instance or singleton:
 
@@ -328,9 +327,6 @@ To access or remove already-added properties:
 - (void) removeAdditionalProperty: (NSString *) key;
 - (void) clearAdditionalProperties;
 ```
-
-> [!WARNING]
-> `additionalProperties` can be accessed directly for wrapper purposes, but this is strongly discouraged — it can break the event payload format. Only do so if you know exactly what you are doing.
 
 To customise fields that are shared across all events, edit the corresponding singleton directly:
 
@@ -840,4 +836,4 @@ http://www.commandersact.com
 Commanders Act | 25 rue de Tolbiac, 75013 Paris - France
 ***
 
-This documentation was generated on 16/06/2026 15:03:17
+This documentation was generated on 16/06/2026 16:16:10

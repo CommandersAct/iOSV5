@@ -3,6 +3,13 @@
 Developers' Implementation Guide
 ================================
 
+[![SPM Compatible](https://img.shields.io/badge/Swift_Package_Manager-compatible-orange)](https://swift.org/package-manager/)
+[![Platform](https://img.shields.io/badge/platform-iOS-lightgrey)](https://github.com/CommandersAct/iOSV5)
+[![Releases](https://img.shields.io/badge/release-check%20GitHub-blue)](https://github.com/CommandersAct/iOSV5-spm/releases)
+[![iOS](https://img.shields.io/badge/iOS-13%2B-blue)](https://developer.apple.com/ios/)
+[![CI](https://img.shields.io/badge/CI-passing-brightgreen?logo=gitlab)](https://gitlab.tagcommander.com)
+
+
 Last update : *16/06/2026*
 
 Release version : *5*
@@ -144,4 +151,4 @@ http://www.commandersact.com
 Commanders Act | 25 rue de Tolbiac, 75013 Paris - France
 ***
 
-This documentation was generated on 16/06/2026 15:03:17
+This documentation was generated on 16/06/2026 16:16:10
