@@ -1,16 +1,17 @@
 ![alt tag](../res/ca_logo.png)
 
-ServerSide's Implementation Guide V2
+ServerSide's Implementation Guide
 =================================
 
-Last update : *16/06/2026*
+Last update : *28/07/2026*
 
 Release version : *5.5.0*
 
 ## Table of Contents
 
-- [ServerSide's Implementation Guide V2](#serversides-implementation-guide-v2)
+- [ServerSide's Implementation Guide](#serversides-implementation-guide)
 - [Introduction](#introduction)
+- [Related Documentation](#related-documentation)
   - [Main Technical Specifications](#main-technical-specifications)
   - [Compatibility](#compatibility)
   - [Event](#event)
@@ -60,6 +61,16 @@ Commanders Act enables marketers to easily add, edit, update, and deactivate tag
 Instead of embedding multiple SDKs, Commanders Act for mobile provides a single module that sends data to our servers, which then create and forward information to your partners.
 
 Remote configuration tools also make it possible to update your setup without resubmitting the application.
+
+Related Documentation
+======================
+
+| Document | When you need it |
+|---|---|
+| [Events Reference](https://doc.commandersact.com/developers/tracking/events-reference) | Full list of events and payloads, with code examples |
+| [Mobile SDK Event Specificity](https://community.commandersact.com/platform-x/developers/tracking/about-events/mobile-sdk-event-specificity) | Mapping between event names, SDK class names, and payload content |
+| [Consent module](../TCConsent/README.md) | Managing user consent and its effect on the ServerSide module |
+| [TCDemo (iOS)](https://github.com/CommandersAct/TCMobileDemo-V5/tree/master/iOS) | Working sample app: ServerSide + Consent |
 
 Main Technical Specifications
 -----------------------------
@@ -836,4 +847,4 @@ http://www.commandersact.com
 Commanders Act | 25 rue de Tolbiac, 75013 Paris - France
 ***
 
-This documentation was generated on 16/06/2026 16:16:10
+This documentation was generated on 28/07/2026 14:51:21
