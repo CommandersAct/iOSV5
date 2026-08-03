@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
            Go to https://github.com/CommandersAct/iOSV5/tree/master/TCServerSide for more details
                    DESC
   s.platform     = :ios, '8.0'
-  s.source   = { :http => "https://github.com/CommandersAct/iOSV5/releases/download/5.5.0/TCServerSide_noIDFA.zip" }
+  s.source   = { :http => "https://github.com/CommandersAct/iOSV5/releases/download/5.5.1/TCServerSide_noIDFA.zip" }
   s.preserve_paths      = 'TCServerSide_noIDFA.xcframework'
   #s.public_header_files = 'TCServerSide_noIDFA.framework/Headers/*.h'
   s.vendored_frameworks = 'TCServerSide_noIDFA.xcframework'

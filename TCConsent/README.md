@@ -3,9 +3,9 @@
 Consent's Implementation Guide
 ==============================
 
-Last update : *28/07/2026*
+Last update : *03/08/2026*
 
-Release version : *5.4.0*
+Release version : *5.4.1*
 
 ## Table of Contents
 
@@ -29,7 +29,6 @@ Release version : *5.4.0*
   - [Configuration](#configuration)
   - [Usage](#usage)
   - [Options](#options)
-  - [Icon](#icon)
   - [Design and colours](#design-and-colours)
   - [Button actions](#button-actions)
 - [Privacy Center Setup](#privacy-center-setup)
@@ -399,6 +398,7 @@ Usage
 TCMobileConsent.sharedInstance().showBanner(
     type: .bottom,
     options: TCBannerOptions(),
+    theme: nil,
     onDetails: {
         // Open the Privacy Center or your own screen here
     }
@@ -409,6 +409,7 @@ Parameters:
 
 - `type` — banner display mode: `.bottom` for a bottom sheet or `.fullScreen` for a modal card
 - `options` — layout and behaviour options (see [Options](#options) below); defaults to `TCBannerOptions()` if omitted
+- `theme` — programmatic colour overrides (see [Design and colours](#design-and-colours) below); defaults to `nil` if omitted, in which case colours fall back to your asset catalogue / system colours
 - `onDetails` — callback triggered when the user taps the details button
 
 Options
@@ -438,37 +439,48 @@ TCBannerOptions(
 | `buttonsOrder` | Display order of the three buttons | `[.refuse, .details, .accept]` | Ignored when `compactLayout` is `true` |
 | `compactLayout` | Use the compact button layout | `false` | See note above |
 
-Icon
-----
-
-To display an icon before the banner title, set `iconName` in `privacy.json` under `"texts" -> "banner"`:
-
-```json
-{
-  "texts": {
-    "banner": {
-      "iconName": "my_app_icon"
-    }
-  }
-}
-```
-
-The value must match the name of an image in your app's asset catalogue. The rendered size is controlled by the `iconSize` option in `TCBannerOptions`. Refer to the [privacy.json documentation](../res/Privacy_JSON_Documentation.md) for the full `texts -> banner` schema.
-
 Design and colours
 ------------------
 
-Define the following named colours in your app's asset catalogue. If absent, the SDK falls back to system colours:
+Colours can be set two ways: via named colours in your app's asset catalogue, or programmatically via `TCBannerTheme`. The asset catalogue always takes priority when present; `TCBannerTheme` only applies where no matching named colour exists. If neither is set, the SDK falls back to system colours.
 
-- `TCBannerBackground` — main background colour of the banner (fallback: `secondarySystemBackground`)
-- `TCBannerTextColor` — main text colour of the banner (fallback: `label`)
+### Asset catalogue (named colours)
+
+Define the following named colours in your app's asset catalogue:
+
+- `TCBannerBackground` — main background colour of the banner.
+- `TCBannerTextColor` — main text colour of the banner.
 
 Dark mode is supported via named colours in your asset catalogue.
 
+### Programmatic (`TCBannerTheme`)
+
+For per-call control (e.g. a theme that isn't tied to your app's asset catalogue, or that changes at runtime), pass a `TCBannerTheme` to `showBanner()`. A `TCBannerTheme` holds two `TCBannerColours` — one for Light Mode, one for Dark Mode:
+
+```swift
+TCMobileConsent.sharedInstance().showBanner(
+    type: .bottom,
+    theme: TCBannerTheme(
+        lightColours: TCBannerColours(
+            background: UIColor,
+            textColor: UIColor
+        ),
+        darkColours: TCBannerColours(
+            background: UIColor,
+            textColor: UIColor
+        )
+    ),
+    onDetails: {
+        // Open the Privacy Center or your own screen here
+    }
+)
+```
+
 Colour resolution priority (highest to lowest):
 
-1. Named colour in asset catalogue (`TCBannerBackground` / `TCBannerTextColor`) — supports Dark/Light mode
-2. System default (`secondarySystemBackground` / `label`)
+1. Named colour in asset catalogue (`TCBannerBackground` / `TCBannerTextColor`) — supports Dark/Light mode (recommended)
+2. `TCBannerTheme` value passed to `showBanner()`, if set
+3. System default (`secondarySystemBackground` / `label`)
 
 Button actions
 --------------
@@ -891,7 +903,7 @@ Quick Reference — Function Recap
 | `refuseAllConsent()` | Our UI or Custom UI | Both | Same as above. |
 | `stat*` (`statEnterPCToVendorScreen()`, `statViewPrivacyPoliciesFromBanner()`, etc.) | Custom UI only | Both | Only needed if you built your own screens — our rendered UI already calls these internally. See [Building Your Own Privacy Center](../res/user_privacy_center.md) for the full list. |
 | `TCUser.sharedInstance().setExternalConsent(_:)` | Either | Both | Only relevant if ServerSide is driven by a consent system entirely external to Commanders Act. |
-| `showBanner(type:options:onDetails:)` | Our UI | **Non-IAB only** | ❌ Not supported for IAB — the Privacy Center handles the first layer instead. |
+| `showBanner(type:options:theme:onDetails:)` | Our UI | **Non-IAB only** | ❌ Not supported for IAB — the Privacy Center handles the first layer instead. |
 | `TCPrivacyCenterViewController()` (push) | Our UI | Both | Adapts automatically depending on whether TCIAB is linked — no code change needed between modes. |
 | `TCUser.sharedInstance().consentID` (get/set) | Both | Both | Defaults to an internal ID; override to use your own (needed to retrieve consent proof later). |
 | `privacy.json` | Our UI: required. | Both | Mandatory offline copy if using our UI (Banner and/or Privacy Center). |
@@ -915,4 +927,4 @@ http://www.commandersact.com
 Commanders Act | 25 rue de Tolbiac, 75013 Paris - France
 ***
 
-This documentation was generated on 28/07/2026 14:51:21
+This documentation was generated on 03/08/2026 16:35:50

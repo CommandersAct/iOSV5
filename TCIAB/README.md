@@ -3,7 +3,7 @@
 TCIAB Implementation Guide
 ===========================
 
-Last update : *28/07/2026*
+Last update : *03/08/2026*
 
 Release version : *5.2.0*
 
@@ -79,7 +79,7 @@ We support IAB 2.1. Add the following translation keys to your `privacy.json` to
 IAB 2.2
 -------
 
-To upgrade to IAB 2.2, first upgrade TCConsent to version `5.4.0` or higher, then:
+To upgrade to IAB 2.2, first upgrade TCConsent to version `5.4.1` or higher, then:
 
 1. Replace all offline in-app JSON files with IAB 2.2 compatible versions. This includes `vendor-list.json` and any `purposes-xx.json` translation files.
 2. Update your `privacy.json` (both the offline copy and your CDN version) to be IAB 2.2 compatible. Review the `vendors` key at the root to re-check your IAB vendor filter.
@@ -356,4 +356,4 @@ http://www.commandersact.com
 Commanders Act | 25 rue de Tolbiac, 75013 Paris - France
 ***
 
-This documentation was generated on 28/07/2026 14:51:21
+This documentation was generated on 03/08/2026 16:35:50

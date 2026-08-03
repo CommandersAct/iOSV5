@@ -1,6 +1,11 @@
 Changelog iOS
 =============
 
+
+*5.4.6 : 08/03/2026*
+
+	~ Deprecated TCUser attributes and methodes.
+
 *5.4.5 : 02/19/2026*
 
 	~ Bug fix on ServerSide standalone configurations.

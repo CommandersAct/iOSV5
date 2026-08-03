@@ -10,7 +10,7 @@ Developers' Implementation Guide
 [![CI](https://img.shields.io/badge/CI-passing-brightgreen?logo=gitlab)](https://gitlab.tagcommander.com)
 
 
-Last update : *28/07/2026*
+Last update : *03/08/2026*
 
 Release version : *5*
 
@@ -51,11 +51,11 @@ For each module, check the respective documentation for setup and usage details.
 Latest available versions
 =========================
 
-Core : *5.4.5*
+Core : *5.4.6*
 
 ServerSide : *5.5.0*
 
-Consent : *5.4.0*
+Consent : *5.4.1*
 
 IAB : *5.2.0*
 
@@ -151,4 +151,4 @@ http://www.commandersact.com
 Commanders Act | 25 rue de Tolbiac, 75013 Paris - France
 ***
 
-This documentation was generated on 28/07/2026 14:51:21
+This documentation was generated on 03/08/2026 16:35:50

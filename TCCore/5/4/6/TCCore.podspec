@@ -1,5 +1,5 @@
 Pod::Spec.new do |s|
-  s.name         = "latest_TCCore"
+  s.name         = "TCCore"
   s.version      = "5.4.6"
   s.homepage     = "https://github.com/CommandersAct/iOSV5/tree/master/TCCore"
   s.license      = { :type => 'proprietary', :text => <<-LICENSE
