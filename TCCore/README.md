@@ -3,7 +3,7 @@
 Core Guide
 ==========
 
-Last update : *03/08/2026*
+Last update : *04/08/2026*
 
 Release version : *5.4.6*
 
@@ -39,4 +39,4 @@ Support and contacts
 http://www.commandersact.com
 ***
 
-This documentation was generated on 03/08/2026 16:35:50
+This documentation was generated on 04/08/2026 16:06:11

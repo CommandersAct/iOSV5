@@ -3,7 +3,7 @@
 Consent's Implementation Guide
 ==============================
 
-Last update : *03/08/2026*
+Last update : *04/08/2026*
 
 Release version : *5.4.1*
 
@@ -897,7 +897,7 @@ Quick Reference — Function Recap
 | Function | UI ownership | Consent flavour | Notes |
 |---|---|---|---|
 | `setSiteID(_:andPrivacyID:)` | Our UI | Both | Standard init when using Banner and/or Privacy Center. `privacy.json` required. |
-| `customPCMSetSiteID(_:andPrivacyID:)` | Custom UI | Both | Init when you build your own consent screens entirely. |
+| `customPCMSetSiteID(_:andPrivacyID:)` | Custom UI | **Non-IAB only** | Init when you build your own consent screens entirely. |
 | `save(_:from:withPrivacyAction:)` (`saveConsent`) | Custom UI only | **Non-IAB only** | ❌ Not usable in IAB mode — IAB requires consent collected through a validated UI. |
 | `acceptAllConsent()` | Our UI or Custom UI | Both | This + `refuseAllConsent()` are the **only** programmatic IAB functions — usable from your own custom banner ONLY. |
 | `refuseAllConsent()` | Our UI or Custom UI | Both | Same as above. |
@@ -927,4 +927,4 @@ http://www.commandersact.com
 Commanders Act | 25 rue de Tolbiac, 75013 Paris - France
 ***
 
-This documentation was generated on 03/08/2026 16:35:50
+This documentation was generated on 04/08/2026 16:06:11
