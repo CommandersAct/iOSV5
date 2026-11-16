@@ -1,6 +1,17 @@
 Changelog iOS
 =============
 
+*5.6.0 : 11/12/2026*
+
+	~ /!\ Requires Core 5.5.0+
+	~ Minimum supported version is now iOS 15 and tvOS 15.
+	+ Commanders Act Gateway Mobile: first-party tracking: send your events from your own domain with a single link. See the "First-party tracking (Commanders Act Gateway)" section of the implementation guide.
+	+ Added TCServerSideConfiguration, a single object grouping every TCServerSide init option, and a matching constructor.
+	- The initWithSiteID:andSourceKey: initializers (except the full one with a notification center and gateway URL) and enableRunningInBackground are deprecated in favor of TCServerSideConfiguration. They keep working, check the implementation guide for the matching fields.
+	- The permanentStore property is deprecated: use addPermanentData, getPermanentData and removePermanentData.
+	+ ServerSide methods and properties now come with documentation in Xcode.
+	~ TCServerSide_noIDFA binaries fix.
+
 *5.5.0 : 06/16/2026*
 
 	~ Moved frequently-changing values from UserDefaults to in-memory storage, eliminating unnecessary listener notifications.

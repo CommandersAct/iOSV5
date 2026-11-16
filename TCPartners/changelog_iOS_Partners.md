@@ -1,6 +1,10 @@
 Changelog iOS
 =================
 
+*5.1.0 : 11/12/2026*
+
+	~ Minimum supported version is now iOS 15 and tvOS 15.
+
 *5.0.4 : 06/04/2024*
 
 	~ Internal import paths refactored.

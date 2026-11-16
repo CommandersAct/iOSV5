@@ -3,9 +3,9 @@
 Core Guide
 ==========
 
-Last update : *04/08/2026*
+Last update : *12/11/2026*
 
-Release version : *5.4.6*
+Release version : *5.5.0*
 
 ## Table of Contents
 
@@ -26,7 +26,7 @@ Dependencies
 
 Core is a required dependency for all other Commanders Act mobile modules. The individual module guides list any dependencies they add on top of Core.
 
-On iOS, Core has no external dependencies.
+On iOS, Core has no external dependencies. Core is also available for tvOS (minimum tvOS 15.0).
 
 Support and contacts
 ====================
@@ -39,4 +39,4 @@ Support and contacts
 http://www.commandersact.com
 ***
 
-This documentation was generated on 04/08/2026 16:06:11
+This documentation was generated on 12/11/2026 17:40:24

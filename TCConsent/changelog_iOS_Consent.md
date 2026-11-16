@@ -1,6 +1,16 @@
 Changelog iOS
 =============
 
+*5.5.0 : 11/12/2026*
+
+	~ /!\ Requires Core 5.5.0+
+	~ Minimum supported version is now iOS 15 and tvOS 15.
+	+ Commanders Act Gateway Mobile: first-party privacy: send consent hits from your own domain and serve IAB files with a single link. See the "First-party privacy (Commanders Act Gateway)" section of the Consent Implementation Guide.
+	+ [IAB/non-IAB] Initialize TCConsent with a single TCConsentConfiguration object, grouping site ID, privacy ID, callback, language, consent duration and other setup options into one call, check the Consent Implementation Guide for more info.
+	~ [IAB/non-IAB] Improved consent version handling: the consentVersion set in TCConsentConfiguration now takes priority over the privacy.json version for every consent hit.
+	- [IAB/non-IAB] setSiteID:andPrivacyID:, customPCMSetSiteID:andPrivacyID:, setGatewayURL:, useAcString:, useCustomPublisherRestrictions and the consentDuration, consentVersion, switchDefaultState, generatePublisherTC and do_not_track properties are deprecated in favor of TCConsentConfiguration. They keep working, check the Consent Implementation Guide for the matching fields.
+	+ [IAB/non-IAB] TCMobileConsent methods and properties now come with documentation in Xcode.
+
 *5.4.1 : 08/03/2026*
 
 	+ [non-IAB] Consent Banner — added TCBannerTheme.

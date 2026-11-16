@@ -1,6 +1,12 @@
 Changelog iOS
 =============
 
+*5.3.0 : 11/12/2026*
+
+	~ Minimum supported version is now iOS 15 and tvOS 15.
+	+ [IAB] Supporting IAB TCF v2.4.
+	~ [IAB] The IABTCF_UseNonStandardStacks key is now stored as IABTCF_UseNonStandardTexts, its TCF 2.2 name. setNonStdStack is deprecated, use setNonStdTexts.
+
 *5.2.0 : 08/18/2025*
 
 	+ Supporting IAB TCF v2.3.

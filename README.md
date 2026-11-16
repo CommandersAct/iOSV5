@@ -6,11 +6,11 @@ Developers' Implementation Guide
 [![SPM Compatible](https://img.shields.io/badge/Swift_Package_Manager-compatible-orange)](https://swift.org/package-manager/)
 [![Platform](https://img.shields.io/badge/platform-iOS-lightgrey)](https://github.com/CommandersAct/iOSV5)
 [![Releases](https://img.shields.io/badge/release-check%20GitHub-blue)](https://github.com/CommandersAct/iOSV5-spm/releases)
-[![iOS](https://img.shields.io/badge/iOS-13%2B-blue)](https://developer.apple.com/ios/)
+[![iOS](https://img.shields.io/badge/iOS-15%2B-blue)](https://developer.apple.com/ios/)
 [![CI](https://img.shields.io/badge/CI-passing-brightgreen?logo=gitlab)](https://gitlab.tagcommander.com)
 
 
-Last update : *04/08/2026*
+Last update : *12/11/2026*
 
 Release version : *5*
 
@@ -19,7 +19,6 @@ Release version : *5*
 - [Developers' Implementation Guide](#developers-implementation-guide)
 - [Introduction](#introduction)
 - [Modules](#modules)
-- [Latest available versions](#latest-available-versions)
 - [Adding a module to your project](#adding-a-module-to-your-project)
   - [CocoaPods](#cocoapods)
   - [Build Variants](#build-variants)
@@ -31,35 +30,23 @@ Release version : *5*
 Introduction
 ============
 
-TagCommander for mobile is a collection of small SDKs, each designed to serve a dedicated purpose. Adding only the modules you need keeps your binary lightweight — the Core module alone is under 50 KB, and each additional module adds roughly 110–120 KB.
+Commanders Act for mobile is a collection of small SDKs, each designed to serve a dedicated purpose. Adding only the modules you need keeps your binary lightweight — the Core module alone is under 50 KB, and each additional module adds roughly 110–120 KB.
 
-**Minimum supported iOS version: 13.0**
+**Minimum supported iOS version: 15.0**
 
 Modules
 =======
 
-| Module | Purpose | Documentation |
-|--------|---------|---------------|
-| **Core** | Base module required by all other modules | [Core guide](TCCore/README.md) |
-| **ServerSide** | Tag management via a server-side approach | [ServerSide guide](TCServerSide/README.md) |
-| **Consent** | Collect and manage user privacy consent | [Consent guide](TCConsent/README.md) |
-| **IAB** | IAB TCF v2 consent string support | [IAB guide](TCIAB/README.md) |
+| Module | Purpose | Latest version | Documentation |
+|--------|---------|----------------|---------------|
+| **Core** | Base module required by all other modules | *5.5.0* | [Core guide](TCCore/README.md) |
+| **ServerSide** | Tag management via a server-side approach | *5.6.0* | [ServerSide guide](TCServerSide/README.md) |
+| **Consent** | Collect and manage user privacy consent | *5.5.0* | [Consent guide](TCConsent/README.md) |
+| **IAB** | IAB TCF v2 consent string support | *5.3.0* | [IAB guide](TCIAB/README.md) |
+| **Partners** | Direct connection from the app to a vendor | *5.1.0* | [Partners guide](TCPartners/README.md) |
 
 For each module, check the respective documentation for setup and usage details.
 
-
-Latest available versions
-=========================
-
-Core : *5.4.6*
-
-ServerSide : *5.5.0*
-
-Consent : *5.4.1*
-
-IAB : *5.2.0*
-
-Partners : *5.0.4*
 
 Adding a module to your project
 ===============================
@@ -77,13 +64,13 @@ CocoaPods
 > [!NOTE]  
 > We renamed all our pods. The pod names now reflect the exact content of the podspec (resolving the previous name warning).
 
-	pod 'latest_TCCore', :podspec => 'https://raw.githubusercontent.com/TagCommander/iOSV5/master/TCCore/latest_TCCore.podspec'
-	pod 'latest_TCServerSide', :podspec => 'https://raw.githubusercontent.com/TagCommander/iOSV5/master/TCServerSide/latest_TCServerSide.podspec'
+	pod 'latest_TCCore', :podspec => 'https://raw.githubusercontent.com/CommandersAct/iOSV5/master/TCCore/latest_TCCore.podspec'
+	pod 'latest_TCServerSide', :podspec => 'https://raw.githubusercontent.com/CommandersAct/iOSV5/master/TCServerSide/latest_TCServerSide.podspec'
 
 You can also pin a specific version:
 
-	pod 'TCCore', :podspec => 'https://raw.githubusercontent.com/TagCommander/iOSV5/master/TCCore/5/0/0/TCCore.podspec'
-	pod 'TCServerSide', :podspec => 'https://raw.githubusercontent.com/TagCommander/iOSV5/master/TCServerSide/5/0/0/TCServerSide.podspec'
+	pod 'TCCore', :podspec => 'https://raw.githubusercontent.com/CommandersAct/iOSV5/master/TCCore/5/0/0/TCCore.podspec'
+	pod 'TCServerSide', :podspec => 'https://raw.githubusercontent.com/CommandersAct/iOSV5/master/TCServerSide/5/0/0/TCServerSide.podspec'
 
 Build Variants
 --------------
@@ -95,7 +82,7 @@ Each module now ships as a single variant, except:
 XCFramework
 -----------
 
-The latest versions are always available on GitHub: https://github.com/TagCommander/iosv5
+The latest versions are always available on GitHub: https://github.com/CommandersAct/iOSV5
 
 > [!NOTE]  
 > You must always include the Core module in your project.
@@ -151,4 +138,4 @@ http://www.commandersact.com
 Commanders Act | 25 rue de Tolbiac, 75013 Paris - France
 ***
 
-This documentation was generated on 04/08/2026 16:06:11
+This documentation was generated on 12/11/2026 17:40:24

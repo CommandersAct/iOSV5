@@ -3,9 +3,9 @@
 ServerSide's Implementation Guide
 =================================
 
-Last update : *04/08/2026*
+Last update : *12/11/2026*
 
-Release version : *5.5.0*
+Release version : *5.6.0*
 
 ## Table of Contents
 
@@ -23,7 +23,7 @@ Release version : *5.5.0*
   - [Executing events](#executing-events)
   - [How to customise your payload](#how-to-customise-your-payload)
 - [Using the ServerSide module](#using-the-serverside-module)
-  - [Customising Events — Code Reference](#customising-events-code-reference)
+  - [Customising Events — Code Reference](#customising-events--code-reference)
   - [Generic properties](#generic-properties)
   - [Custom events](#custom-events)
   - [Video Events](#video-events)
@@ -34,6 +34,7 @@ Release version : *5.5.0*
   - [Getting IDFA](#getting-idfa)
 - [Firebase Destination](#firebase-destination)
   - [Supported Firebase Events](#supported-firebase-events)
+- [First-party tracking (Commanders Act Gateway)](#first-party-tracking-commanders-act-gateway)
 - [Troubleshooting](#troubleshooting)
   - [Debugging](#debugging)
   - [Understanding the logs](#understanding-the-logs)
@@ -85,8 +86,8 @@ Main Technical Specifications
 Compatibility
 -------------
 
-- Architectures: armv7, arm64, i386, x86_64
-- Minimum iOS version: 13.0
+- Architectures: arm64, x86_64 (simulator)
+- Minimum iOS version: 15.0
 - Compiled with ARC enabled
 
 Event
@@ -141,12 +142,52 @@ You will need two values from your consulting team:
 
 If you are using the Consent module, you can also set the default ServerSide behaviour while waiting for user consent. See the [Consent section](#consent) below for details.
 
+### Configuration object (recommended)
+
+Group everything — siteID, sourceKey, consent behaviour, first-party tracking, Firebase, background mode, user-agent wait, advertising IDs, permanent data, TCDebug — into one `TCServerSideConfiguration` and pass it to a single-parameter `ServerSide` initializer (Swift only). Only `siteID` and `sourceKey` are required — every other value defaults to today's existing behaviour.
+
+in swift:
+
+```swift
+let configuration = TCServerSideConfiguration(
+    siteID: siteID,
+    sourceKey: sourceKey,
+    consentBehaviour: PB_DEFAULT_BEHAVIOUR, // optional, see "Consent" below
+    gatewayURL: gatewayURL, // optional, see "First-party tracking (Commanders Act Gateway)" below
+    permanentData: ["myKey": "myValue"], // optional, see "Layer 3 — Permanent Data" below
+    debugLevel: TCLogLevel_Verbose // optional, see "Debugging" below
+)
+let serverSide = ServerSide(configuration: configuration)
+```
+
+`TCServerSideConfiguration` parameters:
+
+| Parameter | Type | Default | Description |
+|---|---|---|---|
+| `siteID` | `Int` | required | Your site ID, as given by your consulting team. |
+| `sourceKey` | `String` | required | Your iOS source key, as given by your consulting team. |
+| `consentBehaviour` | `ETCConsentBehaviour` | `PB_DEFAULT_BEHAVIOUR` | How the module behaves regarding user consent. See "Consent" below. |
+| `gatewayURL` | `String?` | `nil` | Your Commanders Act Gateway link, enabling first-party tracking (e.g. `"https://www.mydomain.com/gateway-path"`). Leave `nil` to use Commanders Act's default endpoint. If you also use the Consent module, pass it the same link. See "First-party tracking (Commanders Act Gateway)" below. |
+| `firebaseInstance` | `Any?` | `nil` | Your Firebase instance (e.g. `Analytics.self`) the events are also forwarded to. Leave `nil` for none. See "Firebase Destination" below. |
+| `runInBackground` | `Bool` | `false` | Set to `true` only if your app needs to keep sending events while in background (e.g. music playback). See "Background Mode" below. |
+| `waitForUserAgent` | `Bool` | `false` | Set to `true` to hold the events until the device User-Agent is known. See "Wait for User-agent" below. |
+| `collectAdvertisingIDs` | `Bool` | `false` | Set to `true` to add the IDFV, IDFA and ad-tracking-enabled flag to your events. Only enable this once the user has accepted the corresponding consent category. See "Getting IDFA" below. |
+| `permanentData` | `[String: String]` | `[:]` | Key/values added to every event. See "Layer 3 — Permanent Data" below. |
+| `debugLevel` | `TCLogLevel?` | `nil` | SDK log level (e.g. `TCLogLevel_Verbose`). `nil` = untouched. |
+| `logNotifications` | `Bool?` | `nil` | Set to `true` to log SDK internal notifications. `nil` = untouched. |
+| `blockHits` | `Bool?` | `nil` | Set to `true` to block all outgoing hits (testing only). `nil` = untouched. |
+
+> [!WARNING]
+> The original initializers (`initWithSiteID:andSourceKey:` and its variants with consent behaviour, Firebase instance and/or gateway URL) are deprecated: use `ServerSide(configuration:)`. They still work.
+
+The original initializers are still available:
+
 in swift:
 
 ```swift
 // Important while integrating TCServerSide
 #if DEBUG
-    TCDebug.setLogLevel(.verbose)
+    TCDebug.setDebugLevel(TCLogLevel_Verbose)
     TCDebug.setNotificationLog(true)
 #endif
 let serverSide = ServerSide(siteID: siteID, andSourceKey: sourceKey)
@@ -302,7 +343,7 @@ in objective-c:
 ```
 
 > [!NOTE]
-> Permanent Data values have lower priority than values set via `addAdditionalProperty` on individual events. If the same key is set both ways, the per-event value wins.
+> Permanent Data values have higher priority than values set via `addAdditionalProperty` on individual events. If the same key is set both ways, the Permanent Data value wins. The event's own fields (event name, page name, page type and typed fields such as `revenue`) are kept when set.
 
 ### Summary
 
@@ -454,7 +495,7 @@ Background Mode
 
 When the application goes to the background, ServerSide flushes any queued data and then stops, to preserve battery and avoid unnecessary data usage.
 
-For apps with real background activity (e.g. audio playback), you can bypass this behaviour:
+For apps with real background activity (e.g. audio playback), you can bypass this behaviour with `runInBackground: true` in `TCServerSideConfiguration`. The `enableRunningInBackground` method is deprecated:
 
 in swift:
 
@@ -489,7 +530,7 @@ in objective-c:
 [TCS disableServerSide];
 ```
 
-This stops all internal systems — background handling, reachability listeners, and hit processing — and causes all subsequent calls to be ignored until ServerSide is re-enabled. You do not need to guard calls in your own code.
+This switches ServerSide to the disabled state: subsequent `execute` calls are ignored until ServerSide is re-enabled. It has no effect when the default behaviour is `PB_ALWAYS_ENABLED`. You do not need to guard calls in your own code.
 
 To re-enable:
 
@@ -513,7 +554,7 @@ Apple removed the synchronous API for reading the user-agent. The value is now o
 If your solution requires the user-agent, call:
 
 ```objc
-[TCS waitForUserAgent: YES];
+[TCS waitForUserAgent];
 ```
 
 The user-agent will be appended to all hits waiting to be sent once it is available.
@@ -541,7 +582,7 @@ Firebase Destination
 Set up the Firebase SDK in your app following the official Firebase documentation. Once Firebase is running and `GoogleService-Info.plist` is in your app bundle, pass the Firebase instance at initialisation:
 
 ```swift
-tc = ServerSide(siteID: siteID, andSourceKey: sourceKey, andFirebaseInstance: Analytics.self)
+tc = ServerSide(configuration: TCServerSideConfiguration(siteID: siteID, sourceKey: sourceKey, firebaseInstance: Analytics.self))
 ```
 
 Supported Firebase Events
@@ -587,6 +628,38 @@ If you use standard `TCEvent` classes instead of `TCCustomEvent`, make sure thei
 Note that predefined variables such as `TCDevice` and `TCNetwork` are not included in Firebase events since the Firebase SDK already collects equivalent data.
 
 
+First-party tracking (Commanders Act Gateway)
+=============================================
+
+Send your events from your own domain with first-party tracking. Pass the link of your Commanders Act Gateway, provided by your consulting team, as `gatewayURL`: every event is then sent to your domain and forwarded to Commanders Act.
+
+in swift:
+
+```swift
+let configuration = TCServerSideConfiguration(
+    siteID: siteID,
+    sourceKey: sourceKey,
+    gatewayURL: "https://www.mydomain.com/gateway-path"
+)
+let serverSide = ServerSide(configuration: configuration)
+```
+
+The original (deprecated) initializers accept it too:
+
+in swift:
+
+```swift
+let serverSide = ServerSide(siteID: siteID, andSourceKey: sourceKey, andDefaultBehaviour: PB_DEFAULT_BEHAVIOUR, andGatewayURL: "https://www.mydomain.com/gateway-path")
+```
+
+in objective-c:
+
+```objc
+ServerSide *serverSide = [[ServerSide alloc] initWithSiteID: siteID andSourceKey: sourceKey andDefaultBehaviour: PB_DEFAULT_BEHAVIOUR andGatewayURL: @"https://www.mydomain.com/gateway-path"];
+```
+
+The link is used as-is, without any path to add: `https://` is applied automatically and a trailing slash is ignored. If you also use the Consent module, pass the same link to `TCConsentConfiguration` to enable first-party privacy as well.
+
 Troubleshooting
 ===============
 
@@ -599,7 +672,7 @@ in swift:
 
 ```swift
 #if DEBUG
-    TCDebug.setLogLevel(.verbose)
+    TCDebug.setDebugLevel(TCLogLevel_Verbose)
     TCDebug.setNotificationLog(true)
 #endif
 ```
@@ -646,7 +719,7 @@ This means the event has been recorded by the SDK but not yet dispatched. It wil
 **Event actually sent:**
 
 ```
-sending: https://collect.commander1.com/events?tc_s=29&tc_skey=NJtcKaoCYuZEFEzDSGZDxRgMBMUw==
+sending: https://collect.commander1.com/events?tc_s=29&token=NJtcKaoCYuZEFEzDSGZDxRgMBMUw==
 with POST data: {"event_name":"purchase", ...}
 ```
 
@@ -847,4 +920,4 @@ http://www.commandersact.com
 Commanders Act | 25 rue de Tolbiac, 75013 Paris - France
 ***
 
-This documentation was generated on 04/08/2026 16:06:11
+This documentation was generated on 12/11/2026 17:40:24

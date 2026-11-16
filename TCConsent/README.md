@@ -3,9 +3,9 @@
 Consent's Implementation Guide
 ==============================
 
-Last update : *04/08/2026*
+Last update : *12/11/2026*
 
-Release version : *5.4.1*
+Release version : *5.5.0*
 
 ## Table of Contents
 
@@ -22,7 +22,7 @@ Release version : *5.4.1*
 - [Saving consent](#saving-consent)
   - [With our Privacy Center](#with-our-privacy-center)
   - [Manually displayed consent](#manually-displayed-consent)
-  - [AcceptAll / RefuseAll](#acceptall-refuseall)
+  - [AcceptAll / RefuseAll](#acceptall--refuseall)
   - [Forwarding consent to Server-Side (external consent only)](#forwarding-consent-to-server-side-external-consent-only)
   - [Testing your integration](#testing-your-integration)
 - [Consent Banner Setup](#consent-banner-setup)
@@ -35,6 +35,7 @@ Release version : *5.4.1*
   - [Launching the Privacy Center](#launching-the-privacy-center)
   - [Customisation](#customisation)
   - [Loading a specific screen directly](#loading-a-specific-screen-directly)
+- [First-party privacy (Commanders Act Gateway)](#first-party-privacy-commanders-act-gateway)
 - [Reacting to consent](#reacting-to-consent)
 - [Retaining consent](#retaining-consent)
   - [Using your own consent ID](#using-your-own-consent-id)
@@ -49,7 +50,7 @@ Release version : *5.4.1*
   - [Debugging Google Consent Mode](#debugging-google-consent-mode)
 - [Forwarding consent to webViews](#forwarding-consent-to-webviews)
 - [Consent internal API](#consent-internal-api)
-- [Quick Reference — Function Recap](#quick-reference-function-recap)
+- [Quick Reference — Function Recap](#quick-reference--function-recap)
 - [TCDemo](#tcdemo)
 - [Support and contacts](#support-and-contacts)
 
@@ -185,7 +186,7 @@ Technical Setup
 ===============
 
 > [!IMPORTANT]
-> If you are using our UI (Banner and/or Privacy Center), you must include an offline copy of `privacy.json` in your project. This prevents issues for users with no or poor internet. If you are also using IAB, include `vendor-list.json` and the relevant `purposes-xx.json` translation file.
+> If you are using our UI (Banner and/or Privacy Center), you must include an offline copy of `privacy.json` in your project. This prevents issues for users with no or poor internet, and at first launch, where the UI can be displayed before the CDN download of `privacy.json` has finished. If you are also using IAB, include `vendor-list.json` and the relevant `purposes-xx.json` translation file.
 
 Documentation for `privacy.json` is available here: [Privacy JSON Documentation](../res/Privacy_JSON_Documentation.md)
 
@@ -195,10 +196,62 @@ Documentation for `privacy.json` is available here: [Privacy JSON Documentation]
 Minimum Requirements
 --------------------
 
-Minimum iOS version: 13.0
+Minimum iOS version: 15.0
 
 Initialisation
 --------------
+
+### Configuration object (recommended)
+
+Group everything — `siteID`, `privacyID`, UI path, and the setter calls that have to surround init: `registerCallback`, `useAcString`, ... etc — into one `TCConsentConfiguration` and pass it to `TCMobileConsent.sharedInstance().initialize(with:)` (Swift only). `siteID`, `privacyID` and `useBundledUI` are required — every other value defaults to today's existing behaviour, and the calls are sequenced internally in the exact order TCConsent's init already requires (callback/AC-String/consent-duration before init, language/the rest right after). Call `initialize(with:)` once: later calls log an error and change nothing.
+
+`useBundledUI` has no default — you must set it explicitly. Setting it to `true` initialises Commanders Act's own Privacy Center and Consent Banner UI, and requires a valid `privacy.json` — see the [Privacy JSON Documentation](../res/Privacy_JSON_Documentation.md) for details. Setting it to `false` does not initialise Commanders Act's UIs, and requires you to build your own consent UI — see [Building Your Own Privacy Center](../res/user_privacy_center.md).
+
+in swift:
+
+```swift
+let configuration = TCConsentConfiguration(
+    siteID: siteID,
+    privacyID: privacyID,
+    useBundledUI: true, // required, see above
+    callback: myPrivacyCallbacks, // optional, see "Reacting to consent" below
+    consentDurationInMonths: 13, // optional, see "Consent validity duration" below
+    gatewayURL: gatewayURL, // optional, see "First-party privacy (Commanders Act Gateway)" below
+    debugLevel: TCLogLevel_Verbose // optional
+)
+TCMobileConsent.sharedInstance().initialize(with: configuration)
+```
+
+`TCConsentConfiguration` parameters:
+
+| Parameter | Type | Default | Description |
+|---|---|---|---|
+| `siteID` | `Int` | required | Your site ID. |
+| `privacyID` | `Int` | required | Your privacy ID corresponding to the chosen privacy on the Commanders Act platform. |
+| `useBundledUI` | `Bool` | required | `true`: use Commanders Act's Privacy Center and Banner (needs `privacy.json`). `false`: build your own consent UI (non-IAB only). |
+| `callback` | `TCPrivacyCallbacks?` | `nil` | Your `TCPrivacyCallbacks` object, notified when consent is given or loaded at startup. See "Reacting to consent" below. |
+| `useAcString` | `Bool` | `false` | Set to `true` if you use IAB and want to enable Google's AC String. See the [TCIAB documentation](../TCIAB/README.md). |
+| `consentDurationInMonths` | `Float?` | `nil` | How long a saved consent stays valid before the user is asked again, in months. Defaults to the value in your `privacy.json`, or the default duration. See "Consent validity duration" below. |
+| `language` | `String?` | `nil` | Language code of the Privacy Center texts (and, with IAB, of the IAB purposes translation). Change it after init with `setLanguage`. |
+| `switchDefaultState` | `Bool` | `false` | Default on/off state of the Privacy Center switches. |
+| `doNotTrack` | `Bool` | `false` | Set to `true` to stop sending privacy statistics: privacy hits are flagged with `"do_not_track": true`. Change it after init with `setDoNotTrack`. See "Privacy statistics" below. |
+| `generatePublisherTC` | `Bool` | `false` | IAB only: set to `true` to also generate the publisher TC string. See the [TCIAB documentation](../TCIAB/README.md). |
+| `useCustomPublisherRestrictions` | `Bool` | `false` | IAB only: set to `true` to apply your own publisher restrictions. When `TCIABPublisherRestrictions.json` is bundled with the app or already downloaded, they apply from the first `privacy.json` parse; otherwise from the next launch. See the [TCIAB documentation](../TCIAB/README.md). |
+| `consentVersion` | `String?` | `nil` | Your consent version. Leave `nil` to use the version of your `privacy.json`; when set, it is always used instead, even after a `privacy.json` update. |
+| `gatewayURL` | `String?` | `nil` | Your Commanders Act Gateway link, enabling first-party privacy (e.g. `"https://www.mydomain.com/gateway-path"`). Leave `nil` to use Commanders Act's default endpoints. If you also use the ServerSide module, pass the same link to `TCServerSideConfiguration.gatewayURL`. See "First-party privacy (Commanders Act Gateway)" below. |
+| `customBundle` | `Bundle?` | `nil` | Bundle holding your offline configuration files (`privacy`, `vendor-list`, `google-atp-list`, `TCIABPublisherRestrictions`, `purposes-<language>`). `nil` = main bundle. |
+| `debugLevel` | `TCLogLevel?` | `nil` | SDK log level (e.g. `TCLogLevel_Verbose`). `nil` = untouched. |
+| `logNotifications` | `Bool?` | `nil` | Set to `true` to log SDK internal notifications. `nil` = untouched. |
+| `blockHits` | `Bool?` | `nil` | Set to `true` to block all outgoing hits (testing only). `nil` = untouched. |
+
+At init, the module checks saved consent and puts the ServerSide on hold if nothing is found. Once consent is given or loaded, the ServerSide is started or stopped accordingly.
+
+### Deprecated init methods
+
+> [!WARNING]
+> `setSiteID(_:andPrivacyID:)` and `customPCMSetSiteID(_:andPrivacyID:)` are deprecated: use `initialize(with:)` with `useBundledUI = true` or `false` instead.
+
+The original init methods are still available, with the setter calls (`registerCallback`, `consentDuration`, ...) made by hand around them.
 
 **With our UI components (Privacy Center and/or Banner, `privacy.json` required):**
 
@@ -228,8 +281,6 @@ in objective-c:
 [[TCMobileConsent sharedInstance] customPCMSetSiteID: siteID andPrivacyID: privacyID];
 ```
 
-At init, the module checks saved consent and puts the ServerSide on hold if nothing is found. Once consent is given or loaded, the ServerSide is started or stopped accordingly.
-
 > [!IMPORTANT]
 > Register your callbacks **before** calling init. The module checks consent at startup and fires callbacks immediately.
 
@@ -238,13 +289,13 @@ If your configuration files are stored in a bundle other than the main one, call
 in swift:
 
 ```swift
-TCConfigurationFileFactory.sharedInstance().setBundle(myBundle, forConfiguration: "vendorlist")
+TCConfigurationFileFactory.sharedInstance().setBundle(myBundle, forConfiguration: "vendor-list")
 ```
 
 in objective-c:
 
 ```objc
-[[TCConfigurationFileFactory sharedInstance] setBundle: myBundle forConfiguration: @"vendorlist"];
+[[TCConfigurationFileFactory sharedInstance] setBundle: myBundle forConfiguration: @"vendor-list"];
 ```
 
 Saving consent
@@ -285,6 +336,9 @@ NSMutableDictionary *consent = [[NSMutableDictionary alloc] init];
 [[TCMobileConsent sharedInstance] saveConsent: consent fromConsentSource: Popup withPrivacyAction: Save];
 ```
 
+> [!WARNING]
+> Each call replaces the whole saved consent. Always pass every purpose and vendor, accepted and refused, in a single call. Never pass `nil` or a partial dictionary: purposes and vendors left out are removed from the saved consent, which falsifies the stored consent and the consent sent to Commanders Act.
+
 Prefix category IDs with `PRIVACY_CAT_` and vendor IDs with `PRIVACY_VEN_`. Values:
 
 - `1` — accepted
@@ -304,7 +358,7 @@ AcceptAll / RefuseAll
 ---------------------
 
 > [!WARNING]
-> These methods only work if you are using our UI and have `privacy.json` in your project.
+> These methods only work if you initialise TCConsent with our UI (`setSiteID(_:andPrivacyID:)` / `useBundledUI: true`) and have `privacy.json` in your project, even if you display your own banner.
 
 > [!NOTE]
 > In the IAB variant, `acceptAllConsent()` and `refuseAllConsent()` are the only supported programmatic consent methods. For manual per-category or per-vendor consent in IAB mode, you must use our Privacy Center.
@@ -434,8 +488,8 @@ TCBannerOptions(
 | `dimAmount` | Background dim level behind the banner | `0.4` | `0` = transparent, `1` = fully black |
 | `isDismissible` | Allow dismissal by tapping outside the banner | `false` | ⚠️ No consent is collected when dismissed this way |
 | `iconName` | Name of the image asset displayed before the title | `nil` | Must exist in your app's asset catalogue |
-| `iconSize` | Size (pt) of the icon displayed before the title | `20` | See [Icon](#icon) below |
-| `buttonsAlignment` | Button layout direction: `.horizontal` or `.vertical` | `.horizontal` | Ignored when `compactLayout` is `true` |
+| `iconSize` | Size (pt) of the icon displayed before the title | `50` | Used only when `iconName` is set |
+| `buttonsAlignment` | Button layout direction: `.horizontal` or `.vertical` | `.vertical` | Ignored when `compactLayout` is `true` |
 | `buttonsOrder` | Display order of the three buttons | `[.refuse, .details, .accept]` | Ignored when `compactLayout` is `true` |
 | `compactLayout` | Use the compact button layout | `false` | See note above |
 
@@ -534,7 +588,7 @@ TCPrivacyCenterViewController *PCM = [[TCPrivacyCenterViewController alloc] init
 Customisation
 -------------
 
-Change the default switch state to off:
+Change the default switch state to off (deprecated: use `switchDefaultState` in `TCConsentConfiguration`):
 
 in swift:
 
@@ -584,6 +638,23 @@ in objective-c:
 ```objc
 [PCM startWithVendorScreen];
 ```
+
+First-party privacy (Commanders Act Gateway)
+============================================
+
+Serve the Consent module's mobile CDN files from your own domain with first-party privacy. Pass the link of your Commanders Act Gateway, provided by your consulting team, as `gatewayURL` in `TCConsentConfiguration`: the IAB files (vendor lists and their translations), `privacy.json` and `TCIABPublisherRestrictions.json` are then loaded from your domain, and consent hits are sent through it as well.
+
+```swift
+let configuration = TCConsentConfiguration(
+    siteID: siteID,
+    privacyID: privacyID,
+    useBundledUI: true,
+    gatewayURL: "https://www.mydomain.com/gateway-path"
+)
+TCMobileConsent.sharedInstance().initialize(with: configuration)
+```
+
+The link is used as-is, without any path to add: `https://` is applied automatically and a trailing slash is ignored. If you also use the ServerSide module, pass the same link to `TCServerSideConfiguration` to enable first-party tracking as well.
 
 Reacting to consent
 ===================
@@ -661,7 +732,7 @@ Default validity is 6 months. To change it via `privacy.json`, add the following
 "consentDurationInMonths": "13"
 ```
 
-To change it in code (call before init):
+To change it in code, set `consentDurationInMonths` in `TCConsentConfiguration`. The `consentDuration` property is deprecated (call before init):
 
 in swift:
 
@@ -697,7 +768,7 @@ If you are using our Privacy Center, you can also use the `resetSave` field in `
 Consent version
 ---------------
 
-To manually change the consent version (e.g. when using your own privacy center):
+To manually change the consent version (e.g. when using your own privacy center), set `consentVersion` in `TCConsentConfiguration`. Once set, it is used instead of the version of your `privacy.json`, even after a `privacy.json` update. The `consentVersion` property is deprecated:
 
 in swift:
 
@@ -731,7 +802,7 @@ The four possible flows are:
 > [!NOTE]
 > If you are building your own Privacy Center, see [Building Your Own Privacy Center](../res/user_privacy_center.md) for the full list of statistic functions to call from your UI.
 
-Whenever `saveConsent` is called, provide the full list of accepted and refused purposes and vendors.
+Whenever `saveConsent` is called, provide the full list of accepted and refused purposes and vendors. Purposes and vendors left out of the call are removed from the saved consent.
 
 Reference list of functions for our interfaces:
 
@@ -758,10 +829,18 @@ in objective-c:
 Stop privacy statistics tracking
 ---------------------------------
 
-To disable privacy stat tracking, configure the following parameter:
+To disable privacy stat tracking, set `doNotTrack` in `TCConsentConfiguration`, or call `setDoNotTrack` after init (the `do_not_track` property is deprecated):
+
+in swift:
+
+```swift
+TCMobileConsent.sharedInstance().setDoNotTrack(true)
+```
+
+in objective-c:
 
 ```objc
-[TCMobileConsent sharedInstance].do_not_track = value;
+[[TCMobileConsent sharedInstance] setDoNotTrack: YES];
 ```
 
 Google Consent Mode (Firebase)
@@ -816,8 +895,12 @@ Register your callbacks and set the GCM developer ID **before** initialising TCC
 
 ```swift
 firebaseAnalytics.setDefaultEventParameters("developer_id", TC_GCM_DEVELOPER_ID)
-TCMobileConsent.sharedInstance().callback = MyPrivacyCallbacks()
-TCMobileConsent.sharedInstance().setSiteID(siteID, andPrivacyID: privacyID)
+TCMobileConsent.sharedInstance().initialize(with: TCConsentConfiguration(
+    siteID: siteID,
+    privacyID: privacyID,
+    useBundledUI: true,
+    callback: MyPrivacyCallbacks()
+))
 ```
 
 Debugging Google Consent Mode
@@ -896,10 +979,11 @@ Quick Reference — Function Recap
 
 | Function | UI ownership | Consent flavour | Notes |
 |---|---|---|---|
-| `setSiteID(_:andPrivacyID:)` | Our UI | Both | Standard init when using Banner and/or Privacy Center. `privacy.json` required. |
-| `customPCMSetSiteID(_:andPrivacyID:)` | Custom UI | **Non-IAB only** | Init when you build your own consent screens entirely. |
+| `initialize(with:)` | Our UI or Custom UI | Both | Recommended init. `useBundledUI: true` for our UI (`privacy.json` required), `false` for your own consent screens. |
+| `setSiteID(_:andPrivacyID:)` | Our UI | Both | Deprecated: `initialize(with:)` with `useBundledUI: true`. |
+| `customPCMSetSiteID(_:andPrivacyID:)` | Custom UI | **Non-IAB only** | Deprecated: `initialize(with:)` with `useBundledUI: false`. |
 | `save(_:from:withPrivacyAction:)` (`saveConsent`) | Custom UI only | **Non-IAB only** | ❌ Not usable in IAB mode — IAB requires consent collected through a validated UI. |
-| `acceptAllConsent()` | Our UI or Custom UI | Both | This + `refuseAllConsent()` are the **only** programmatic IAB functions — usable from your own custom banner ONLY. |
+| `acceptAllConsent()` | Our UI or Custom UI | Both | This + `refuseAllConsent()` are the **only** programmatic IAB functions — usable from your own custom banner ONLY. Requires init with `setSiteID(_:andPrivacyID:)` / `useBundledUI: true`. |
 | `refuseAllConsent()` | Our UI or Custom UI | Both | Same as above. |
 | `stat*` (`statEnterPCToVendorScreen()`, `statViewPrivacyPoliciesFromBanner()`, etc.) | Custom UI only | Both | Only needed if you built your own screens — our rendered UI already calls these internally. See [Building Your Own Privacy Center](../res/user_privacy_center.md) for the full list. |
 | `TCUser.sharedInstance().setExternalConsent(_:)` | Either | Both | Only relevant if ServerSide is driven by a consent system entirely external to Commanders Act. |
@@ -927,4 +1011,4 @@ http://www.commandersact.com
 Commanders Act | 25 rue de Tolbiac, 75013 Paris - France
 ***
 
-This documentation was generated on 04/08/2026 16:06:11
+This documentation was generated on 12/11/2026 17:40:24

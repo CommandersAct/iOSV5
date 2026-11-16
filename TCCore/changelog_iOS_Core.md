@@ -1,6 +1,10 @@
 Changelog iOS
 =============
 
+*5.5.0 : 11/12/2026*
+
+	~ Minimum supported version is now iOS 15 and tvOS 15.
+	~ Internal support for the Commanders Act Gateway used by ServerSide and Consent.
 
 *5.4.6 : 08/03/2026*
 
